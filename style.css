@@ -1,0 +1,96 @@
+html{
+    width: 100%;
+    height: 100%;
+}
+body{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(51, 43, 50);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 13 sütun */
+  gap: 13px; /* kutular arası boşluk */
+  width: 90vw;
+  margin: auto;
+}
+
+.box {
+  aspect-ratio: 3 / 4; /* kare yapar */
+  background-color: #e7dde7;
+  padding: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: transform 0.3s ease;
+
+}
+.photo {
+  position: relative;   /* overlay için referans */
+  width: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+
+}
+.photo img{
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.photo::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8); /* siyah yarı saydam */
+  clip-path: polygon(100% 0, 100% 100%, 0 100%); /* sağ alt üçgen */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+} 
+.score {
+  position: absolute;
+  bottom: 17%;   /* biraz yukarı al */
+  right: 17%;    /* biraz sola al */
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  opacity: 0;     /* default gizli */
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.box:hover .score {
+  opacity: 1;
+}
+.box:hover{
+  transform: scale(1.1);
+}
+
+.box:hover .photo::after {
+  opacity: 1;
+}
+
+
+.album {
+  margin-top: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* 2 satır göster */
+  line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.album{
+  font-size: 20px;
+}
+.artist{
+  font-size:12px;
+}
