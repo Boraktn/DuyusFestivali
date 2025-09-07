@@ -54,7 +54,7 @@ h1{
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.8); /* siyah yarı saydam */
+  background: var(--overlay-color, rgba(0,0,0,0.8));
   clip-path: polygon(100% 0, 100% 100%, 0 100%); /* sağ alt üçgen */
   opacity: 0;
   transition: opacity 0.3s ease;
