@@ -12,7 +12,8 @@ h1{
   text-align: center;
   font-size: 70px;
   font-weight: bolder;
-  font-family:'Times New Roman', Times, serif;
+  font-family:"Limelight", serif;
+  text-shadow: 5px 5px rgb(108, 79, 104);
   color:rgb(246, 246, 228);
 }
 .header {
