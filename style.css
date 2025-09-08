@@ -15,6 +15,25 @@ h1{
   font-family:'Times New Roman', Times, serif;
   color:rgb(246, 246, 228);
 }
+.header {
+  display: flex;        /* yatay hizalama */
+  gap: 20px;            /* aralarına boşluk */
+  justify-content: flex-start; /* sola hizalı (center / space-between da olabilir) */
+  align-items: center;  /* dikeyde ortala */
+  margin-bottom:30px;
+  margin-left:70px;
+}
+.headerItem {
+  font-size: 20px;
+  padding: 10px 40px;
+  text-decoration: none;
+  color: white;
+}
+.headerItem:hover{
+    background:  rgb(121, 104, 119);;
+    
+
+}
 .grid {
   display: grid;
   grid-template-columns: repeat(6, 1fr); /* 13 sütun */
