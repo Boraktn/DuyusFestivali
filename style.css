@@ -10,17 +10,17 @@ body{
 }
 h1{
   text-align: center;
-  font-size: 70px;
+  font-size: clamp(1.8rem, 10vw, 5rem);
   font-weight: bolder;
   font-family:"Limelight", serif;
   text-shadow: 5px 5px rgb(108, 79, 104);
   color:rgb(246, 246, 228);
 }
 .header {
-  display: flex;        /* yatay hizalama */
-  gap: 20px;            /* aralarına boşluk */
-  justify-content: flex-start; /* sola hizalı (center / space-between da olabilir) */
-  align-items: center;  /* dikeyde ortala */
+  display: flex;      
+  gap: 20px;           
+  justify-content: flex-start; 
+  align-items: center; 
   margin-bottom:30px;
   margin-left:70px;
 }
@@ -35,16 +35,42 @@ h1{
     
 
 }
+#popup{
+  width: 20%;
+  aspect-ratio: 3 / 4; 
+  background-color: #e7dde7;
+  padding: 10px;
+  overflow: hidden;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  z-index: 2;
+  outline: 3px solid black;
+  cursor: grab;
+  user-select: none;
+}
+#myBox.dragging {
+  cursor: grabbing;
+}
+.close{
+  position: absolute;
+  right:3%;
+  top: 10px;
+  outline: none;
+  background-color: antiquewhite;
+  color:black;
+  z-index: 3;
+}
 .grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 13 sütun */
-  gap: 13px; /* kutular arası boşluk */
+  grid-template-columns: repeat(6, 1fr);
+  gap: 17px;
   width: 90vw;
   margin: auto;
 }
 
 .box {
-  aspect-ratio: 3 / 4; /* kare yapar */
+  aspect-ratio: 3 / 4; 
   background-color: #e7dde7;
   padding: 10px;
   overflow: hidden;
@@ -55,10 +81,11 @@ h1{
 
 }
 .photo {
-  position: relative;   /* overlay için referans */
+  position: relative;  
   width: 100%;
   overflow: hidden;
   flex-shrink: 0;
+  pointer-events: none;
 
 }
 .photo img{
@@ -75,19 +102,19 @@ h1{
   width: 100%;
   height: 100%;
   background: var(--overlay-color, rgba(0,0,0,0.8));
-  clip-path: polygon(100% 0, 100% 100%, 0 100%); /* sağ alt üçgen */
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
 
 } 
 .score {
   position: absolute;
-  bottom: 17%;   /* biraz yukarı al */
-  right: 17%;    /* biraz sola al */
+  bottom: 17%; 
+  right: 17%;   
   color: white;
   font-size: 3rem;
   font-weight: bold;
-  opacity: 0;     /* default gizli */
+  opacity: 0;    
   transition: opacity 0.3s ease;
   pointer-events: none;
   z-index: 2;
@@ -111,7 +138,7 @@ h1{
   
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* 2 satır göster */
+  -webkit-line-clamp: 2;
   line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
