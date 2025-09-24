@@ -36,14 +36,17 @@ h1{
 
 }
 #popup{
-  width: 20%;
+  width: 25%;
   aspect-ratio: 3 / 4; 
   background-color: #e7dde7;
   padding: 10px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   position: absolute;
-  top: 20%;
-  left: 20%;
+  top: 25%;
+  left: 40%;
   z-index: 2;
   outline: 3px solid black;
   cursor: grab;
@@ -54,10 +57,13 @@ h1{
 }
 .close{
   position: absolute;
-  right:3%;
-  top: 10px;
-  outline: none;
-  background-color: antiquewhite;
+  right:1%;
+  top: 4px;
+  height: 40px;
+  width: 40px;
+  font-size: 30px;
+  border-radius: 50%;
+  background-color: rgb(250, 255, 226);
   color:black;
   z-index: 3;
 }
@@ -90,6 +96,7 @@ h1{
 }
 .photo img{
     width: 100%;
+    height: 100%;
     display: block;
     object-fit: cover;
 }
@@ -147,5 +154,5 @@ h1{
   font-size: 20px;
 }
 .artist{
-  font-size:12px;
+  font-size:13px;
 }
