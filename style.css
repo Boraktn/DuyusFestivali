@@ -21,25 +21,26 @@ h1{
   gap: 20px;           
   justify-content: flex-start; 
   align-items: center; 
-  margin-bottom:30px;
-  margin-left:70px;
+  margin-bottom:1.5vw;
+  margin-left: 2.2vw;
 }
 .headerItem {
-  font-size: 20px;
-  padding: 10px 40px;
+  font-size: 1.6vw;
+  padding: 1vw 3vw;
   text-decoration: none;
   color: white;
+  background-color: rgb(108, 79, 104);
 }
 .headerItem:hover{
     background:  rgb(121, 104, 119);;
     
 
-}
+} 
 #popup{
-  width: 25%;
+  width: 25vw;
   aspect-ratio: 3 / 4; 
   background-color: #e7dde7;
-  padding: 10px;
+  padding: 1.4vw;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -48,37 +49,50 @@ h1{
   top: 25%;
   left: 40%;
   z-index: 2;
-  outline: 3px solid black;
+  outline: 0.2vw solid rgb(0, 0, 0);
   cursor: grab;
   user-select: none;
 }
-#myBox.dragging {
+#popup.dragging {
   cursor: grabbing;
 }
+
+#abouttitle{
+  margin-top: 0.4vw;
+  font-size:max(1.2vw,5px);
+  font-weight: bold;
+}
+#aboutcontext{
+  font-size: max(0.9vw,4px);
+}
+
 .close{
   position: absolute;
-  right:1%;
-  top: 4px;
-  height: 40px;
-  width: 40px;
-  font-size: 30px;
-  border-radius: 50%;
-  background-color: rgb(250, 255, 226);
-  color:black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right:1vw;
+  top: 1vw;
+  height: 2.5vw;
+  width: 2.5vw;
+  font-size: 1.5vw;
+  border-radius: 2vw;
+  background-color: rgb(249, 252, 236);
+  border-color: rgb(152, 154, 145);
   z-index: 3;
 }
 .grid {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  gap: 17px;
-  width: 90vw;
+  gap: 0.9vw;
+  width: 95vw;
   margin: auto;
 }
 
 .box {
   aspect-ratio: 3 / 4; 
   background-color: #e7dde7;
-  padding: 10px;
+  padding: 0.52vw;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -116,10 +130,10 @@ h1{
 } 
 .score {
   position: absolute;
-  bottom: 17%; 
-  right: 17%;   
+  bottom: 0.5vw; 
+  right: 0.5vw;   
   color: white;
-  font-size: 3rem;
+  font-size: 3vw;
   font-weight: bold;
   opacity: 0;    
   transition: opacity 0.3s ease;
@@ -139,8 +153,8 @@ h1{
 
 
 .album {
-  margin-top: 2px;
-  font-size: 12px;
+  margin-top: 0.125rem;
+  font-size: max(0.80vw,5px);
   font-weight: bold;
   
   display: -webkit-box;
@@ -151,7 +165,7 @@ h1{
   text-overflow: ellipsis;
 }
 .artist{
-  font-size:10px;
+  font-size:max(4px,0.63vw);
 
   display: -webkit-box;
   -webkit-box-orient: vertical;
