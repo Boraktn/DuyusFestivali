@@ -37,7 +37,7 @@ h1{
 
 } 
 #popup{
-  width: 25vw;
+  width: max(25vw,200px);
   aspect-ratio: 3 / 4; 
   background-color: #e7dde7;
   padding: 1.4vw;
@@ -59,11 +59,11 @@ h1{
 
 #abouttitle{
   margin-top: 0.4vw;
-  font-size:max(1.2vw,5px);
+  font-size:max(1.2vw,10px);
   font-weight: bold;
 }
 #aboutcontext{
-  font-size: max(0.9vw,4px);
+  font-size: max(0.9vw,7px);
 }
 
 .close{
@@ -71,11 +71,11 @@ h1{
   display: flex;
   align-items: center;
   justify-content: center;
-  right:1vw;
-  top: 1vw;
-  height: 2.5vw;
-  width: 2.5vw;
-  font-size: 1.5vw;
+  right:0.7vw;
+  top: 0.7vw;
+  height: 3.5vw;
+  aspect-ratio: 1/1;
+  font-size: 2.5vw;
   border-radius: 2vw;
   background-color: rgb(249, 252, 236);
   border-color: rgb(152, 154, 145);
@@ -133,7 +133,7 @@ h1{
   bottom: 0.5vw; 
   right: 0.5vw;   
   color: white;
-  font-size: 3vw;
+  font-size: max(20px,3vw);
   font-weight: bold;
   opacity: 0;    
   transition: opacity 0.3s ease;
@@ -156,7 +156,7 @@ h1{
   margin-top: 0.125rem;
   font-size: max(0.80vw,5px);
   font-weight: bold;
-  
+  line-height: 1;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
