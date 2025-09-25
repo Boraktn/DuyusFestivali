@@ -69,7 +69,7 @@ h1{
 }
 .grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(9, 1fr);
   gap: 17px;
   width: 90vw;
   margin: auto;
@@ -139,8 +139,8 @@ h1{
 
 
 .album {
-  margin-top: 5px;
-  font-size: 20px;
+  margin-top: 2px;
+  font-size: 12px;
   font-weight: bold;
   
   display: -webkit-box;
@@ -150,9 +150,24 @@ h1{
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.album{
-  font-size: 20px;
-}
 .artist{
-  font-size:13px;
+  font-size:10px;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+@media (max-width: 430px) {
+  .grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
