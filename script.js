@@ -42,9 +42,12 @@ document.querySelectorAll('.box').forEach(box => {
   const overlay = box.querySelector('.photo');
   console.log(scoreEl.textContent);
   let score = parseInt(scoreEl.textContent);
-
+  if(isNaN(score)){
+      overlay.style.setProperty('--overlay-color', `rgba(0, 0, 0, 0.8)`);
+  }
+  else{
   let r = Math.round(255 * (100 - score) / 100);
   let g = Math.round(255 * score / 100);
-
   overlay.style.setProperty('--overlay-color', `rgba(${r}, ${g}, 0, 0.8)`);
+  }
 });
