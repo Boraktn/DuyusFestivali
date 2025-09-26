@@ -1,7 +1,9 @@
+
 const box = document.getElementById("popup");
 
 let offsetX = 0, offsetY = 0;
 let dragging = false;
+
 
 function startDrag(x, y) {
   dragging = true;

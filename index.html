@@ -15,6 +15,7 @@
     <h1>DUYUŞ FESTİVALİ</h1>
     <div class="header">
     <a class="headerItem" href="https://open.spotify.com/playlist/6ez0yqqXd2m6aye6K9MFU7?si=3cea2ec915db4e36">Çalma Listesi</a>
+    <a class="headerItem" id="btn">Random   </a>
     <div id="popup">
         <button class="close" onclick="this.parentElement.style.visibility='hidden'">X</button>
         <div class="photo">
@@ -394,7 +395,13 @@
             <div class="artist">NEKROPSİ</div>
         </div>
     </div>
-    
+        <script>
+  document.getElementById("btn").addEventListener("click", async () => {
+    const res = await fetch("https://duyusfestivali-backend.vercel.app/api/server");
+    const data = await res.json();
+    window.open(data.url, "_blank"); // Spotify’da aç
+  });
+</script>
         <script src="script.js"></script>
 
 </body>
