@@ -397,7 +397,7 @@
     </div>
         <script>
   document.getElementById("btn").addEventListener("click", async () => {
-    const res = await fetch("https://duyusfestivali-backend.vercel.app/api/server");
+    const res = await fetch("https://duyusfestivali-backend.vercel.app/api/random-track");
     const data = await res.json();
     window.open(data.url, "_blank"); // Spotify’da aç
   });
