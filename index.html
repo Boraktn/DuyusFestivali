@@ -397,9 +397,23 @@
     </div>
         <script>
   document.getElementById("btn").addEventListener("click", async () => {
+      try {
+    alert("Butona tıklandı"); // Buton çalışıyor mu kontrol
+
     const res = await fetch("https://duyusfestivali-backend.vercel.app/api/random-track");
+    alert("Fetch tetiklendi"); // Fetch backend'e gitti mi kontrol
+
     const data = await res.json();
-    window.open(data.url, "_blank"); // Spotify’da aç
+    alert("Cevap geldi: " + JSON.stringify(data)); // Backend’den veri geldi mi kontrol
+
+    if (data.url) {
+      window.open(data.url, "_blank"); // Spotify’da aç
+    } else {
+      alert("URL yok!"); // veri eksikse uyar
+    }
+  } catch (err) {
+    alert("Hata: " + err); // fetch veya JSON hatası
+  }
   });
 </script>
         <script src="script.js"></script>
