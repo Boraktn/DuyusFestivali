@@ -397,22 +397,22 @@
     </div>
         <script>
   document.getElementById("btn").addEventListener("click", async () => {
-      try {
-    alert("Butona tıklandı"); // Buton çalışıyor mu kontrol
+   let newWindow = window.open("", "_blank");
 
+  try {
     const res = await fetch("https://duyusfestivali-backend.vercel.app/api/random-track");
-    alert("Fetch tetiklendi"); // Fetch backend'e gitti mi kontrol
-
     const data = await res.json();
-    alert("Cevap geldi: " + JSON.stringify(data)); // Backend’den veri geldi mi kontrol
 
     if (data.url) {
-      window.open(data.url, "_blank"); // Spotify’da aç
+      // Sonradan gerçek Spotify URL'sini yükle
+      newWindow.location.href = data.url;
     } else {
-      alert("URL yok!"); // veri eksikse uyar
+      newWindow.close();
+      alert("URL bulunamadı!");
     }
   } catch (err) {
-    alert("Hata: " + err); // fetch veya JSON hatası
+    newWindow.close();
+    alert("Hata: " + err);
   }
   });
 </script>
