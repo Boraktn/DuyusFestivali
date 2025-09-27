@@ -28,8 +28,8 @@ h1{
 }
 .headerItem {
   font-size: max(1.6vw, 12px);
-  width: max(15vw,90px);
-  height: max(5vw,30px);
+  width: max(12vw,90px);
+  height: max(4vw,30px);
   display: flex;
   justify-content: center;
   align-items: center;
