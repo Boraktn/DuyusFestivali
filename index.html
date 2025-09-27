@@ -404,7 +404,6 @@
     const data = await res.json();
 
     if (data.url) {
-      // Sonradan gerçek Spotify URL'sini yükle
       newWindow.location.href = data.url;
     } else {
       newWindow.close();
