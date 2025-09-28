@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<head>
+    <title>DUYUŞ FESTİVALİ</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    
+    <link href="style.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+        <h1>DUYUŞ FESTİVALİ</h1>
+    <div class="header">
+        <a class="headerItem" href="index.html">Anasayfa</a>
+        <a class="headerItem" href="https://open.spotify.com/playlist/6ez0yqqXd2m6aye6K9MFU7?si=3cea2ec915db4e36">Çalma Listesi</a>
+        <a class="headerItem" id="btn">Random</a>
+        <a class="headerItem" href="data.html">Veriler</a>
+    </div> 
+      <div class="dataContainer">
+      <div class="slider">
+      <div class="slides">
+      <div id="pie" class="slide"><div class="canvastitle">ÜLKELERE GÖRE  ALBÜM SAYILARI</div><canvas id="pieCountry" ></canvas></div>
+      <div class="slide"><div class="canvastitle">ÜLKELERE GÖRE ALBÜM PUANLARI</div><canvas id="avgCountries" ></canvas></div>
+      <div class="slide"><div class="canvastitle">ON YILLARA GÖRE ALBÜM PUANLARI</div><canvas id="lineDecades"></canvas></div>
+      <div class="slide"><div class="canvastitle">SÜRE-PUAN SERPİLME DİYAGRAMI</div><canvas id="scatterDurationScore"></canvas></div>
+      <div class="slide"><div class="canvastitle">HAFTALARA GÖRE PUAN DAĞILIMI</div><canvas id="lineIndex"></canvas></div>
+      </div>
+      <button class="prev">‹</button>
+      <button class="next">›</button>
+      </div>
+      <div class="topAlbums">
+        <div>
+      <h2>EN İYİ 3 ALBÜM</h2> 
+  <div id="best-albums" class="album-list">
+    <div class="album-card">
+      <img>
+      <div class="album-info">
+        <h3 class="albumdata"></h3>
+        <p class="artistdata"></p>
+        <p class="scoredata"></p>
+      </div>
+      <div  class="album-score"></div>
+    </div>
+    <div class="album-card">
+      <img>
+      <div class="album-info">
+        <h3 class="albumdata"></h3>
+        <p class="artistdata"></p>
+        <p class="scoredata"></p>
+      </div>
+      <div  class="album-score"></div>
+    </div>
+    <div class="album-card">
+      <img>
+      <div class="album-info">
+        <h3 class="albumdata"></h3>
+        <p class="artistdata"></p>
+        <p class="scoredata"></p>
+      </div>
+      <div  class="album-score"></div>
+    </div>
+  </div>
+</div>
+  <div>
+  <h2>EN KÖTÜ 3 ALBÜM</h2>
+  <div id="worst-albums" class="album-list">
+    <div class="album-card">
+      <img>
+      <div class="album-info">
+        <h3 class="albumdata"></h3>
+        <p class="artistdata"></p>
+        <p class="scoredata"></p>
+      </div>
+      <div  class="album-score"></div>
+    </div>
+    <div class="album-card">
+      <img>
+      <div class="album-info">
+        <h3 class="albumdata"></h3>
+        <p class="artistdata"></p>
+        <p class="scoredata"></p>
+      </div>
+      <div  class="album-score"></div>
+    </div>
+    <div class="album-card">
+      <img>
+      <div class="album-info">
+        <h3 class="albumdata"></h3>
+        <p class="artistdata"></p>
+        <p class="scoredata"></p>
+      </div>
+      <div  class="album-score"></div>
+    </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <script type="module" src="data.js"></script>
+</body>
+<!-- Chart.js ve PapaParse (CSV için) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>

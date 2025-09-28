@@ -53,3 +53,21 @@ document.querySelectorAll('.box').forEach(box => {
   overlay.style.setProperty('--overlay-color', `rgba(${r}, ${g}, 0, 0.8)`);
   }
 });
+  document.getElementById("btn").addEventListener("click", async () => {
+   let newWindow = window.open("", "_blank");
+
+  try {
+    const res = await fetch("https://duyusfestivali-backend.vercel.app/api/random-track");
+    const data = await res.json();
+
+    if (data.url) {
+      newWindow.location.href = data.url;
+    } else {
+      newWindow.close();
+      alert("URL bulunamadı!");
+    }
+  } catch (err) {
+    newWindow.close();
+    alert("Hata: " + err);
+  }
+  });

@@ -14,17 +14,19 @@
 <body>
     <h1>DUYUŞ FESTİVALİ</h1>
     <div class="header">
-    <a class="headerItem" href="https://open.spotify.com/playlist/6ez0yqqXd2m6aye6K9MFU7?si=3cea2ec915db4e36">Çalma Listesi</a>
-    <a class="headerItem" id="btn">Random   </a>
+        <a class="headerItem" href="index.html">Anasayfa</a>
+        <a class="headerItem" href="https://open.spotify.com/playlist/6ez0yqqXd2m6aye6K9MFU7?si=3cea2ec915db4e36">Çalma Listesi</a>
+        <a class="headerItem" id="btn">Random</a>
+        <a class="headerItem" href="data.html">Veriler</a>
+    </div> 
     <div id="popup">
         <button class="close" onclick="this.parentElement.style.visibility='hidden'">X</button>
         <div class="photo">
             <img src="img/duyusfestivali.jpg" alt="">
         </div>
         <div id="abouttitle">HAKKINDA</div>
-        <div id="aboutcontext">Duyuş Festivali, sürekli aynı sanatçıları dinlediğimi fark ettiğim için uyguladığım bir yeni yıl kararım. 2025 boyunca, her hafta farklı bir sanatçıdan daha önce çoğunu ya da hiçbirini bilmediğim bir albüm dinliyorum. Beğendiğim şarkıları özel bir çalma listesine ekliyor, albümleri ise beğendiğim şarkı oranına göre puanlıyorum.</div>
+        <div id="aboutcontext">Duyuş Festivali, sürekli aynı sanatçıları dinlediğimi fark ettiğim için uyguladığım yeni yıl kararım. 2025 boyunca, her hafta farklı bir sanatçıdan şarkılarının çoğunu ya da hiçbirini daha önce bilmediğim bir albüm dinliyorum. Beğendiğim şarkıları özel bir çalma listesine ekliyor, albümleri ise beğendiğim şarkı oranına göre puanlıyorum.</div>
     </div>
-    </div>  
     <div class="grid">
         <div class="box">
             <div class="photo">
@@ -341,7 +343,7 @@
         <div class="box">
             <div class="photo">
                 <img src="img/40.webp" alt="">
-                <span class="score">n/a</span>
+                <span class="score">43</span>
             </div>
             <div class="album">GOOD NEWS FOR PEOPLE WHO LOVES BAD NEWS</div>
             <div class="artist">MODEST MOUSE</div>
@@ -396,24 +398,7 @@
         </div>
     </div>
         <script>
-  document.getElementById("btn").addEventListener("click", async () => {
-   let newWindow = window.open("", "_blank");
 
-  try {
-    const res = await fetch("https://duyusfestivali-backend.vercel.app/api/random-track");
-    const data = await res.json();
-
-    if (data.url) {
-      newWindow.location.href = data.url;
-    } else {
-      newWindow.close();
-      alert("URL bulunamadı!");
-    }
-  } catch (err) {
-    newWindow.close();
-    alert("Hata: " + err);
-  }
-  });
 </script>
         <script src="script.js"></script>
 
