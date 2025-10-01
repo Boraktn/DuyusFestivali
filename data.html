@@ -20,25 +20,14 @@
         <a class="headerItem" href="data.html">Veriler</a>
     </div> 
       <div class="dataContainer">
-      <div class="slider">
-      <div class="slides">
-      <div id="pie" class="slide"><div class="canvastitle">ÜLKELERE GÖRE  ALBÜM SAYILARI</div><canvas id="pieCountry" ></canvas></div>
-      <div class="slide"><div class="canvastitle">ÜLKELERE GÖRE ALBÜM PUANLARI</div><canvas id="avgCountries" ></canvas></div>
-      <div class="slide"><div class="canvastitle">ON YILLARA GÖRE ALBÜM PUANLARI</div><canvas id="lineDecades"></canvas></div>
-      <div class="slide"><div class="canvastitle">SÜRE-PUAN SERPİLME DİYAGRAMI</div><canvas id="scatterDurationScore"></canvas></div>
-      <div class="slide"><div class="canvastitle">HAFTALARA GÖRE PUAN DAĞILIMI</div><canvas id="lineIndex"></canvas></div>
-      </div>
-      <button class="prev">‹</button>
-      <button class="next">›</button>
-      </div>
       <div class="topAlbums">
-        <div>
-      <h2>EN İYİ 3 ALBÜM</h2> 
+      <div class="toplist">
+      <div class="toptext">EN İYİ 3 ALBÜM</div> 
   <div id="best-albums" class="album-list">
     <div class="album-card">
       <img>
       <div class="album-info">
-        <h3 class="albumdata"></h3>
+        <div class="albumdata"></div>
         <p class="artistdata"></p>
         <p class="scoredata"></p>
       </div>
@@ -47,7 +36,7 @@
     <div class="album-card">
       <img>
       <div class="album-info">
-        <h3 class="albumdata"></h3>
+        <div class="albumdata"></div>
         <p class="artistdata"></p>
         <p class="scoredata"></p>
       </div>
@@ -56,7 +45,7 @@
     <div class="album-card">
       <img>
       <div class="album-info">
-        <h3 class="albumdata"></h3>
+        <div class="albumdata"></div>
         <p class="artistdata"></p>
         <p class="scoredata"></p>
       </div>
@@ -64,13 +53,13 @@
     </div>
   </div>
 </div>
-  <div>
-  <h2>EN KÖTÜ 3 ALBÜM</h2>
+  <div class="toplist">
+  <div class="toptext">EN KÖTÜ 3 ALBÜM</div>
   <div id="worst-albums" class="album-list">
     <div class="album-card">
       <img>
       <div class="album-info">
-        <h3 class="albumdata"></h3>
+        <div class="albumdata"></div>
         <p class="artistdata"></p>
         <p class="scoredata"></p>
       </div>
@@ -79,7 +68,7 @@
     <div class="album-card">
       <img>
       <div class="album-info">
-        <h3 class="albumdata"></h3>
+        <div class="albumdata"></div>
         <p class="artistdata"></p>
         <p class="scoredata"></p>
       </div>
@@ -88,7 +77,7 @@
     <div class="album-card">
       <img>
       <div class="album-info">
-        <h3 class="albumdata"></h3>
+        <div class="albumdata"></div>
         <p class="artistdata"></p>
         <p class="scoredata"></p>
       </div>
@@ -97,6 +86,14 @@
     </div>
   </div>
   </div>
+      <div class="slides">
+      <div id="pie" class="slide"><div class="canvastitle">ÜLKELERE GÖRE  ALBÜM SAYILARI</div><canvas id="pieCountry" ></canvas></div>
+      <div class="slide"><div class="canvastitle">ÜLKELERE GÖRE ALBÜM PUANLARI</div><canvas id="avgCountries" ></canvas></div>
+      <div class="slide"><div class="canvastitle">ON YILLARA GÖRE ALBÜM PUANLARI</div><canvas id="lineDecades"></canvas></div>
+      <div class="slide"><div class="canvastitle">SÜRE-PUAN SERPİLME DİYAGRAMI</div><canvas id="scatterDurationScore"></canvas></div>
+      <div class="slide"><div class="canvastitle">HAFTALARA GÖRE PUAN DAĞILIMI</div><canvas id="lineIndex"></canvas></div>
+      </div>
+      
   </div>
   <script type="module" src="data.js"></script>
 </body>

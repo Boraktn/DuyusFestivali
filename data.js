@@ -232,20 +232,6 @@ new Chart(document.getElementById("avgCountries"), {
   }
 });
 
-
-    const slides = document.querySelector('.slides');
-  const totalSlides = document.querySelectorAll('.slide').length;
-  let index = 0;
-
-  document.querySelector('.next').addEventListener('click', () => {
-    index = (index + 1) % totalSlides;
-    slides.style.transform = `translateX(-${index * 120}%)`;
-  });
-
-  document.querySelector('.prev').addEventListener('click', () => {
-    index = (index - 1 + totalSlides) % totalSlides;
-    slides.style.transform = `translateX(-${index * 120}%)`;
-  });
   window.addEventListener("resize", () => {
   Chart.helpers.each(Chart.instances, function(instance) {
     instance.resize();
