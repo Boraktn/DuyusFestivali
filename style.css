@@ -226,10 +226,14 @@ h1 {
 
 .slides {
   display: grid;
+  border-radius: 1vw;
+  background-color: rgb(108, 79, 104);
   grid-template-columns: repeat(2, 1fr);
   width: 98wv;
   margin: auto;
-  gap: 2vw;
+  padding: 2vw;
+  column-gap:  14vw;
+  row-gap: 7vw;
 
 }
 
@@ -243,7 +247,7 @@ h1 {
   border-radius: 1vw;
   box-sizing: border-box;
   text-align: center;
-  width: 48vw;
+  width: 40vw;
 }
 
 @media(max-width:425px) {
@@ -251,7 +255,7 @@ h1 {
     grid-template-columns: repeat(1, 1fr);
   }
   .slide{
-    width: 98vw;
+    width: 92vw;
   }
 }
 
