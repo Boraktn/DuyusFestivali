@@ -341,7 +341,7 @@ h1 {
   align-items: center;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 431px) {
   .album-list {
     flex-direction: column;
   }
@@ -350,7 +350,9 @@ h1 {
     flex: 0 0 40vw;
   }
 
-  .album-score {
-    margin-left: 10vw;
+}
+@media (max-width: 320px){
+  .album-score{
+    margin-left: 6vw;
   }
 }
