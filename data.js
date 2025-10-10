@@ -82,6 +82,7 @@ let totalSum = 0;
 let totalN = 0;
 
 rows.forEach(r => {
+  if(r.Score){
   if (!countryScoreAgg[r.Country]) {
     countryScoreAgg[r.Country] = { sum: 0, n: 0 };
   }
@@ -89,7 +90,7 @@ rows.forEach(r => {
   countryScoreAgg[r.Country].n += 1;
 
   totalSum += r.Score;
-  totalN += 1;
+  totalN += 1;}
 });
 
 const countryLabels2 = Object.keys(countryScoreAgg);
@@ -129,10 +130,12 @@ new Chart(document.getElementById("avgCountries"), {
     /** 2) Line: 10 yıllar -> ortalama Score **/
     const decadeAgg = {};
     rows.forEach(r => {
+    if(r.Score){
       const decade = Math.floor(r.Release_Year / 10) * 10;
       if (!decadeAgg[decade]) decadeAgg[decade] = { sum: 0, n: 0 };
       decadeAgg[decade].sum += r.Score;
       decadeAgg[decade].n += 1;
+      }
     });
     const decadeKeys = Object.keys(decadeAgg).map(Number).sort((a,b)=>a-b);
     const decadeLabels = decadeKeys.map(d => `${d}s`);
@@ -219,11 +222,13 @@ new Chart(document.getElementById("avgCountries"), {
       }
     });
     const best = rows
+    .filter(r => !isNaN(r.Score))
     .slice()
     .sort((a, b) => b.Score - a.Score || b.Release_Year - a.Release_Year || a.Index - b.Index)
     .slice(0, 3);
 
   const worst = rows
+    .filter(r => !isNaN(r.Score))
     .slice()
     .sort((a, b) => a.Score - b.Score || a.Release_Year - b.Release_Year || a.Index - b.Index)
     .slice(0, 3);
