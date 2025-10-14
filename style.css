@@ -98,6 +98,11 @@ h1 {
 }
 label{
   color:#fff;
+  font-size: max(8px,1.2vw);
+}
+option {
+  font-size: max(8px,1.2vw);
+  padding: 4px 8px;
 }
 .set{
   display: flex;
@@ -112,10 +117,9 @@ label{
 }
 
 .select {
-  padding: 6px 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  font-size: 14px;
+  font-size: max(8px,1.2vw);
   background: #fafafa;
 }
 .grid {
