@@ -6,9 +6,9 @@ const chartColors = [
   "#9966FF", // 5) Mor
   "#FF9F40", // 6) Turuncu
   "#8BC34A", // 7) Yeşil
-  "#950032ff"  // 8) Fuşya
+  "#b3732eff",  // 8) Fuşya
+  "#950032ff"
 ];
-/** CSV dosyanın yolu/adı — gerekirse değiştir **/
 const CSV_URL = 'data.csv';
 
 Papa.parse(CSV_URL, {

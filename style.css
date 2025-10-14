@@ -96,7 +96,28 @@ h1 {
   border-color: rgb(152, 154, 145);
   z-index: 3;
 }
+label{
+  color:#fff;
+}
+.set{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  }
+.container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+}
 
+.select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background: #fafafa;
+}
 .grid {
   display: grid;
   grid-template-columns: repeat(9, 1fr);

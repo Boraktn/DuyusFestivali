@@ -52,15 +52,15 @@ Papa.parse(CSV_URL, {
       box.appendChild(albumDiv);
       box.appendChild(artistDiv);
 
-  let scoreint = parseInt(score.textContent);
-  if(isNaN(scoreint)){
-      photoDiv.style.setProperty('--overlay-color', `rgba(0, 0, 0, 0.8)`);
-  }
-  else{
-  let r = Math.round(255 * (100 - scoreint) / 100);
-  let g = Math.round(255 * scoreint / 100);
-  photoDiv.style.setProperty('--overlay-color', `rgba(${r}, ${g}, 0, 0.8)`);
-  }
+      let scoreint = parseInt(score.textContent);
+      if (isNaN(scoreint)) {
+        photoDiv.style.setProperty('--overlay-color', `rgba(0, 0, 0, 0.8)`);
+      }
+      else {
+        let r = Math.round(255 * (100 - scoreint) / 100);
+        let g = Math.round(255 * scoreint / 100);
+        photoDiv.style.setProperty('--overlay-color', `rgba(${r}, ${g}, 0, 0.8)`);
+      }
       // Grid'e ekle
       grid.appendChild(box);
     });
@@ -69,6 +69,63 @@ Papa.parse(CSV_URL, {
 });
 let offsetX = 0, offsetY = 0;
 let dragging = false;
+const sortSelect = document.getElementById("sortSelect");
+
+sortSelect.addEventListener("change", () => {
+  const boxes = Array.from(document.querySelectorAll(".box"));
+  const sortBy = sortSelect.value;
+
+  boxes.sort((a, b) => {
+    if (sortBy === "index") {
+      return parseInt(a.dataset.index) - parseInt(b.dataset.index);
+    } else if (sortBy === "score") {
+      return parseFloat(b.dataset.score) - parseFloat(a.dataset.score);
+    } else if (sortBy === "year") {
+      return parseInt(b.dataset.year) - parseInt(a.dataset.year);
+    } else if (sortBy === "duration") {
+      return parseFloat(b.dataset.duration) - parseFloat(a.dataset.duration);
+    }
+  });
+
+  // Grid içeriğini temizleyip yeniden sırayla ekle
+  boxes.forEach(box => grid.appendChild(box));
+});
+
+const filterSelect = document.getElementById("filterSelect"); // Ülke
+const decadeSelect = document.getElementById("decadeSelect"); // On yıl
+
+function applyFilters() {
+  const selectedCountry = filterSelect.value;
+  const selectedDecade = decadeSelect.value;
+  const boxes = document.querySelectorAll(".box");
+
+  boxes.forEach(box => {
+    const country = box.dataset.country;
+    const year = parseInt(box.dataset.year);
+
+    // Ülke koşulu
+    const matchCountry = (selectedCountry === "Tümü" || country === selectedCountry);
+
+    // On yıl koşulu
+    const matchDecade = (() => {
+      if (selectedDecade === "Tümü") return true;
+      const start = parseInt(selectedDecade);
+      const end = start + 9;
+      return year >= start && year <= end;
+    })();
+
+    // İkisi de sağlanıyorsa görünür
+    if (matchCountry && matchDecade) {
+      box.style.display = "block"; // veya flex
+    } else {
+      box.style.display = "none";
+    }
+  });
+}
+
+// Her iki filtre değiştiğinde tetikle
+filterSelect.addEventListener("change", applyFilters);
+decadeSelect.addEventListener("change", applyFilters);
 
 
 function startDrag(x, y) {
@@ -110,17 +167,17 @@ document.querySelectorAll('.box').forEach(box => {
   const overlay = box.querySelector('.photo');
   console.log(scoreEl.textContent);
   let score = parseInt(scoreEl.textContent);
-  if(isNaN(score)){
-      overlay.style.setProperty('--overlay-color', `rgba(0, 0, 0, 0.8)`);
+  if (isNaN(score)) {
+    overlay.style.setProperty('--overlay-color', `rgba(0, 0, 0, 0.8)`);
   }
-  else{
-  let r = Math.round(255 * (100 - score) / 100);
-  let g = Math.round(255 * score / 100);
-  overlay.style.setProperty('--overlay-color', `rgba(${r}, ${g}, 0, 0.8)`);
+  else {
+    let r = Math.round(255 * (100 - score) / 100);
+    let g = Math.round(255 * score / 100);
+    overlay.style.setProperty('--overlay-color', `rgba(${r}, ${g}, 0, 0.8)`);
   }
 });
-  document.getElementById("btn").addEventListener("click", async () => {
-   let newWindow = window.open("", "_blank");
+document.getElementById("btn").addEventListener("click", async () => {
+  let newWindow = window.open("", "_blank");
 
   try {
     const res = await fetch("https://duyusfestivali-backend.vercel.app/api/random-track");
@@ -136,4 +193,4 @@ document.querySelectorAll('.box').forEach(box => {
     newWindow.close();
     alert("Hata: " + err);
   }
-  });
+});

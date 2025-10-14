@@ -35,6 +35,45 @@
             bilmediğim bir albüm dinliyorum. Beğendiğim şarkıları özel bir çalma listesine ekliyor, albümleri ise
             beğendiğim şarkı oranına göre puanlıyorum.</div>
     </div>
+    <div class="set">
+        <div class="container">
+            <label for="decadeSelect">Yayınlanma Dönemi</label>
+            <select class="select" id="decadeSelect">
+                <option value="Tümü">Tümü</option>
+                <option value="1960">1960'lar</option>
+                <option value="1970">1970'ler</option>
+                <option value="1980">1980'ler</option>
+                <option value="1990">1990'lar</option>
+                <option value="2000">2000'ler</option>
+                <option value="2010">2010'lar</option>
+                <option value="2020">2020'ler</option>
+            </select>
+        </div>
+        <div class="container">
+            <label for="filterSelect">Ülke</label>
+            <select class="select" id="filterSelect">
+                <option value="Tümü">Tümü</option>
+                <option value="TÜRKİYE">Türkiye</option>
+                <option value="ABD">ABD</option>
+                <option value="İNGİLTERE">İngiltere</option>
+                <option value="AVUSTRALYA">Avustralya</option>
+                <option value="FRANSA">Fransa</option>
+                <option value="İSVEÇ">İsveç</option>
+                <option value="İTALYA">İtalya</option>
+                <option value="KUZEY İRLANDA">Kuzey İrlanda</option>
+                <option value="KANADA">Kanada</option>
+            </select>
+        </div>
+        <div class="container">
+            <label for="sortSelect">Sırala:</label>
+            <select class="select" id="sortSelect">
+                <option value="index">Festival</option>
+                <option value="score">Puan</option>
+                <option value="year">Yıl</option>
+                <option value="duration">Süre</option>
+            </select>
+        </div>
+    </div>
     <div class="grid" id="grid"></div>
 
     <script src="script.js"></script>
