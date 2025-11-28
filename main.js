@@ -1,4 +1,4 @@
-import { addAlbumForUser } from "./album.js";
+import { addAlbumForUser, handleSpotifyAlbumSubmit} from "./album.js";
 
 // Test amaçlı kullanacağın albüm objesi
 // Gerçekte bunu kartlardan/aramadan alacaksın
@@ -12,6 +12,15 @@ const testAlbum = {
   Release_Year: 2024,
   Duration: 43
 };
+const albumForm = document.getElementById("albumForm");
+const albumInput = document.getElementById("albumInput");
+
+if (albumForm) {
+  albumForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    handleSpotifyAlbumSubmit(albumInput.value);
+  });
+}
 
 document.getElementById("addAlbumBtn").addEventListener("click", () => {
   addAlbumForUser(testAlbum);
