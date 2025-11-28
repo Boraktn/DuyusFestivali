@@ -27,14 +27,15 @@ export async function addAlbumForUser(album) {
         console.log("Yazılacak path:", albumsRef.path);
 
     await addDoc(albumsRef, {
-      album: album.Album,
-      artist: album.Artist,
-      image: album.Image,
-      country: album.Country,
-      score: album.Score,
-      releaseYear: album.Release_Year,
-      duration: album.Duration,
-      createdAt: new Date()
+      album: album.Album,                 // "Altüst"
+      artist: album.Artist,              // "Athena"
+      image: album.Image,                // kapak URL
+      releaseYear: album.Release_Year,   // 2014
+      duration: album.Duration_Minutes,  // 62
+      spotifyUrl: album.spotifyUrl,      // open.spotify.com/album/...
+      createdAt: new Date()              // veya serverTimestamp()
+      // country / score artık backend'den gelmiyor;
+      // puanlamayı kullanıcı sonra senin arayüzünden yapar
     });
 
     console.log("Albüm eklendi:", album.Album);
@@ -70,6 +71,8 @@ export async function handleSpotifyAlbumSubmit(spotifyUrl) {
 
     const data = await res.json();
     console.log("Albüm:", data);
+        await addAlbumForUser(data);
+
 
     // Firestore’a bu şekilde kaydedebilirsin:
     // await setDoc(doc(db, "albums", albumId), {
