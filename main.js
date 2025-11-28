@@ -1,4 +1,9 @@
-import { addAlbumForUser, handleSpotifyAlbumSubmit, extractAlbumId} from "./album.js";
+import { addAlbumForUser, handleSpotifyAlbumSubmit, loadUserAlbumsGrid } from "./album.js";
+import { auth, db } from "./firebase.js";
+import {
+  collection,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
 // Test amaçlı kullanacağın albüm objesi
 // Gerçekte bunu kartlardan/aramadan alacaksın
@@ -12,6 +17,8 @@ const testAlbum = {
   Release_Year: 2024,
   Duration: 43
 };
+loadUserAlbumsGrid();
+
 const albumForm = document.getElementById("albumForm");
 const albumInput = document.getElementById("albumInput");
 
@@ -25,3 +32,10 @@ if (albumForm) {
 document.getElementById("addAlbumBtn").addEventListener("click", () => {
   addAlbumForUser(testAlbum);
 });
+
+
+const grid = document.getElementById("grid");
+
+// Kullanıcının albums koleksiyonundan kutuları doldur
+
+
