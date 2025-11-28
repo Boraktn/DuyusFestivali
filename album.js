@@ -7,6 +7,7 @@ import {
 
 
 export async function addAlbumForUser(album) {
+  const grid = document.getElementById("grid");
 
     const user = auth.currentUser;
   

@@ -17,10 +17,19 @@ const testAlbum = {
   Release_Year: 2024,
   Duration: 43
 };
-loadUserAlbumsGrid();
+document.addEventListener("DOMContentLoaded", () => {
+  loadUserAlbumsGrid();
 
-const albumForm = document.getElementById("albumForm");
-const albumInput = document.getElementById("albumInput");
+  const albumForm = document.getElementById("albumForm");
+  const albumInput = document.getElementById("albumInput");
+
+  if (albumForm) {
+    albumForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      handleSpotifyAlbumSubmit(albumInput.value);
+    });
+  }
+});
 
 if (albumForm) {
   albumForm.addEventListener("submit", async (e) => {
@@ -34,7 +43,7 @@ document.getElementById("addAlbumBtn").addEventListener("click", () => {
 });
 
 
-const grid = document.getElementById("grid");
+
 
 // Kullanıcının albums koleksiyonundan kutuları doldur
 
