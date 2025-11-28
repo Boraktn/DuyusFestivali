@@ -38,6 +38,7 @@ export async function addAlbumForUser(album) {
       // country / score artık backend'den gelmiyor;
       // puanlamayı kullanıcı sonra senin arayüzünden yapar
     });
+    loadUserAlbumsGrid();
 
     console.log("Albüm eklendi:", album.Album);
   } catch (err) {
@@ -91,12 +92,12 @@ export async function handleSpotifyAlbumSubmit(spotifyUrl) {
   }
 }
 export async function loadUserAlbumsGrid() {
-  console.log("fonk çalışi");
-  const user = auth.currentUser;
-  const username = localStorage.getItem("username");
+    const grid = document.getElementById("grid");
+  if (!grid) return;
 
-  if (!user || !username) {
-    console.warn("Kullanıcı yok, albümler yüklenemedi.");
+  const username = localStorage.getItem("username");
+  if (!username) {
+    console.warn("username yok, albümler yüklenemedi.");
     return;
   }
 
