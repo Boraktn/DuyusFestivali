@@ -55,7 +55,7 @@ function extractAlbumId(spotifyUrl) {
     return null;
   }
 }
-async function handleSpotifyAlbumSubmit(spotifyUrl) {
+export async function handleSpotifyAlbumSubmit(spotifyUrl) {
   const albumId = extractAlbumId(spotifyUrl);
   if (!albumId) {
     alert("Geçerli bir Spotify albüm linki gir.");
