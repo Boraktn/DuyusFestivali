@@ -44,7 +44,7 @@ export async function addAlbumForUser(album) {
   }
 }
 
-function extractAlbumId(spotifyUrl) {
+export function extractAlbumId(spotifyUrl) {
   try {
     const url = new URL(spotifyUrl.trim());
     const parts = url.pathname.split("/");
@@ -64,7 +64,7 @@ export async function handleSpotifyAlbumSubmit(spotifyUrl) {
 
   try {
     const res = await fetch(
-      `https://duyusfest-backend.vercel.app/api/spotifyAlbum?albumId=${albumId}`
+      `https://duyusfest-backend.vercel.app/api/route?albumId=${albumId}`
     );
     if (!res.ok) throw new Error("Spotify'dan veri alınamadı");
 
