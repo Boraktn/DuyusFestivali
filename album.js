@@ -90,6 +90,7 @@ export async function handleSpotifyAlbumSubmit(spotifyUrl) {
   }
 }
 export async function loadUserAlbumsGrid() {
+  console.log("fonk çalışi");
   const user = auth.currentUser;
   const username = localStorage.getItem("username");
 
