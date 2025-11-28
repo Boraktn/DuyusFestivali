@@ -38,7 +38,6 @@ export async function addAlbumForUser(album) {
       // country / score artık backend'den gelmiyor;
       // puanlamayı kullanıcı sonra senin arayüzünden yapar
     });
-    loadUserAlbumsGrid();
 
     console.log("Albüm eklendi:", album.Album);
   } catch (err) {
@@ -74,6 +73,7 @@ export async function handleSpotifyAlbumSubmit(spotifyUrl) {
     const data = await res.json();
     console.log("Albüm:", data);
         await addAlbumForUser(data);
+        await loadUserAlbumsGrid();
 
 
     // Firestore’a bu şekilde kaydedebilirsin:
