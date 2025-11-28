@@ -64,7 +64,7 @@ export async function handleSpotifyAlbumSubmit(spotifyUrl) {
 
   try {
     const res = await fetch(
-      `https://duyusfest-backend.vercel.app/api/route?albumId=${albumId}`
+      `https://duyusfestivali-backend.vercel.app/api/route?albumId=${albumId}`
     );
     if (!res.ok) throw new Error("Spotify'dan veri alınamadı");
 
