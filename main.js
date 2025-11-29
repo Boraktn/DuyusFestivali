@@ -31,12 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-if (albumForm) {
-  albumForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    handleSpotifyAlbumSubmit(albumInput.value);
-  });
-}
 
 document.getElementById("addAlbumBtn").addEventListener("click", () => {
   addAlbumForUser(testAlbum);
