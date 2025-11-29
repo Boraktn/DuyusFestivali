@@ -72,7 +72,7 @@ export async function handleSpotifyAlbumSubmit(spotifyUrl) {
     const data = await res.json();
     console.log("Albüm:", data);
         await addAlbumForUser(data);
-        //await loadUserAlbumsGrid();
+        await loadUserAlbumsGrid();
 
 
     // Firestore’a bu şekilde kaydedebilirsin:
