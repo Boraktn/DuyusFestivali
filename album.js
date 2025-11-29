@@ -7,6 +7,7 @@ import {
 
 
 export async function addAlbumForUser(album) {
+  console.log("addAlbumforUser çalışıyor.");
   const grid = document.getElementById("grid");
 
     const user = auth.currentUser;
@@ -21,11 +22,9 @@ export async function addAlbumForUser(album) {
     alert("Kullanıcı adı bulunamadı. Lütfen tekrar giriş yap.");
     return;
   }
-  console.log("currentUser:", user);
   console.log("username in LS:", username);
   try {
     const albumsRef = collection(db, "users", username, "albums");
-        console.log("Yazılacak path:", albumsRef.path);
 
     await addDoc(albumsRef, {
       album: album.Album,                 // "Altüst"
@@ -73,7 +72,7 @@ export async function handleSpotifyAlbumSubmit(spotifyUrl) {
     const data = await res.json();
     console.log("Albüm:", data);
         await addAlbumForUser(data);
-        await loadUserAlbumsGrid();
+        //await loadUserAlbumsGrid();
 
 
     // Firestore’a bu şekilde kaydedebilirsin:
@@ -92,6 +91,7 @@ export async function handleSpotifyAlbumSubmit(spotifyUrl) {
   }
 }
 export async function loadUserAlbumsGrid() {
+  console.log("GRID YUKLENIYOR");
     const grid = document.getElementById("grid");
   if (!grid) return;
 
