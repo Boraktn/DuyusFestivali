@@ -54,7 +54,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 await setDoc(userRef, {
                     uid,
                     email,
-                    createdAt: new Date()
+                    createdAt: new Date(),
+                    albumCount: 0
+
                 });
                 window.location.href = "main.html";
 

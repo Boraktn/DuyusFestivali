@@ -9,6 +9,63 @@ body {
   background-color: rgb(51, 43, 50);
   font-family: Arial, Helvetica, sans-serif;
 }
+/* Liste genel alan */
+.users-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Kullanıcı kartı */
+.user-card {
+  background: #1b1b1b;        /* Senin koyu stiline benzer */
+  border: 1px solid #333;
+  padding: 14px 16px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Soldaki kısım */
+.user-card-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Username */
+.user-username {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Albüm sayısı */
+.user-albums {
+  font-size: 14px;
+  color: #aaa;
+}
+
+/* Profil linki */
+.user-link {
+  font-size: 14px;
+  padding: 6px 10px;
+  background: #444;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  border: 1px solid #555;
+  transition: background 0.15s ease;
+}
+
+.user-link:hover {
+  background: #666;
+}
+
 .auth-body {
   background-color: rgb(51, 43, 50); /* zaten var ama netleştirelim */
   justify-content: center;
@@ -35,7 +92,6 @@ body {
 .auth-title {
   margin: 0 0 1.5rem 0;
   text-align: center;
-  font-family: "Limelight", serif;
   font-size: clamp(1.8rem, 4vw, 2.6rem);
   color: rgb(51, 43, 50);
 }
