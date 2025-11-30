@@ -12,8 +12,8 @@ export async function addAlbumForUser(album) {
 
     const user = auth.currentUser;
   
-  const username = localStorage.getItem("username");
 
+  const username = user.displayName;
   if (!user) {
     alert("Albüm eklemek için önce giriş yapmalısın.");
     return;
@@ -95,11 +95,11 @@ export async function loadUserAlbumsGrid() {
     const grid = document.getElementById("grid");
   if (!grid) return;
 
-  const username = localStorage.getItem("username");
-  if (!username) {
-    console.warn("username yok, albümler yüklenemedi.");
-    return;
-  }
+  const user = auth.currentUser;
+  if (!user) return; // Güvenlik
+
+  const username = user.displayName;
+  if (!username) return;
 
   // Eski kutuları temizle
   grid.innerHTML = "";
