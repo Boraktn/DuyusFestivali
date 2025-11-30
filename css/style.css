@@ -11,7 +11,6 @@ body {
 }
 .auth-body {
   background-color: rgb(51, 43, 50); /* zaten var ama netleştirelim */
-  display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -28,7 +27,6 @@ body {
 .auth-card {
   background-color: #e7dde7;
   padding: 2.5rem 3rem;
-  border-radius: 18px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   width: min(420px, 90vw);
   box-sizing: border-box;
@@ -40,7 +38,6 @@ body {
   font-family: "Limelight", serif;
   font-size: clamp(1.8rem, 4vw, 2.6rem);
   color: rgb(51, 43, 50);
-  text-shadow: 3px 3px rgb(108, 79, 104);
 }
 
 .auth-form {
@@ -106,7 +103,6 @@ body {
 @media (max-width: 480px) {
   .auth-card {
     padding: 1.8rem 1.5rem;
-    border-radius: 14px;
   }
 
   .auth-title {
