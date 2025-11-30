@@ -11,15 +11,16 @@ export async function addAlbumForUser(album) {
   const grid = document.getElementById("grid");
 
     const user = auth.currentUser;
-  
-
-  const username = user.displayName;
-  if (!user) {
+   if (!user) {
     alert("Albüm eklemek için önce giriş yapmalısın.");
+    window.location.href = "login.html";
     return;
   }
+
+  const username = user.displayName;
   if (!username) {
     alert("Kullanıcı adı bulunamadı. Lütfen tekrar giriş yap.");
+    window.location.href = "login.html";
     return;
   }
   console.log("username in LS:", username);
