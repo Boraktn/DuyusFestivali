@@ -9,7 +9,110 @@ body {
   background-color: rgb(51, 43, 50);
   font-family: Arial, Helvetica, sans-serif;
 }
+.auth-body {
+  background-color: rgb(51, 43, 50); /* zaten var ama netleştirelim */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
 
+.auth-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  background-color: #e7dde7;
+  padding: 2.5rem 3rem;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  width: min(420px, 90vw);
+  box-sizing: border-box;
+}
+
+.auth-title {
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+  font-family: "Limelight", serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: rgb(51, 43, 50);
+  text-shadow: 3px 3px rgb(108, 79, 104);
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.auth-form input {
+  padding: 0.7rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(108, 79, 104, 0.6);
+  font-size: 0.95rem;
+  outline: none;
+  background: #faf6fb;
+}
+
+.auth-form input:focus {
+  border-color: rgb(108, 79, 104);
+  box-shadow: 0 0 0 2px rgba(108, 79, 104, 0.35);
+}
+
+.auth-button {
+  margin-top: 0.4rem;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: rgb(108, 79, 104);
+  color: #fff;
+  transition: transform 0.1s ease, background 0.15s ease;
+}
+
+.auth-button:hover {
+  background-color: rgb(121, 104, 119);
+  transform: translateY(-1px);
+}
+
+.auth-button:active {
+  transform: translateY(1px);
+}
+
+.auth-text {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: rgb(51, 43, 50);
+}
+
+.auth-link {
+  color: rgb(108, 79, 104);
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.auth-link:hover {
+  border-bottom-color: rgb(108, 79, 104);
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1.8rem 1.5rem;
+    border-radius: 14px;
+  }
+
+  .auth-title {
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+  }
+}
 h1 {
   text-align: center;
   font-size: clamp(1.8rem, 10vw, 7rem);

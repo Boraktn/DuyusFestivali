@@ -5,7 +5,29 @@
   <title>Kayıt Ol | Duyuş Festivali</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body class="auth-body">
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <h2 class="auth-title">Kayıt Ol</h2>
+
+      <form id="signupForm" class="auth-form">
+        <input id="signupUsername" type="text" placeholder="Kullanıcı adı" required/>
+        <input type="email" id="signupEmail" placeholder="E-posta" required />
+        <input type="password" id="signupPassword" placeholder="Şifre" required />
+        <button type="submit" class="auth-button">Kayıt Ol</button>
+      </form>
+
+      <p class="auth-text">
+        Zaten hesabın var mı?
+        <a href="login.html" class="auth-link">Giriş yap</a>
+      </p>
+    </div>
+  </div>
+
+  <script type="module" src="js/signup.page.js"></script>
+</body>
+
+<!-- <body>
   <h2>Kayıt Ol</h2>
   <form id="signupForm">
     <input id="signupUsername" type="text" placeholder="Kullanıcı adı" required/>
@@ -16,5 +38,5 @@
   <p>Zaten hesabın var mı? <a href="login.html">Giriş yap</a></p>
 
   <script type="module" src="js/signup.page.js"></script>
-</body>
+</body> -->
 </html>

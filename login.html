@@ -5,7 +5,28 @@
   <title>Giriş Yap | Duyuş Festivali</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
+<body class="auth-body">
+  <div class="auth-wrapper">
+    <div class="auth-card">
+      <h2 class="auth-title">Giriş Yap</h2>
+
+      <form id="loginForm" class="auth-form">
+        <input type="email" id="loginEmail" placeholder="E-posta" required />
+        <input type="password" id="loginPassword" placeholder="Şifre" required />
+        <button type="submit" class="auth-button">Giriş</button>
+      </form>
+
+      <p class="auth-text">
+        Hesabın yok mu?
+        <a href="signup.html" class="auth-link">Kayıt ol</a>
+      </p>
+    </div>
+  </div>
+
+  <script type="module" src="js/login.page.js"></script>
+</body>
+
+<!-- <body>
   <h2>Giriş Yap</h2>
   <form id="loginForm">
     <input type="email" id="loginEmail" placeholder="E-posta" required />
@@ -15,5 +36,5 @@
   <p>Hesabın yok mu? <a href="signup.html">Kayıt ol</a></p>
 
   <script type="module" src="js/login.page.js"></script>
-</body>
+</body> -->
 </html>
