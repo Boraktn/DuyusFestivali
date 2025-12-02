@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Profil | Duyuş Festivali</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+</head>
+
+<body>
+    <div id="navbar"></div>
+
+    <main class="profile-page">
+        <h2 id="profileUsername">@kullanici</h2>
+        <p id="profileInfo" class="profile-info">
+            Kullanıcının Duyuş Festivali listesi
+        </p>
+
+        <p id="profileError" class="profile-error" style="display:none;"></p>
+
+        <!-- Albüm kartlarını senin main.html’deki grid yapınla aynı tutalım -->
+        <section>
+            <h3>Albüm listesi</h3>
+            <div id="grid" class="grid">
+                <!-- JS ile doldurulacak -->
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="js/profile.page.js"></script>
+    <script type="module" src="js/navbar.js"></script>
+</body>
+
+</html>

@@ -10,6 +10,27 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 /* Liste genel alan */
+
+
+.navbar-links {
+  align-items: left;
+  padding: 14px 20px;
+  border-bottom: 1px solid #333;
+  display: flex;
+  gap: 5rem;
+}
+
+.navbar-item {
+  text-decoration: none;
+  font-size: 30px;
+  color: white;
+  font-weight: bold;
+}
+
+.navbar-item:hover {
+  opacity: 0.7;
+}
+
 .users-list {
   list-style: none;
   padding: 0;
@@ -21,7 +42,7 @@ body {
 
 /* Kullanıcı kartı */
 .user-card {
-  background: #1b1b1b;        /* Senin koyu stiline benzer */
+  background: #1b1b1b;
   border: 1px solid #333;
   padding: 14px 16px;
   border-radius: 10px;
@@ -66,13 +87,6 @@ body {
   background: #666;
 }
 
-.auth-body {
-  background-color: rgb(51, 43, 50); /* zaten var ama netleştirelim */
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  margin: 0;
-}
 
 .auth-wrapper {
   width: 100%;
@@ -165,7 +179,7 @@ body {
     font-size: clamp(1.6rem, 6vw, 2.2rem);
   }
 }
-h1 {
+#title {
   text-align: center;
   font-size: clamp(1.8rem, 10vw, 7rem);
   font-weight: bolder;

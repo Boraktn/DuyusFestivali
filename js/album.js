@@ -5,13 +5,13 @@ import {
   getDocs
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
-
+//ALBÜMÜ VERİTABANINA EKLEME
 export async function addAlbumForUser(album) {
-  console.log("addAlbumforUser çalışıyor.");
-  const grid = document.getElementById("grid");
 
-    const user = auth.currentUser;
-   if (!user) {
+  //ŞU ANDA KULLANICI AKTİF Mİ DİYE BAKIYORUZ
+  //EĞER DEĞİLSE GİRİŞ YAP SAYFASINA YÖNLENDİRİYORUZ
+  const user = auth.currentUser;
+  if (!user) {
     alert("Albüm eklemek için önce giriş yapmalısın.");
     window.location.href = "login.html";
     return;
@@ -24,39 +24,43 @@ export async function addAlbumForUser(album) {
     return;
   }
   console.log("username in LS:", username);
+  //KULLANICIN ALBUMS KOLEKSİYONUNA ALBÜMÜ TÜM BİLGİLERİYLE KAYDEDİYORUZ
   try {
     const albumsRef = collection(db, "users", username, "albums");
 
     await addDoc(albumsRef, {
-      album: album.Album,                 // "Altüst"
-      artist: album.Artist,              // "Athena"
-      image: album.Image,                // kapak URL
-      releaseYear: album.Release_Year,   // 2014
-      duration: album.Duration_Minutes,  // 62
-      spotifyUrl: album.spotifyUrl,      // open.spotify.com/album/...
-      createdAt: new Date()              // veya serverTimestamp()
-      // country / score artık backend'den gelmiyor;
-      // puanlamayı kullanıcı sonra senin arayüzünden yapar
+      album: album.Album,
+      artist: album.Artist,
+      image: album.Image,
+      releaseYear: album.Release_Year,
+      duration: album.Duration_Minutes,
+      spotifyUrl: album.spotifyUrl,
+      createdAt: new Date(),
+      score: null
     });
 
     console.log("Albüm eklendi:", album.Album);
+    await updateDoc(doc(db, "users", username), {
+      albumCount: increment(1)
+    });
   } catch (err) {
     console.error("Albüm eklenirken hata:", err);
     alert("Albüm eklenirken bir hata oluştu.");
   }
 }
-
+//ALBÜM LİNKİNDEN SPOTIFY IP KISMINI ALMA
 export function extractAlbumId(spotifyUrl) {
   try {
     const url = new URL(spotifyUrl.trim());
     const parts = url.pathname.split("/");
     const albumIndex = parts.indexOf("album");
     if (albumIndex === -1 || albumIndex + 1 >= parts.length) return null;
-    return parts[albumIndex + 1]; // 3RQQmkQEvNCY4prGKE6oc5
+    return parts[albumIndex + 1];
   } catch {
     return null;
   }
 }
+
 export async function handleSpotifyAlbumSubmit(spotifyUrl) {
   const albumId = extractAlbumId(spotifyUrl);
   if (!albumId) {
@@ -72,20 +76,8 @@ export async function handleSpotifyAlbumSubmit(spotifyUrl) {
 
     const data = await res.json();
     console.log("Albüm:", data);
-        await addAlbumForUser(data);
-        await loadUserAlbumsGrid();
-
-
-    // Firestore’a bu şekilde kaydedebilirsin:
-    // await setDoc(doc(db, "albums", albumId), {
-    //   Album: data.Album,
-    //   Artist: data.Artist,
-    //   Image: data.Image,
-    //   Release_Year: data.Release_Year,
-    //   Duration: data.Duration_Minutes,
-    //   spotifyUrl: data.spotifyUrl,
-    // });
-
+    await addAlbumForUser(data);
+    await loadUserAlbumsGrid();
   } catch (e) {
     console.error(e);
     alert("Albüm verisi alınırken hata oluştu.");
@@ -93,7 +85,7 @@ export async function handleSpotifyAlbumSubmit(spotifyUrl) {
 }
 export async function loadUserAlbumsGrid() {
   console.log("GRID YUKLENIYOR");
-    const grid = document.getElementById("grid");
+  const grid = document.getElementById("grid");
   if (!grid) return;
 
   const user = auth.currentUser;
@@ -118,11 +110,11 @@ export async function loadUserAlbumsGrid() {
 
     // data-* attribute'lar (olanları doldur, olmayanları boş geç)
     box.dataset.country = album.country || "";
-    box.dataset.score   = album.score   ?? "";  // puan alanı varsa
-    box.dataset.year    = album.releaseYear ?? "";
-    box.dataset.genre   = album.genre   || "";
+    box.dataset.score = album.score ?? "";  // puan alanı varsa
+    box.dataset.year = album.releaseYear ?? "";
+    box.dataset.genre = album.genre || "";
     box.dataset.duration = album.duration ?? "";
-    box.dataset.id      = docSnap.id; // doc id, istersen kullanırsın
+    box.dataset.id = docSnap.id; // doc id, istersen kullanırsın
 
     // GÖRSEL
     const photoDiv = document.createElement("div");
