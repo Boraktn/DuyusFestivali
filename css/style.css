@@ -1,3 +1,148 @@
+.album-edit-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.album-edit-modal--hidden {
+  display: none;
+}
+
+.album-edit-modal__inner {
+  width: min(900px, 94vw);
+  max-height: 90vh;
+  background: #1b1b1b;
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.album-edit-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.album-edit-modal__header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.album-edit-modal__close {
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.album-edit-modal__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+  .album-edit-modal__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Wide kart modal içindeyken aşırı hover efekti olmasın */
+.box--modal {
+  box-shadow: none;
+}
+
+.box--modal:hover {
+  transform: none !important;
+}
+
+/* Form kısmı */
+.album-edit-form {
+  background-color: #e7dde7;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  box-sizing: border-box;
+}
+
+.album-edit-form label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgb(51, 43, 50);
+}
+
+.album-edit-form input[type="number"],
+.album-edit-form textarea {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid rgba(108, 79, 104, 0.6);
+  padding: 0.55rem 0.75rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+  background: #faf6fb;
+}
+
+.album-edit-form input[type="number"]:focus,
+.album-edit-form textarea:focus {
+  border-color: rgb(108, 79, 104);
+  box-shadow: 0 0 0 2px rgba(108, 79, 104, 0.35);
+}
+
+.album-edit-form__hint {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.album-edit-form__buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+}
+
+.album-edit-form__primary,
+.album-edit-form__secondary {
+  border-radius: 999px;
+  border: none;
+  padding: 0.55rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.album-edit-form__primary {
+  background-color: rgb(108, 79, 104);
+  color: #fff;
+}
+
+.album-edit-form__primary:hover {
+  background-color: rgb(121, 104, 119);
+}
+
+.album-edit-form__secondary {
+  background-color: transparent;
+  color: rgb(108, 79, 104);
+  border: 1px solid rgba(108, 79, 104, 0.8);
+}
+
+.album-edit-form__secondary:hover {
+  background-color: rgba(108, 79, 104, 0.08);
+}
 html {
   width: 100%;
   height: 100%;
@@ -10,7 +155,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Liste genel alan */
 
 
 .navbar-links {
@@ -41,7 +185,6 @@ body {
   gap: 12px;
 }
 
-/* Kullanıcı kartı */
 .user-card {
   background: #1b1b1b;
   border: 1px solid #333;
@@ -52,27 +195,23 @@ body {
   align-items: center;
 }
 
-/* Soldaki kısım */
 .user-card-main {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-/* Username */
 .user-username {
   font-size: 18px;
   font-weight: 600;
   color: #fff;
 }
 
-/* Albüm sayısı */
 .user-albums {
   font-size: 14px;
   color: #aaa;
 }
 
-/* Profil linki */
 .user-link {
   font-size: 14px;
   padding: 6px 10px;
@@ -307,6 +446,7 @@ option {
 }
 
 .box {
+  position: relative;
   aspect-ratio: 3 / 4;
   background-color: #e7dde7;
   padding: 0.52vw;
@@ -320,11 +460,55 @@ option {
 
 .photo {
   position: relative;
+  overflow: hidden ;
   width: 100%;
-  overflow: hidden;
   flex-shrink: 0;
   pointer-events: none;
+  z-index: 0;
 
+}
+
+
+.album-edit-btn {
+  position: absolute;
+  
+  top: -5px;
+  right: -5px;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.8);
+
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+.box:hover .album-edit-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+.box--wide .album-edit-btn {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  transform: scale(1) !important; 
+  
+  width: 48px;
+  height: 48px;
+  font-size: 22px;
+
+  top: 8px; 
+  right: 8px;
 }
 
 .photo img {
@@ -369,6 +553,10 @@ option {
   transform: scale(1.07);
 }
 
+.box--wide:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
 .box:hover .photo::after {
   opacity: 1;
 }
@@ -399,18 +587,14 @@ option {
 }
 
 
-/* GENİŞ LİSTE MODU */
 .grid.grid--wide {
   grid-template-columns: 1fr;
-  /* repeat(3, 1fr) yerine bu */
   row-gap: 1.5rem;
-  /* dikey aralık */
 }
 
 .box.box--wide {
-  aspect-ratio: 2/1;
+  aspect-ratio: 5/2;
   height: 12vw;
-  /* boyu ayarlarsın, istersen rem de kullan */
   display: flex;
   flex-direction: row;
   align-items: stretch;

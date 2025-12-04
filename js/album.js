@@ -4,7 +4,8 @@ import {
   addDoc,
   getDocs,
   updateDoc,
-  increment
+  increment,
+  doc
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
 //ALBÜMÜ VERİTABANINA EKLEME
@@ -92,6 +93,132 @@ export function setViewMode(mode) {
   viewMode = mode;
   loadUserAlbumsGrid(); // mevcut fonksiyonun; mode değişince yeniden çiz
 }
+let currentEditAlbumId = null;
+
+const albumEditModal = document.getElementById("albumEditModal");
+const albumEditClose = document.getElementById("albumEditClose");
+const albumEditCancel = document.getElementById("albumEditCancel");
+const albumEditForm = document.getElementById("albumEditForm");
+const editScoreInput = document.getElementById("editScore");
+const editCommentInput = document.getElementById("editComment");
+
+const editImage = document.getElementById("editModalImage");
+const editAlbumTitle = document.getElementById("editModalAlbumTitle");
+const editArtist = document.getElementById("editModalArtist");
+const editScoreText = document.getElementById("editModalScoreText");
+const editScoreBox = document.getElementById("editModalScoreBox");
+const editCommentPreview = document.getElementById("editModalCommentPreview");
+
+function computeScoreColor(score) {
+  const s = parseInt(score, 10);
+  if (isNaN(s)) return "rgba(0, 0, 0, 0.8)";
+  const r = Math.round(255 * (100 - s) / 100);
+  const g = Math.round(255 * s / 100);
+  return `rgba(${r}, ${g}, 0, 0.8)`;
+}
+
+function updateModalScorePreview(score) {
+  const s = parseInt(score, 10);
+  const valid = !isNaN(s) && s >= 1 && s <= 100;
+
+  if (editScoreText) {
+    editScoreText.textContent = valid ? s : "N/A";
+  }
+  if (editScoreBox) {
+    editScoreBox.style.backgroundColor = computeScoreColor(valid ? s : NaN);
+  }
+}
+
+function openAlbumEditModal(albumData) {
+  if (!albumEditModal) return;
+  currentEditAlbumId = albumData.id;
+
+  if (editImage) {
+    editImage.src = albumData.image;
+    editImage.alt = albumData.album;
+  }
+  if (editAlbumTitle) editAlbumTitle.textContent = albumData.album;
+  if (editArtist) editArtist.textContent = albumData.artist;
+
+  const scoreVal = albumData.score ?? "";
+  const commentVal = albumData.comment ?? "";
+
+  if (editScoreInput) editScoreInput.value = scoreVal;
+  if (editCommentInput) editCommentInput.value = commentVal;
+  if (editCommentPreview) editCommentPreview.textContent = commentVal;
+
+  updateModalScorePreview(scoreVal);
+
+  albumEditModal.classList.remove("album-edit-modal--hidden");
+}
+
+function closeAlbumEditModal() {
+  if (!albumEditModal) return;
+  albumEditModal.classList.add("album-edit-modal--hidden");
+  currentEditAlbumId = null;
+}
+
+// --- Modal eventleri ---
+if (albumEditClose) {
+  albumEditClose.addEventListener("click", closeAlbumEditModal);
+}
+if (albumEditCancel) {
+  albumEditCancel.addEventListener("click", closeAlbumEditModal);
+}
+if (albumEditModal) {
+  albumEditModal.addEventListener("click", (e) => {
+    if (e.target === albumEditModal) {
+      closeAlbumEditModal();
+    }
+  });
+}
+
+if (editScoreInput) {
+  editScoreInput.addEventListener("input", () => {
+    updateModalScorePreview(editScoreInput.value);
+  });
+}
+
+if (editCommentInput && editCommentPreview) {
+  editCommentInput.addEventListener("input", () => {
+    editCommentPreview.textContent = editCommentInput.value;
+  });
+}
+
+// Kaydet butonu
+if (albumEditForm) {
+  albumEditForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!currentEditAlbumId) return;
+
+    const rawScore = (editScoreInput.value || "").trim();
+    const scoreInt = parseInt(rawScore, 10);
+
+    if (isNaN(scoreInt) || scoreInt < 1 || scoreInt > 100) {
+      alert("Puan 1 ile 100 arasında olmalı.");
+      return;
+    }
+
+    const comment = (editCommentInput.value || "").trim();
+
+    const user = auth.currentUser;
+    if (!user || !user.displayName) return;
+
+    try {
+      const ref = doc(db, "users", user.displayName, "albums", currentEditAlbumId);
+      await updateDoc(ref, {
+        score: scoreInt,
+        comment: comment
+      });
+
+      closeAlbumEditModal();
+      await loadUserAlbumsGrid();
+    } catch (err) {
+      console.error("Albüm güncellenirken hata:", err);
+      alert("Albüm güncellenirken bir hata oluştu.");
+    }
+  });
+}
 
 export async function loadUserAlbumsGrid() {
   console.log("GRID YUKLENIYOR");
@@ -133,6 +260,7 @@ export async function loadUserAlbumsGrid() {
     const photoDiv = document.createElement("div");
     photoDiv.classList.add("photo");
 
+
     const img = document.createElement("img");
     img.src = album.image;
     img.alt = album.album;
@@ -165,7 +293,26 @@ export async function loadUserAlbumsGrid() {
     const artistDiv = document.createElement("div");
     artistDiv.classList.add("artist");
     artistDiv.textContent = album.artist;
+    
+    const editBtn = document.createElement("button");
+    editBtn.className = "album-edit-btn";
+    editBtn.type = "button";
+    editBtn.innerHTML = "✎";
+    editBtn.addEventListener("click", () => {
+      const scoreInt = parseInt(album.score);
+      const hasScore = !isNaN(scoreInt);
 
+      openAlbumEditModal({
+        id: docSnap.id,
+        album: album.album,
+        artist: album.artist,
+        image: album.image,
+        score: hasScore ? scoreInt : "",
+        comment: album.comment || ""
+      });
+    });
+
+    box.appendChild(editBtn);
     // Kullanıcı yorumu (Firestore'da album.comment varsayıyorum)
     const commentDiv = document.createElement("div");
     commentDiv.classList.add("comment");
@@ -220,30 +367,30 @@ export async function loadUserAlbumsGrid() {
     grid.appendChild(box);
   });
   if (viewMode !== "wide") {
-      const TOTAL_POLAROIDS = 52;
-      const placeholderCount = Math.max(0, TOTAL_POLAROIDS - albumCount);
-      console.log(TOTAL_POLAROIDS)
+    const TOTAL_POLAROIDS = 52;
+    const placeholderCount = Math.max(0, TOTAL_POLAROIDS - albumCount);
+    console.log(TOTAL_POLAROIDS)
 
-      for (let i = 0; i < placeholderCount; i++) {
-        const box = document.createElement("div");
-        box.classList.add("box", "box--empty");
+    for (let i = 0; i < placeholderCount; i++) {
+      const box = document.createElement("div");
+      box.classList.add("box", "box--empty");
 
-        const photoDiv = document.createElement("div");
-        photoDiv.classList.add("photo", "photo--empty");
+      const photoDiv = document.createElement("div");
+      photoDiv.classList.add("photo", "photo--empty");
 
-        const albumDiv = document.createElement("div");
-        albumDiv.classList.add("album", "album--empty");
-        albumDiv.textContent = ""; // sadece yer tutsun
+      const albumDiv = document.createElement("div");
+      albumDiv.classList.add("album", "album--empty");
+      albumDiv.textContent = ""; // sadece yer tutsun
 
-        const artistDiv = document.createElement("div");
-        artistDiv.classList.add("artist", "artist--empty");
-        artistDiv.textContent = "";
+      const artistDiv = document.createElement("div");
+      artistDiv.classList.add("artist", "artist--empty");
+      artistDiv.textContent = "";
 
-        box.appendChild(photoDiv);
-        box.appendChild(albumDiv);
-        box.appendChild(artistDiv);
+      box.appendChild(photoDiv);
+      box.appendChild(albumDiv);
+      box.appendChild(artistDiv);
 
-        grid.appendChild(box);
-      }
+      grid.appendChild(box);
     }
+  }
 }
