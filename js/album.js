@@ -83,40 +83,51 @@ export async function handleSpotifyAlbumSubmit(spotifyUrl) {
     alert("Albüm verisi alınırken hata oluştu.");
   }
 }
+
+let viewMode = "grid"; // "grid" veya "wide"
+
+export function setViewMode(mode) {
+  viewMode = mode;
+  loadUserAlbumsGrid(); // mevcut fonksiyonun; mode değişince yeniden çiz
+}
+
 export async function loadUserAlbumsGrid() {
   console.log("GRID YUKLENIYOR");
   const grid = document.getElementById("grid");
   if (!grid) return;
 
   const user = auth.currentUser;
-  if (!user) return; // Güvenlik
+  if (!user) return;
 
   const username = user.displayName;
   if (!username) return;
 
-  // Eski kutuları temizle
+  // GRID class'ı: mod'a göre
+  grid.classList.toggle("grid--wide", viewMode === "wide");
+
   grid.innerHTML = "";
+  let albumCount = 0;
 
   const albumsRef = collection(db, "users", username, "albums");
   const snap = await getDocs(albumsRef);
 
   snap.forEach((docSnap) => {
     const album = docSnap.data();
-    if (!album.album) return; // güvenlik için
-
-    // BOX
+    if (!album.album) return;
+    albumCount++;
     const box = document.createElement("div");
     box.classList.add("box");
+    if (viewMode === "wide") {
+      box.classList.add("box--wide");
+    }
 
-    // data-* attribute'lar (olanları doldur, olmayanları boş geç)
     box.dataset.country = album.country || "";
-    box.dataset.score = album.score ?? "";  // puan alanı varsa
+    box.dataset.score = album.score ?? "";
     box.dataset.year = album.releaseYear ?? "";
     box.dataset.genre = album.genre || "";
     box.dataset.duration = album.duration ?? "";
-    box.dataset.id = docSnap.id; // doc id, istersen kullanırsın
+    box.dataset.id = docSnap.id;
 
-    // GÖRSEL
     const photoDiv = document.createElement("div");
     photoDiv.classList.add("photo");
 
@@ -126,12 +137,25 @@ export async function loadUserAlbumsGrid() {
 
     const scoreSpan = document.createElement("span");
     scoreSpan.classList.add("score");
-    scoreSpan.textContent = album.score ?? ""; // yoksa boş
+    scoreSpan.textContent = album.score ?? "";
 
     photoDiv.appendChild(img);
     photoDiv.appendChild(scoreSpan);
+    const scoreBox = document.createElement("div");
+    scoreBox.classList.add("score-box");
 
-    // ALBUM – ARTIST
+    const scoreText = document.createElement("span");
+    scoreText.classList.add("score-text");
+
+    // sayısal değeri hesapla
+    const scoreInt = parseInt(album.score);
+    const hasScore = !isNaN(scoreInt);
+
+    // N/A veya gerçek skor
+    scoreText.textContent = hasScore ? scoreInt : "N/A";
+
+    scoreBox.appendChild(scoreText);
+    // METİN KISMI
     const albumDiv = document.createElement("div");
     albumDiv.classList.add("album");
     albumDiv.textContent = album.album;
@@ -140,28 +164,84 @@ export async function loadUserAlbumsGrid() {
     artistDiv.classList.add("artist");
     artistDiv.textContent = album.artist;
 
-    // Kutuyu oluştur
-    box.appendChild(photoDiv);
-    box.appendChild(albumDiv);
-    box.appendChild(artistDiv);
+    // Kullanıcı yorumu (Firestore'da album.comment varsayıyorum)
+    const commentDiv = document.createElement("div");
+    commentDiv.classList.add("comment");
+    commentDiv.textContent = album.comment || "";
 
-    // Renk hesaplama (score'a göre)
-    const scoreInt = parseInt(scoreSpan.textContent);
-    if (isNaN(scoreInt)) {
-      photoDiv.style.setProperty(
-        "--overlay-color",
-        `rgba(0, 0, 0, 0.8)`
-      );
+    if (viewMode === "wide") {
+      const infoDiv = document.createElement("div");
+      infoDiv.classList.add("info");
+
+      const topTexts = document.createElement("div");
+      topTexts.appendChild(albumDiv);
+      topTexts.appendChild(artistDiv);
+
+      infoDiv.appendChild(topTexts);
+      infoDiv.appendChild(commentDiv);
+
+      // SOL KOLON: kapak + score kare
+      const leftCol = document.createElement("div");
+      leftCol.classList.add("left-col");
+      leftCol.appendChild(photoDiv);
+      leftCol.appendChild(scoreBox);
+
+      box.appendChild(leftCol);
+      box.appendChild(infoDiv);
     } else {
-      const r = Math.round(255 * (100 - scoreInt) / 100);
-      const g = Math.round(255 * scoreInt / 100);
-      photoDiv.style.setProperty(
-        "--overlay-color",
-        `rgba(${r}, ${g}, 0, 0.8)`
-      );
+      box.appendChild(photoDiv);
+      box.appendChild(albumDiv);
+      box.appendChild(artistDiv);
     }
 
-    // Grid'e ekle
+
+    // RENK HESABI (aynen kalsın)
+    const scoreIntForColor = parseInt(album.score);
+    const isNaNScore = isNaN(scoreIntForColor);
+
+    let color;
+    if (isNaNScore) {
+      color = "rgba(0, 0, 0, 0.8)";
+    } else {
+      const r = Math.round(255 * (100 - scoreIntForColor) / 100);
+      const g = Math.round(255 * scoreIntForColor / 100);
+      color = `rgba(${r}, ${g}, 0, 0.8)`;
+    }
+
+    if (viewMode === "wide") {
+      // kare score kutusunun rengi
+      scoreBox.style.backgroundColor = color;
+    } else {
+      // eski overlay davranışı
+      photoDiv.style.setProperty("--overlay-color", color);
+    }
     grid.appendChild(box);
   });
+  if (viewMode !== "wide") {
+      const TOTAL_POLAROIDS = 52;
+      const placeholderCount = Math.max(0, TOTAL_POLAROIDS - albumCount);
+      console.log(TOTAL_POLAROIDS)
+
+      for (let i = 0; i < placeholderCount; i++) {
+        const box = document.createElement("div");
+        box.classList.add("box", "box--empty");
+
+        const photoDiv = document.createElement("div");
+        photoDiv.classList.add("photo", "photo--empty");
+
+        const albumDiv = document.createElement("div");
+        albumDiv.classList.add("album", "album--empty");
+        albumDiv.textContent = ""; // sadece yer tutsun
+
+        const artistDiv = document.createElement("div");
+        artistDiv.classList.add("artist", "artist--empty");
+        artistDiv.textContent = "";
+
+        box.appendChild(photoDiv);
+        box.appendChild(albumDiv);
+        box.appendChild(artistDiv);
+
+        grid.appendChild(box);
+      }
+    }
 }

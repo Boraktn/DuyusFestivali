@@ -1,4 +1,4 @@
-import { addAlbumForUser, handleSpotifyAlbumSubmit, loadUserAlbumsGrid } from "./album.js";
+import { addAlbumForUser, handleSpotifyAlbumSubmit, loadUserAlbumsGrid, setViewMode } from "./album.js";
 import { auth } from "./firebase.js";
 import {
     onAuthStateChanged,
@@ -25,6 +25,20 @@ document.addEventListener("DOMContentLoaded", () => {
             await signOut(auth);
             //ÇIKIŞ YAPAN KULLANICI GİRİŞ YAP SAYFASINA YÖNLENDİRİLİR.
             window.location.href = "login.html";
+        });
+    }
+    const gridViewBtn = document.getElementById("viewGrid");
+    const wideViewBtn = document.getElementById("viewWide");
+
+    if (gridViewBtn) {
+        gridViewBtn.addEventListener("click", () => {
+            setViewMode("grid");
+        });
+    }
+
+    if (wideViewBtn) {
+        wideViewBtn.addEventListener("click", () => {
+            setViewMode("wide");
         });
     }
 });

@@ -11,6 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Limelight&family=Pacifico&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -21,8 +23,11 @@
     <label for="albumInput">Spotify Albüm Linki:</label>
     <input type="text" id="albumInput" placeholder="https://open.spotify.com/album/..." required>
     <button type="submit">Ekle</button>
-    <div class="grid" id="grid"></div>
+
   </form>
+  <button id="viewGrid">Kutu görünüm</button>
+  <button id="viewWide">Liste görünüm</button>
+  <div class="grid" id="grid"></div>
 
   <script type="module" src="js/main.page.js"></script>
   <script type="module" src="js/navbar.js"></script>
