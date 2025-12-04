@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     albumCount: 0
 
                 });
-                window.location.href = "main.html";
+                window.location.href = "index.html";
 
             } catch (err) {
                 alert(err.message);

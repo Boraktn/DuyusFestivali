@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     alert("Kullanıcı adın profilde bulunamadı. Lütfen tekrar kayıt ol.");
                     return;
                 }
-                window.location.href = "main.html";
+                window.location.href = "index.html";
 
             } catch (err) {
                 alert(err.message);
@@ -36,6 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
 //ZATEN GİRİŞ YAPMIŞ BİR KULLANICI LOGIN SAYFASINDA İSE KENDİ SAYFASINA YÖNLENDİRİLİR.
 onAuthStateChanged(auth, (user) => {
     if (user && window.location.pathname.endsWith("login.html")) {
-        window.location.href = "main.html";
+        window.location.href = "index.html";
     }
 });
