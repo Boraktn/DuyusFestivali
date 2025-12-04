@@ -139,7 +139,7 @@ export async function loadUserAlbumsGrid() {
 
     const scoreSpan = document.createElement("span");
     scoreSpan.classList.add("score");
-    scoreSpan.textContent = album.score ?? "";
+    scoreSpan.textContent = album.score ?? "n/a";
 
     photoDiv.appendChild(img);
     photoDiv.appendChild(scoreSpan);
