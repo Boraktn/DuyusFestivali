@@ -2,7 +2,9 @@ import { auth, db } from "./firebase.js";
 import {
   collection,
   addDoc,
-  getDocs
+  getDocs,
+  updateDoc,
+  increment
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
 //ALBÜMÜ VERİTABANINA EKLEME
