@@ -89,9 +89,9 @@ export async function handleSpotifyAlbumSubmit(spotifyUrl) {
 
 let viewMode = "grid"; // "grid" veya "wide"
 
-export function setViewMode(mode) {
+export function setViewMode(mode,username) {
   viewMode = mode;
-  loadUserAlbumsGrid(); // mevcut fonksiyonun; mode değişince yeniden çiz
+  loadUserAlbumsGrid(username); // mevcut fonksiyonun; mode değişince yeniden çiz
 }
 let currentEditAlbumId = null;
 
@@ -220,16 +220,31 @@ if (albumEditForm) {
   });
 }
 
-export async function loadUserAlbumsGrid() {
+export async function loadUserAlbumsGrid(targetUsername) {
   console.log("GRID YUKLENIYOR");
   const grid = document.getElementById("grid");
   if (!grid) return;
 
-  const user = auth.currentUser;
-  if (!user) return;
+  const currentUser = auth.currentUser;
 
-  const username = user.displayName;
-  if (!username) return;
+  let usernameToLoad = targetUsername || null;
+  let editable = false;
+
+  if (!usernameToLoad) {
+    // Parametre yoksa: kendi sayfamız
+    if (!currentUser || !currentUser.displayName) return;
+    usernameToLoad = currentUser.displayName;
+    editable = true;
+  } else {
+    // Parametre varsa: profil sayfası olabilir
+    if (currentUser && currentUser.displayName === usernameToLoad) {
+      editable = true;   // kendi profilin
+      console.log("editable");
+    } else {
+      editable = false;  // başkasının profili → sadece read-only
+      console.log("non-editable");
+    }
+  }
 
   // GRID class'ı: mod'a göre
   grid.classList.toggle("grid--wide", viewMode === "wide");
@@ -237,8 +252,9 @@ export async function loadUserAlbumsGrid() {
   grid.innerHTML = "";
   let albumCount = 0;
 
-  const albumsRef = collection(db, "users", username, "albums");
+  const albumsRef = collection(db, "users", usernameToLoad, "albums");
   const snap = await getDocs(albumsRef);
+
 
   snap.forEach((docSnap) => {
     const album = docSnap.data();
@@ -293,26 +309,29 @@ export async function loadUserAlbumsGrid() {
     const artistDiv = document.createElement("div");
     artistDiv.classList.add("artist");
     artistDiv.textContent = album.artist;
-    
-    const editBtn = document.createElement("button");
-    editBtn.className = "album-edit-btn";
-    editBtn.type = "button";
-    editBtn.innerHTML = "✎";
-    editBtn.addEventListener("click", () => {
-      const scoreInt = parseInt(album.score);
-      const hasScore = !isNaN(scoreInt);
 
-      openAlbumEditModal({
-        id: docSnap.id,
-        album: album.album,
-        artist: album.artist,
-        image: album.image,
-        score: hasScore ? scoreInt : "",
-        comment: album.comment || ""
+        if (editable) {
+          console.log("for real editable")
+      const editBtn = document.createElement("button");
+      editBtn.className = "album-edit-btn";
+      editBtn.type = "button";
+      editBtn.innerHTML = "✎";
+      editBtn.addEventListener("click", () => {
+        const scoreIntEdit = parseInt(album.score);
+        const hasScoreEdit = !isNaN(scoreIntEdit);
+
+        openAlbumEditModal({
+          id: docSnap.id,
+          album: album.album,
+          artist: album.artist,
+          image: album.image,
+          score: hasScoreEdit ? scoreIntEdit : "",
+          comment: album.comment || ""
+        });
       });
-    });
 
-    box.appendChild(editBtn);
+      box.appendChild(editBtn);
+    }
     // Kullanıcı yorumu (Firestore'da album.comment varsayıyorum)
     const commentDiv = document.createElement("div");
     commentDiv.classList.add("comment");

@@ -59,24 +59,13 @@
         <!-- Sağ taraf: düzenleme formu -->
         <form id="albumEditForm" class="album-edit-form">
           <label for="editScore">Albüm puanı (1–100)</label>
-          <input
-            type="number"
-            id="editScore"
-            min="1"
-            max="100"
-            inputmode="numeric"
-            placeholder="Örn: 73"
-          />
+          <input type="number" id="editScore" min="1" max="100" inputmode="numeric" placeholder="Örn: 73" />
           <small class="album-edit-form__hint">
             Puan sadece 1 ile 100 arasında olabilir.
           </small>
 
           <label for="editComment">Yorum</label>
-          <textarea
-            id="editComment"
-            rows="6"
-            placeholder="Albüm hakkında düşüncelerin..."
-          ></textarea>
+          <textarea id="editComment" rows="6" placeholder="Albüm hakkında düşüncelerin..."></textarea>
 
           <div class="album-edit-form__buttons">
             <button type="button" class="album-edit-form__secondary" id="albumEditCancel">
@@ -90,9 +79,10 @@
       </div>
     </div>
   </div>
+  <div id="footer-placeholder"></div>
 
   <script type="module" src="js/main.page.js"></script>
   <script type="module" src="js/navbar.js"></script>
-
+  <script type="module" src="js/footer.js"></script>
 
 </body>
