@@ -5,6 +5,8 @@ import {
   getDocs,
   updateDoc,
   increment,
+  query,
+  orderBy,
   doc
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
@@ -268,7 +270,8 @@ export async function loadUserAlbumsGrid(targetUsername) {
 
   //KULLANICININ ALBÜM BİLGİLERİNE ULAŞIYORUZ.
   const albumsRef = collection(db, "users", usernameToLoad, "albums");
-  const snap = await getDocs(albumsRef);
+  const q = query(albumsRef, orderBy("createdAt"));
+  const snap = await getDocs(q);
 
   //HER ALBÜM KUTUCUĞUNU BİR BİR OLUŞTURUYORUZ
   snap.forEach((docSnap) => {
