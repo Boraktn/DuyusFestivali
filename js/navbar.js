@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+   //NAVBAR BÜTÜN SAYFALARA PARTIALS/NAVBAR.HTML DOSYASINDAN EKLENİYOR.
   const target = document.getElementById("navbar");
   if (!target) return;
 

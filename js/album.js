@@ -43,6 +43,7 @@ export async function addAlbumForUser(album) {
     });
 
     console.log("Albüm eklendi:", album.Album);
+    //KULLANICIYA AİT ALBUMCOUNT'IN DEĞERİNİ ARTTIRIYORUZ.
     await updateDoc(doc(db, "users", username), {
       albumCount: increment(1)
     });
@@ -65,20 +66,25 @@ export function extractAlbumId(spotifyUrl) {
 }
 
 export async function handleSpotifyAlbumSubmit(spotifyUrl) {
+  //FONKSİYON ÇAĞRILINCA ÖNCE SPOTIFY URL'SİNİN IP KISMINI ALMAK İÇİN
+  //EXTRACTALBUMID FONKSİYONU ÇAĞRILIR. EĞER ALBÜM ID BOŞ İŞE UYARI VERİLİR.
   const albumId = extractAlbumId(spotifyUrl);
   if (!albumId) {
     alert("Geçerli bir Spotify albüm linki gir.");
     return;
   }
-
+  //BACK-END İLE İLETİŞİM KURULAN KISIM: ROUTE FONKSİYONU ALBUM ID GİRDİSİYLE ÇAĞRILIR
   try {
     const res = await fetch(
       `https://duyusfestivali-backend.vercel.app/api/route?albumId=${albumId}`
     );
     if (!res.ok) throw new Error("Spotify'dan veri alınamadı");
 
+    //GELEN ÇIKTI JSON FORMATINDA DATA DEĞİŞKENİNE ATANIR.
     const data = await res.json();
     console.log("Albüm:", data);
+    //ALBÜM BİLGİSİ KULLANICININ VERİTABANINA EKLENİR VE 
+    // YENİ ALBÜMÜN DE GÖRÜNMESİ İÇİN ALBÜM KOLEKSİYONU EKRANI TEKRAR YÜKLENİR.
     await addAlbumForUser(data);
     await loadUserAlbumsGrid();
   } catch (e) {
@@ -87,21 +93,24 @@ export async function handleSpotifyAlbumSubmit(spotifyUrl) {
   }
 }
 
-let viewMode = "grid"; // "grid" veya "wide"
+//GÖRÜNÜM DEĞİŞKENİ
+let viewMode = "grid";
 
-export function setViewMode(mode,username) {
+//GÖRÜNÜMÜN AYARLANDIĞI VE GÜNCELLEME İÇİN ALBÜM KOLEKSİYONU EKRANININ TEKRAR YÜKLENDİĞİ FONKSİYON
+export function setViewMode(mode, username) {
+  //EĞER VIEWMODE ZATEN İSTENEN MODE İSE FONKSİYON GERİ GÖNDERİLİR.
+  if (mode === viewMode) return;
   viewMode = mode;
-  loadUserAlbumsGrid(username); // mevcut fonksiyonun; mode değişince yeniden çiz
+  loadUserAlbumsGrid(username);
 }
+//ALBÜM PUANLAMA/YORUM YAPMA EKRANI BİLGİLERİ
 let currentEditAlbumId = null;
-
 const albumEditModal = document.getElementById("albumEditModal");
 const albumEditClose = document.getElementById("albumEditClose");
 const albumEditCancel = document.getElementById("albumEditCancel");
 const albumEditForm = document.getElementById("albumEditForm");
 const editScoreInput = document.getElementById("editScore");
 const editCommentInput = document.getElementById("editComment");
-
 const editImage = document.getElementById("editModalImage");
 const editAlbumTitle = document.getElementById("editModalAlbumTitle");
 const editArtist = document.getElementById("editModalArtist");
@@ -109,6 +118,7 @@ const editScoreText = document.getElementById("editModalScoreText");
 const editScoreBox = document.getElementById("editModalScoreBox");
 const editCommentPreview = document.getElementById("editModalCommentPreview");
 
+//PUANA GÖRE VERİLEN RENK: 0->KIRMIZI, 100->YEŞİL
 function computeScoreColor(score) {
   const s = parseInt(score, 10);
   if (isNaN(s)) return "rgba(0, 0, 0, 0.8)";
@@ -158,7 +168,6 @@ function closeAlbumEditModal() {
   currentEditAlbumId = null;
 }
 
-// --- Modal eventleri ---
 if (albumEditClose) {
   albumEditClose.addEventListener("click", closeAlbumEditModal);
 }
@@ -185,7 +194,6 @@ if (editCommentInput && editCommentPreview) {
   });
 }
 
-// Kaydet butonu
 if (albumEditForm) {
   albumEditForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -219,7 +227,8 @@ if (albumEditForm) {
     }
   });
 }
-
+//ALBÜM KOLEKSİYONU YÜKLEME FONKSİYONU: BU FONKSİYON BAŞKA KULLANICILARIN SAYFALARINI DA
+//KULLANICININ KENDİ SAYFASINI DA YÜKLEYEBİLİR.
 export async function loadUserAlbumsGrid(targetUsername) {
   console.log("GRID YUKLENIYOR");
   const grid = document.getElementById("grid");
@@ -227,49 +236,59 @@ export async function loadUserAlbumsGrid(targetUsername) {
 
   const currentUser = auth.currentUser;
 
+  //EĞER BİR PARAMETRE VARSA O KULLANICI ADINI ALIYORUZ
   let usernameToLoad = targetUsername || null;
+  //SAYFA DA EDIT BUTONLARININ GÖZÜKÜP GÖZÜKMEYECEĞİNİ BELİRLEYEN DEĞİŞKEN
   let editable = false;
 
+
   if (!usernameToLoad) {
-    // Parametre yoksa: kendi sayfamız
+    //PARAMETRE YOK İSE OTURUM SAHİBİNİN KENDİ KULLANICI ADINI KULLANIYORUZ VE SAYFAYI DÜZENLENEBİLİR YAPIYORUZ.
     if (!currentUser || !currentUser.displayName) return;
     usernameToLoad = currentUser.displayName;
     editable = true;
   } else {
-    // Parametre varsa: profil sayfası olabilir
+    //PARAMETRE VARSA KULLANICI ADI OTURUM SAHİBİNİN Mİ KONTROL EDİP DÜZENLENEBİLİR OLUP OLMAYACAĞINA KARAR VERİYORUZ.
     if (currentUser && currentUser.displayName === usernameToLoad) {
-      editable = true;   // kendi profilin
+      editable = true;
       console.log("editable");
     } else {
-      editable = false;  // başkasının profili → sadece read-only
+      editable = false;
       console.log("non-editable");
     }
   }
 
-  // GRID class'ı: mod'a göre
+  //EĞER GÖRÜNÜM MODU WIDE İSE GEREKLİ CLASS'I GRID'E EKLİYORUZ.
   grid.classList.toggle("grid--wide", viewMode === "wide");
-
+  //HER ÇAĞRILDIĞINDA GRID'İN İÇİNİ SİLİYORUZ.
   grid.innerHTML = "";
+
+  //ALBUM SAYISINI SAYMAZ İÇİN DEĞİŞKEN
   let albumCount = 0;
 
+  //KULLANICININ ALBÜM BİLGİLERİNE ULAŞIYORUZ.
   const albumsRef = collection(db, "users", usernameToLoad, "albums");
   const snap = await getDocs(albumsRef);
 
-
+  //HER ALBÜM KUTUCUĞUNU BİR BİR OLUŞTURUYORUZ
   snap.forEach((docSnap) => {
+    //ALBÜM BİLGİLERİNİ DEĞİŞKENE ATIYORUZ
     const album = docSnap.data();
+    //ALBÜM ADI BOŞ İŞE GERİ GÖNDERİYORUZ.
     if (!album.album) return;
+    //ALBÜM SAYISINI 1 ARTTIRIYORUZ.
     albumCount++;
+
+    //ALBÜM GÖRÜNÜMÜ WIDE İSE BOX--WIDE CLASS'I EKLENİYOR 
     const box = document.createElement("div");
     box.classList.add("box");
     if (viewMode === "wide") {
       box.classList.add("box--wide");
     }
-
+    //ALBÜM VERİLERİ KAYDEDİLİYOR.
     box.dataset.country = album.country || "";
     box.dataset.score = album.score ?? "";
     box.dataset.year = album.releaseYear ?? "";
-    box.dataset.genre = album.genre || "";
     box.dataset.duration = album.duration ?? "";
     box.dataset.id = docSnap.id;
 
@@ -293,25 +312,18 @@ export async function loadUserAlbumsGrid(targetUsername) {
     const scoreText = document.createElement("span");
     scoreText.classList.add("score-text");
 
-    // sayısal değeri hesapla
     const scoreInt = parseInt(album.score);
     const hasScore = !isNaN(scoreInt);
-
-    // N/A veya gerçek skor
     scoreText.textContent = hasScore ? scoreInt : "N/A";
-
     scoreBox.appendChild(scoreText);
-    // METİN KISMI
     const albumDiv = document.createElement("div");
     albumDiv.classList.add("album");
     albumDiv.textContent = album.album;
-
     const artistDiv = document.createElement("div");
     artistDiv.classList.add("artist");
     artistDiv.textContent = album.artist;
 
-        if (editable) {
-          console.log("for real editable")
+    if (editable) {
       const editBtn = document.createElement("button");
       editBtn.className = "album-edit-btn";
       editBtn.type = "button";
@@ -332,55 +344,46 @@ export async function loadUserAlbumsGrid(targetUsername) {
 
       box.appendChild(editBtn);
     }
-    // Kullanıcı yorumu (Firestore'da album.comment varsayıyorum)
     const commentDiv = document.createElement("div");
     commentDiv.classList.add("comment");
     commentDiv.textContent = album.comment || "";
 
-    if (viewMode === "wide") {
-      const infoDiv = document.createElement("div");
-      infoDiv.classList.add("info");
-
-      const topTexts = document.createElement("div");
-      topTexts.appendChild(albumDiv);
-      topTexts.appendChild(artistDiv);
-
-      infoDiv.appendChild(topTexts);
-      infoDiv.appendChild(commentDiv);
-
-      // SOL KOLON: kapak + score kare
+     if (viewMode === "wide") {
+      // Sol: albüm kapağı
       const leftCol = document.createElement("div");
       leftCol.classList.add("left-col");
       leftCol.appendChild(photoDiv);
       leftCol.appendChild(scoreBox);
 
+      // Orta: albüm adı, sanatçı ve hemen altında yorum
+      const middleCol = document.createElement("div");
+      middleCol.classList.add("middle-col");
+      middleCol.appendChild(albumDiv);
+      middleCol.appendChild(artistDiv);
+      middleCol.appendChild(commentDiv);
+
+      const emptyDiv = document.createElement("div");
+      emptyDiv.classList.add("box--wide");
+      emptyDiv.classList.add("placeholder");
+
+      // Sağ: skor kutusu
       box.appendChild(leftCol);
-      box.appendChild(infoDiv);
+      box.appendChild(middleCol);
+      box.appendChild(emptyDiv);
     } else {
       box.appendChild(photoDiv);
       box.appendChild(albumDiv);
       box.appendChild(artistDiv);
     }
 
-
-    // RENK HESABI (aynen kalsın)
     const scoreIntForColor = parseInt(album.score);
-    const isNaNScore = isNaN(scoreIntForColor);
 
-    let color;
-    if (isNaNScore) {
-      color = "rgba(0, 0, 0, 0.8)";
-    } else {
-      const r = Math.round(255 * (100 - scoreIntForColor) / 100);
-      const g = Math.round(255 * scoreIntForColor / 100);
-      color = `rgba(${r}, ${g}, 0, 0.8)`;
-    }
+    const color = computeScoreColor(scoreIntForColor);
+
 
     if (viewMode === "wide") {
-      // kare score kutusunun rengi
       scoreBox.style.backgroundColor = color;
     } else {
-      // eski overlay davranışı
       photoDiv.style.setProperty("--overlay-color", color);
     }
     grid.appendChild(box);
@@ -399,7 +402,7 @@ export async function loadUserAlbumsGrid(targetUsername) {
 
       const albumDiv = document.createElement("div");
       albumDiv.classList.add("album", "album--empty");
-      albumDiv.textContent = ""; // sadece yer tutsun
+      albumDiv.textContent = "";
 
       const artistDiv = document.createElement("div");
       artistDiv.classList.add("artist", "artist--empty");
