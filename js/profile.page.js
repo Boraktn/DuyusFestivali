@@ -1,4 +1,4 @@
-import {setViewMode, loadUserAlbumsGrid } from "./album.js";
+import { setViewMode, loadUserAlbumsGrid } from "./album.js";
 
 
 
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.getElementById("grid");
 
   if (!grid) return;
-    //EĞER KULLANICI ADI DEĞERİ BOŞ İSE UYARI 
+  //EĞER KULLANICI ADI DEĞERİ BOŞ İSE UYARI 
   if (!username) {
     if (errorEl) {
       errorEl.textContent = "Kullanıcı adı belirtilmemiş.";
@@ -25,21 +25,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (usernameEl) usernameEl.textContent = `@${username}`;
+  /*const photoDiv = document.getElementById("avatar");
+
+
+  const img = document.createElement("img");
+  img.src = "img/pp1.webp";
+  photoDiv.appendChild(img);*/
   console.log("no set");
-    loadUserAlbumsGrid(username)
-    console.log("set");
+  loadUserAlbumsGrid(username)
+  console.log("set");
   //GÖRÜNÜM MODU BELİRLENİP USERNAME İLE BİRLİKTE ALBUM.JS FONKSİYONUNA İLETİLİYOR.
   const gridViewBtn = document.getElementById("viewGrid");
   const wideViewBtn = document.getElementById("viewWide");
-    if (gridViewBtn) {
-        gridViewBtn.addEventListener("click", () => {
-            setViewMode("grid",username);
-        });
-    }
+  if (gridViewBtn) {
+    gridViewBtn.addEventListener("click", () => {
+      setViewMode("grid", username);
+    });
+  }
 
-    if (wideViewBtn) {
-        wideViewBtn.addEventListener("click", () => {
-            setViewMode("wide", username);
-        });
-    }
+  if (wideViewBtn) {
+    wideViewBtn.addEventListener("click", () => {
+      setViewMode("wide", username);
+    });
+  }
 });

@@ -613,7 +613,10 @@ option {
   opacity: 1;
 }
 
-
+#avatar{
+  height: 90px;
+  aspect-ratio: 1/1;
+}
 .album {
   margin-top: 0.2rem;
   font-size: max(0.90vw, 6px);
