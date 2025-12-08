@@ -22,13 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 //EĞER EKLİ DEĞİLSE UYARI GÖNDERİLİYOR.
                 const username = userCredential.user.displayName;
                 if (!username) {
-                    alert("Kullanıcı adın profilde bulunamadı. Lütfen tekrar kayıt ol.");
                     return;
                 }
                 window.location.href = "index.html";
 
             } catch (err) {
-                alert(err.message);
+                showMessage("Giriş Başarısız.");
+
             }
         });
     }
@@ -39,3 +39,9 @@ onAuthStateChanged(auth, (user) => {
         window.location.href = "index.html";
     }
 });
+function showMessage(msg) {
+    const box = document.getElementById("authMessage");
+    if (!box) return;
+    box.textContent = msg;
+    box.style.display = "block";
+}

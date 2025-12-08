@@ -23,14 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const username = rawUsername.trim().toLowerCase();
 
             if (username.length < 3) {
-                alert("Kullanıcı adı en az 3 karakter olmalı!");
+                showMessage("Kullanıcı adı en az 3 karakter olmalı.");
                 return;
             }
 
             const validUsernameRegex = /^[a-z0-9]+$/;
             if (!validUsernameRegex.test(username)) {
-                alert("Kullanıcı adı sadece İngilizce harf (a-z) ve rakam içerebilir. Boşluk, Türkçe karakter ve sembol kullanma.");
-                return;
+                showMessage("Kullanıcı adı sadece İngilizce harf ve rakam içerebilir."); return;
             }
 
             // KULLANICI ADI VERİTABANINDA VARSA UYARI GÖNDERİLİYOR
@@ -38,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const userRef = doc(db, "users", username);
                 const snap = await getDoc(userRef);
                 if (snap.exists()) {
-                    alert("Bu kullanıcı adı zaten alınmış!");
+                    showMessage("Bu kullanıcı adı zaten alınmış.");
                     return;
                 }
                 //BİR SORUN YOKSA EMAIL VE ŞİFRE İLE HESAP OLUŞTURULUYOR.
@@ -61,8 +60,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 window.location.href = "index.html";
 
             } catch (err) {
-                alert(err.message);
+                showMessage("Kayıt başarısız: " + err.message);
             }
         });
     }
 });
+function showMessage(msg) {
+    const box = document.getElementById("authMessage");
+    if (!box) return;
+    box.textContent = msg;
+    box.style.display = "block";
+}
