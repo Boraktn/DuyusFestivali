@@ -972,3 +972,87 @@ option {
     margin-left: 6vw;
   }
 }
+.toolbar {
+  margin: 1.5vw 2.2vw 1vw;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.album-add-btn {
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  border: none;
+  font-size: max(0.9rem, 1.1vw);
+  font-weight: 600;
+  cursor: pointer;
+  background-color: rgb(108, 79, 104);
+  color: #f7ecda;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  transition: transform 0.1s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.album-add-btn:hover {
+  background-color: rgb(121, 104, 119);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+}
+
+.album-add-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.view-toggle {
+  display: flex;
+  gap: 8px;
+}
+
+/* Genel buton stili */
+.view-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background-color: rgb(108, 79, 104); /* sitenin mor tonu */
+  color: #f7ecda;          /* ikon rengi */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+}
+
+.view-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.35);
+}
+
+.view-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* İçerideki ikon */
+.view-btn__icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.view-btn__icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: currentColor;  /* butonun text rengi = ikon rengi */
+}
+
+/* Aktif görünüm rengi */
+.view-btn.is-active {
+  
+  background: #e7dde7;
+  color: #1e1724;  
+}
