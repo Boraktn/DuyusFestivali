@@ -1071,3 +1071,35 @@ option {
   from { opacity: 0; transform: translateY(-4px); }
   to { opacity: 1; transform: translateY(0); }
 }
+.show-scores .score {
+    opacity: 1 !important;
+}
+.show-scores .photo::before,
+.show-scores .photo::after {
+  opacity: 1 !important;
+}
+.toggle-scores-btn {
+  margin-right: 1vw;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: max(8px, 1.2vw);
+  padding: 0px;
+  width: max(5vw,30px);
+  aspect-ratio: 4/3;
+  background: #fafafa;
+  cursor: pointer;
+  line-height: 1.2;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.toggle-scores-btn:hover {
+  transform: translateY(-1px);
+}
+
+.toggle-scores-btn.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}

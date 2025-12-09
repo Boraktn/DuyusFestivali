@@ -9,15 +9,12 @@ Papa.parse(CSV_URL, {
   header: true,
   dynamicTyping: true,
   complete: ({ data }) => {
-    // Her satırdan bir "box" oluştur
     data.forEach(album => {
-      if (!album.Album) return; // Boş satır varsa atla
+      if (!album.Album) return;
 
-      // BOX oluştur
       const box = document.createElement("div");
       box.classList.add("box");
 
-      // 📎 KÜNYE bilgilerini data-* attribute olarak ekliyoruz
       box.dataset.country = album.Country;
       box.dataset.score = album.Score;
       box.dataset.year = album.Release_Year;
@@ -25,7 +22,6 @@ Papa.parse(CSV_URL, {
       box.dataset.duration = album.Duration;
       box.dataset.index = album.Index;
 
-      // GÖRSEL kısım
       const photoDiv = document.createElement("div");
       photoDiv.classList.add("photo");
       const img = document.createElement("img");
@@ -38,7 +34,6 @@ Papa.parse(CSV_URL, {
       photoDiv.appendChild(img);
       photoDiv.appendChild(score);
 
-      // ALBUM ve ARTIST bilgileri
       const albumDiv = document.createElement("div");
       albumDiv.classList.add("album");
       albumDiv.textContent = album.Album;
@@ -47,7 +42,7 @@ Papa.parse(CSV_URL, {
       artistDiv.classList.add("artist");
       artistDiv.textContent = album.Artist;
 
-      // Her şeyi box’a ekle
+      
       box.appendChild(photoDiv);
       box.appendChild(albumDiv);
       box.appendChild(artistDiv);
@@ -61,7 +56,6 @@ Papa.parse(CSV_URL, {
         let g = Math.round(255 * scoreint / 100);
         photoDiv.style.setProperty('--overlay-color', `rgba(${r}, ${g}, 0, 0.8)`);
       }
-      // Grid'e ekle
       grid.appendChild(box);
     });
 
@@ -87,12 +81,11 @@ sortSelect.addEventListener("change", () => {
     }
   });
 
-  // Grid içeriğini temizleyip yeniden sırayla ekle
   boxes.forEach(box => grid.appendChild(box));
 });
 
-const filterSelect = document.getElementById("filterSelect"); // Ülke
-const decadeSelect = document.getElementById("decadeSelect"); // On yıl
+const filterSelect = document.getElementById("filterSelect"); 
+const decadeSelect = document.getElementById("decadeSelect");
 
 function applyFilters() {
   const selectedCountry = filterSelect.value;
@@ -114,16 +107,14 @@ function applyFilters() {
       return year >= start && year <= end;
     })();
 
-    // İkisi de sağlanıyorsa görünür
     if (matchCountry && matchDecade) {
-      box.style.display = "block"; // veya flex
+      box.style.display = "block";
     } else {
       box.style.display = "none";
     }
   });
 }
 
-// Her iki filtre değiştiğinde tetikle
 filterSelect.addEventListener("change", applyFilters);
 decadeSelect.addEventListener("change", applyFilters);
 
@@ -194,3 +185,11 @@ document.getElementById("btn").addEventListener("click", async () => {
     alert("Hata: " + err);
   }
 });
+const toggleScoresBtn = document.getElementById("toggleScores");
+
+if (toggleScoresBtn) {
+  toggleScoresBtn.addEventListener("click", () => {
+    const isActive = document.body.classList.toggle("show-scores");
+    toggleScoresBtn.classList.toggle("active", isActive);
+  });
+}
