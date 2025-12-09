@@ -241,6 +241,30 @@ body {
 .navbar-item:hover {
   opacity: 0.7;
 }
+.nav-right {
+  margin-left:auto;
+  display: flex;
+  align-items: center;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: #f6f2e9;
+  font-size: 30px;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.nav-btn:hover {
+  background: rgba(255,255,255,0.10);
+}
+
+
+
 
 .users-list {
   list-style: none;
@@ -1085,7 +1109,7 @@ option {
   font-size: max(8px, 1.2vw);
   padding: 0px;
   width: max(5vw,30px);
-  aspect-ratio: 4/3;
+  aspect-ratio: 5/3;
   background: #fafafa;
   cursor: pointer;
   line-height: 1.2;
