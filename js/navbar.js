@@ -18,13 +18,16 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+
       onAuthStateChanged(auth, (user) => {
         navActions.innerHTML = "";
 
         if (user) {
           // PROFİL linki görünür
           profileLink.style.display = "inline-block";
-
+          if (profileLink && user?.displayName) {
+            profileLink.href = `profile.html?u=${user.displayName}`;
+          }
           // Çıkış butonu
           const logoutBtn = document.createElement("button");
           logoutBtn.className = "nav-btn";

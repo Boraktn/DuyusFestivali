@@ -389,6 +389,7 @@ export async function loadUserAlbumsGrid(targetUsername) {
     } else {
       photoDiv.style.setProperty("--overlay-color", color);
     }
+    console.log("thats one");
     grid.appendChild(box);
   });
   if (viewMode !== "wide") {
