@@ -61,7 +61,7 @@
   font-size: 12px;
   opacity: 0.8;
 }
-
+/*-------------------------------------------ALBÜM DÜZENLEME MODAL'İ----------------------------------*/
 .album-edit-modal {
   position: fixed;
   inset: 0;
@@ -77,14 +77,26 @@
 }
 
 .album-edit-modal__inner {
-  width: min(900px, 94vw);
-  max-height: 90vh;
-  background: #1b1b1b;
-  border-radius: 18px;
-  padding: 1.5rem;
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
-  overflow-y: auto;
-  box-sizing: border-box;
+  background: #f0e6ef; /* senin form kutusunun rengine göre */
+    padding: 2rem;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    box-shadow: 0 0 30px rgba(0,0,0,0.3);
+}
+.album-edit-info-top {
+    margin-bottom: 1.2rem;
+}
+
+.album-edit-info-top .album {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.album-edit-info-top .artist {
+    font-size: .95rem;
+    opacity: .7;
 }
 
 .album-edit-modal__header {
@@ -92,7 +104,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
-  color: #fff;
+  color: #1b1b1b;
 }
 
 .album-edit-modal__header h2 {
@@ -207,29 +219,40 @@
 .album-edit-form__secondary:hover {
   background-color: rgba(108, 79, 104, 0.08);
 }
+.album-edit-modal__infoonly {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+}
 
-html, body {
+
+html,
+body {
   margin: 0;
   padding: 0;
   max-width: 100%;
-  overflow-x: hidden;   /* yatay scroll’u tamamen kapat */
+  overflow-x: hidden;
+  /* yatay scroll’u tamamen kapat */
 }
+
 body {
   background-color: rgb(51, 43, 50);
   font-family: Arial, Helvetica, sans-serif;
 }
 
 /*------------------NAVBAR-------------------------------------------------------------------*/
-.navbar{
-  width:100%;
+.navbar {
+  width: 100%;
 }
+
 .navbar-links {
   align-items: left;
   padding: 14px 20px;
   border-bottom: 1px solid #e7dde7;
   margin-bottom: 2vw;
   display: flex;
-  gap: max(40px,5vw);
+  gap: max(40px, 5vw);
   overflow: hidden;
 }
 
@@ -418,111 +441,6 @@ body {
   color: rgb(246, 246, 228);
 }
 
-.header {
-  display: flex;
-  gap: 20px;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 1.5vw;
-  margin-left: 2.2vw;
-}
-
-.headerItem {
-  font-size: max(1.6vw, 12px);
-  width: max(12vw, 90px);
-  height: max(4vw, 30px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  color: white;
-  background-color: rgb(108, 79, 104);
-}
-
-.headerItem:hover {
-  background: rgb(121, 104, 119);
-  ;
-
-
-}
-
-#popup {
-  width: max(25vw, 200px);
-  aspect-ratio: 3 / 4;
-  background-color: #e7dde7;
-  padding: 1.4vw;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: absolute;
-  top: 25%;
-  left: 40%;
-  z-index: 2;
-  outline: 0.2vw solid rgb(0, 0, 0);
-  cursor: grab;
-  user-select: none;
-}
-
-#popup.dragging {
-  cursor: grabbing;
-}
-
-#abouttitle {
-  margin-top: 0.4vw;
-  font-size: max(1.2vw, 10px);
-  font-weight: bold;
-}
-
-#aboutcontext {
-  font-size: max(0.9vw, 7px);
-}
-
-.close {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  right: 0.7vw;
-  top: 0.7vw;
-  height: 3.5vw;
-  aspect-ratio: 1/1;
-  font-size: 2.5vw;
-  border-radius: 2vw;
-  background-color: rgb(249, 252, 236);
-  border-color: rgb(152, 154, 145);
-  z-index: 3;
-}
-
-label {
-  color: #fff;
-  font-size: max(8px, 1.2vw);
-}
-
-option {
-  font-size: max(8px, 1.2vw);
-  padding: 4px 8px;
-}
-
-.set {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-
-.container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 12px 0;
-}
-
-.select {
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: max(8px, 1.2vw);
-  background: #fafafa;
-}
 
 .grid {
   display: grid;
@@ -851,147 +769,6 @@ option {
   }
 }
 
-.dataContainer {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 5vw;
-}
-
-.topAlbums {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1vw;
-  width: 98vw;
-}
-
-.slides {
-  display: grid;
-  border-radius: 1vw;
-  background-color: rgb(108, 79, 104);
-  grid-template-columns: repeat(2, 1fr);
-  width: 98wv;
-  margin: auto;
-  padding: 2vw;
-  column-gap: 14vw;
-  row-gap: 7vw;
-
-}
-
-
-.canvastitle {
-  font-size: max(2vw, 12px);
-}
-
-.slide {
-  background-color: #e5d3e8;
-  border-radius: 1vw;
-  box-sizing: border-box;
-  text-align: center;
-  width: 40vw;
-}
-
-@media(max-width:425px) {
-  .slides {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  .slide {
-    width: 92vw;
-  }
-}
-
-.toptext {
-  color: #ddd;
-  margin-bottom: 1vw;
-  font-size: max(15px, 2vw);
-  font-weight: bold;
-}
-
-.toplist {
-
-  padding: 2vw;
-  background-color: rgb(108, 79, 104);
-  border-radius: 1vw;
-}
-
-.album-list {
-  display: flex;
-  gap: 3vw;
-}
-
-.album-card {
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding-left: 0.5vw;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  width: max(270px, 30vw);
-  height: max(50px, 8vw);
-  overflow: hidden;
-  position: relative;
-}
-
-.album-card img {
-  width: max(7vw, 40px);
-  height: max(7vw, 40px);
-  object-fit: cover;
-  border: 1px solid #aaa;
-  margin-right: 1vw;
-}
-
-.album-info {
-  display: flex;
-  flex: 0 0 10vw;
-  flex-direction: column;
-}
-
-.albumdata {
-  margin-top: max(20px, 0.5vw);
-  font-size: max(1vw, 9px);
-  font-weight: bold;
-}
-
-.album-info p {
-
-  font-size: max(1vw, 9px);
-  color: #555;
-}
-
-.album-score {
-  background-color: rgba(0, 0, 0, 0.8);
-  right: 10vw;
-  font-size: max(5vw, 25px);
-  width: max(70px, 11vw);
-  height: max(8vw, 50px);
-  padding-left: max(15px, 2vw);
-  padding-top: max(2vw, 20px);
-  font-weight: bold;
-  color: #fff;
-  justify-content: center;
-  align-items: center;
-}
-
-@media (max-width: 431px) {
-  .album-list {
-    flex-direction: column;
-  }
-
-  .album-info {
-    flex: 0 0 40vw;
-  }
-
-}
-
-@media (max-width: 320px) {
-  .album-score {
-    margin-left: 6vw;
-  }
-}
-
 .toolbar {
   margin: 1.5vw 2.2vw 1vw;
   display: flex;
@@ -1029,7 +806,6 @@ option {
   gap: 8px;
 }
 
-/* Genel buton stili */
 .view-btn {
   width: 40px;
   height: 40px;
@@ -1037,9 +813,7 @@ option {
   border: none;
   cursor: pointer;
   background-color: rgb(108, 79, 104);
-  /* sitenin mor tonu */
   color: #f7ecda;
-  /* ikon rengi */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1100,41 +874,6 @@ option {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-.show-scores .score {
-  opacity: 1 !important;
-}
-
-.show-scores .photo::before,
-.show-scores .photo::after {
-  opacity: 1 !important;
-}
-
-.toggle-scores-btn {
-  margin-right: 1vw;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: max(8px, 1.2vw);
-  padding: 0px;
-  width: max(5vw, 30px);
-  aspect-ratio: 5/3;
-  background: #fafafa;
-  cursor: pointer;
-  line-height: 1.2;
-  white-space: nowrap;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease,
-    transform 0.1s ease;
-}
-
-.toggle-scores-btn:hover {
-  transform: translateY(-1px);
-}
-
-.toggle-scores-btn.active {
-  background: #111;
-  color: #fff;
-  border-color: #111;
 }
 
 .profile-page {
