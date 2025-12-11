@@ -3,7 +3,7 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/f
 import { auth,db } from "./firebase.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
-  const DEFAULT_AVATAR = "img/avatars/Default.webp";
+  const DEFAULT_AVATAR = "img/avatars/default.webp";
 
   async function loadProfileHeader(usernameToLoad) {
   const usernameEl = document.getElementById("profileUsername");
