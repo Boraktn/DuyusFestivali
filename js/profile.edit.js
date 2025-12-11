@@ -4,10 +4,10 @@ import { doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebase
 
 const AVATARS = [
   "img/avatars/default.webp",
-  "img/avatars/1.webp",
-  "img/avatars/2.webp",
-  "img/avatars/3.webp",
-  "img/avatars/4.webp"
+  "img/avatars/1.png",
+  "img/avatars/2.png",
+  "img/avatars/3.png",
+  "img/avatars/4.png"
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
