@@ -121,27 +121,9 @@
   line-height: 1;
 }
 
-.album-edit-modal__grid {
-  display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-  gap: 1.5rem;
-  align-items: flex-start;
-}
-
-@media (max-width: 768px) {
-  .album-edit-modal__grid {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* Wide kart modal içindeyken aşırı hover efekti olmasın */
-.box--modal {
-  box-shadow: none;
-}
 
-.box--modal:hover {
-  transform: none !important;
-}
 
 /* Form kısmı */
 .album-edit-form {
@@ -219,13 +201,6 @@
 .album-edit-form__secondary:hover {
   background-color: rgba(108, 79, 104, 0.08);
 }
-.album-edit-modal__infoonly {
-    padding: 1rem 0;
-    display: flex;
-    flex-direction: column;
-    gap: .25rem;
-}
-
 
 html,
 body {
@@ -550,6 +525,14 @@ body {
 
 .box:hover .photo::after {
   opacity: 1;
+}
+@media (hover: none) {
+  .box:active {
+    transform: scale(1.05);
+  }
+  .box:active .photo::after {
+  opacity: 1;
+}
 }
 
 .album {
@@ -880,6 +863,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1.5rem 1rem;
+  position: relative;
 }
 
 /* Polaroidlerle aynı zemin rengi – değiştir: #f3e7f3 yerine kendi rengini koy */
@@ -911,8 +895,7 @@ body {
 }
 
 .profile-info {
-  margin-top: -0.4rem;
-  position: relative;
+  margin-top: -5vw;
   width: 100%;
   padding-right: 120px;
 }
@@ -937,8 +920,8 @@ body {
 
 #editProfileBtn {
   position: absolute;
-  top: -40px;
-  right: -20px;
+  top: 50px;        /* kutunun üstünden biraz içeri */
+  right: 30px; 
   transform: translateY(-10px);
   border: none;
   background: rgba(0, 0, 0, 0.4);
@@ -959,8 +942,8 @@ body {
   }
 
   .profile-avatar {
-    width: 120px;
-    height: 120px;
+    width: 60px;
+    height: 60px;
   }
 
   #editProfileBtn {

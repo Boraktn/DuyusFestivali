@@ -266,6 +266,7 @@ option {
   gap: 1vw;
   width: 98vw;
   margin: auto;
+  padding-bottom: 4rem;
 }
 .box {
   position: relative;

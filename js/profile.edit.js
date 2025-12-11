@@ -6,7 +6,7 @@ const AVATARS = [
   "img/avatars/Default.webp",
   "img/avatars/1.webp",
   "img/avatars/2.webp",
-
+  "img/avatars/3.webp",
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
