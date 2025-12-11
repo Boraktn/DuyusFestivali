@@ -409,8 +409,8 @@ body {
   text-align: center;
   font-size: clamp(1.8rem, 10vw, 7rem);
   font-weight: bolder;
-  margin-top: 2vw;
-  margin-bottom: 2vw;
+  margin-top: 1vw;
+  margin-bottom: 1vw;
   font-family: "Limelight", serif;
   text-shadow: 5px 5px rgb(108, 79, 104);
   color: rgb(246, 246, 228);
