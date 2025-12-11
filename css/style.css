@@ -284,6 +284,14 @@ body {
   flex-direction: column;
   gap: 4px;
 }
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.75rem;
+  flex-shrink: 0;
+}
 
 .user-username {
   font-size: 18px;

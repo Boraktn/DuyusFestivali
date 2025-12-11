@@ -32,11 +32,17 @@ document.addEventListener("DOMContentLoaded", () => {
       snap.forEach((docSnap) => {
         const data = docSnap.data();
         const username = docSnap.id;
+        const avatarUrl = data.avatar || "img/avatars/default.webp";
 
         const li = document.createElement("li");
         li.className = "user-card";
         li.innerHTML = `
           <div class="user-card-main">
+          <img
+        class="user-avatar"
+        src="${avatarUrl}"
+        alt="${username} profil fotoğrafı"
+      />
             <span class="user-username">@${username}</span>
             <span class="user-albums">
               ${data.albumCount ?? 0} albüm

@@ -11,7 +11,7 @@ const AVATARS = [
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
-  const editBtn = document.getElementById("editProfileBtn");   // biyografi edit butonu
+  const editBtn = document.getElementById("editProfileBtn"); 
   const modal = document.getElementById("profileEditModal");
   const avatarGrid = document.getElementById("avatarGrid");
   const bioTextarea = document.getElementById("bioInput");
@@ -22,14 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!editBtn || !modal) return;
 
-  // Avatarları modala çiz
   AVATARS.forEach((src) => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "avatar-option";
     btn.innerHTML = `<img src="${src}" alt="Avatar" />`;
     btn.addEventListener("click", () => {
-      // seçili class güncelle
       document
         .querySelectorAll(".avatar-option")
         .forEach((b) => b.classList.remove("avatar-option--selected"));
@@ -39,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
     avatarGrid.appendChild(btn);
   });
 
-  // Modal açılırken mevcut bilgileri yükle
   editBtn.addEventListener("click", async () => {
     const user = auth.currentUser;
     if (!user || !user.displayName) return;
@@ -52,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
       bioTextarea.value = data.bio || "";
       selectedAvatar = data.avatar || null;
 
-      // mevcut avatarı işaretle
       if (selectedAvatar) {
         document
           .querySelectorAll(".avatar-option")
