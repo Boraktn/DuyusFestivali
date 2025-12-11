@@ -47,7 +47,19 @@
             </button>
         </div>
     </div>
-    
+    <main class="profile-page">
+        <section class="profile-header">
+            <div id="avatar" class="profile-avatar"></div>
+
+            <div class="profile-info">
+                <h2 id="profileUsername" class="profile-username">kullanici</h2>
+                <p id="profileBio" class="profile-bio">
+                </p>
+                <button id="editProfileBtn" class="btn-outline">Biyografi / Fotoğraf Düzenle</button>
+
+            </div>
+        </section>
+    </main>
     <div class="grid" id="grid"></div>
 
     <div id="albumAddModal" class="album-edit-modal album-edit-modal--hidden">
@@ -127,12 +139,28 @@
         </div>
     </div>
 
+    <div id="profileEditModal" class="profile-edit-modal">
+        <div class="profile-edit-modal__content">
+            <h2>Profilini Düzenle</h2>
 
+            <label class="profile-edit-label">Profil Fotoğrafı</label>
+            <div id="avatarGrid" class="avatar-grid"></div>
+
+            <label class="profile-edit-label" for="bioInput">Biyografi</label>
+            <textarea id="bioInput" rows="4" class="profile-edit-textarea"></textarea>
+
+            <div class="profile-edit-actions">
+                <button id="closeProfileModal" type="button" class="btn-secondary">İptal</button>
+                <button id="saveProfileBtn" type="button" class="btn-primary">Kaydet</button>
+            </div>
+        </div>
+    </div>
 
     <div id="footer"></div>
     <script type="module" src="js/profile.page.js"></script>
     <script type="module" src="js/navbar.js"></script>
     <script type="module" src="js/footer.js"></script>
+    <script type="module" src="js/profile.edit.js"></script>
 </body>
 
 </html>

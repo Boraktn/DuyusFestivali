@@ -1,8 +1,32 @@
 import { setViewMode, loadUserAlbumsGrid, handleSpotifyAlbumSubmit } from "./album.js";
-import {
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-import { auth } from "./firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+import { auth,db } from "./firebase.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
+  const DEFAULT_AVATAR = "img/avatars/Default.webp";
+
+  async function loadProfileHeader(usernameToLoad) {
+  const usernameEl = document.getElementById("profileUsername");
+  const avatarEl = document.getElementById("avatar");
+  const bioTextEl = document.getElementById("profileBio");
+
+  if (usernameEl) usernameEl.textContent = usernameToLoad;
+
+  const userRef = doc(db, "users", usernameToLoad);
+  const snap = await getDoc(userRef);
+
+  if (snap.exists()) {
+    const data = snap.data();
+
+    const avatarSrc = data.avatar || DEFAULT_AVATAR;
+  if (avatarEl) {
+    avatarEl.innerHTML = `<img src="${avatarSrc}" alt="Avatar" />`;
+  }
+    if (bioTextEl) {
+      bioTextEl.textContent = data.bio || "";
+    }
+  }
+}
 
 let targetUsername;
 document.addEventListener("DOMContentLoaded", () => {
@@ -74,41 +98,47 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   if (viewGridBtn) {
     viewGridBtn.addEventListener("click", () => {
-      setViewMode("grid",targetUsername);
+      setViewMode("grid", targetUsername);
       setActiveViewButton("grid");
     });
   }
 
   if (viewWideBtn) {
     viewWideBtn.addEventListener("click", () => {
-      setViewMode("wide",targetUsername);
+      setViewMode("wide", targetUsername);
       setActiveViewButton("wide");
     });
   }
 
+
+
 });
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   const currentUsername = user?.displayName || null;
-
   const isSelf = currentUsername && targetUsername === currentUsername;
 
-
-  if (!isSelf) {
-    const openAddAlbumBtn = document.getElementById("openAddAlbumModal");
-    if (openAddAlbumBtn) openAddAlbumBtn.style.display = "none";
+  const openAddAlbumBtn = document.getElementById("openAddAlbumModal");
+  if (openAddAlbumBtn) {
+    openAddAlbumBtn.style.display = isSelf ? "inline-flex" : "none";
+  }
+    const editProfileBtn = document.getElementById("editProfileBtn");
+  if (editProfileBtn) {
+    editProfileBtn.style.display = isSelf ? "inline-flex" : "none";
   }
 
+  // Profil kimin profiliyse onu yükle
+  const usernameToLoad = targetUsername || currentUsername;
+  if (!usernameToLoad) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  await loadProfileHeader(usernameToLoad);
+
   if (targetUsername) {
-    
     loadUserAlbumsGrid(targetUsername);
   } else {
-
-    if (!user) {
-
-      window.location.href = "login.html";
-      return;
-    }
     loadUserAlbumsGrid();
   }
 });
