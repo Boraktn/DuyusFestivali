@@ -3,7 +3,7 @@ import { auth, db } from "./firebase.js";
 import { doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
 const AVATARS = [
-  "img/avatars/Default.webp",
+  "img/avatars/default.webp",
   "img/avatars/1.webp",
   "img/avatars/2.webp",
   "img/avatars/3.webp",
