@@ -547,6 +547,16 @@ body {
   opacity: 1;
 }
 
+.box:active .score{
+  opacity: 1;
+}
+.box:active{
+  transform: scale(1.07);
+}
+.box:active .photo::after{
+  opacity: 1;
+}
+
 
 .album {
   margin-top: 0.2rem;
