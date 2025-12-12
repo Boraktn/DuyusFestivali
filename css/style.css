@@ -485,7 +485,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-
+  display: none;
   opacity: 0;
   pointer-events: none;
   transform: scale(0.8);
