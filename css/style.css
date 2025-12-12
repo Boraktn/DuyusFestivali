@@ -449,7 +449,7 @@ body {
   aspect-ratio: 3 / 4;
   background-color: #e7dde7;
   padding: 0.52vw;
-  overflow: hidden;
+  overflow:auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -546,13 +546,16 @@ body {
   opacity: 1;
 }
 
-.box:active {
-  transform: scale(1.05);
+@media(hover:none) {
+  .box:active {
+    transform: scale(1.05);
+  }
+
+  .box:active .photo::after {
+    opacity: 1;
+  }
 }
 
-.box:active .photo::after {
-  opacity: 1;
-}
 
 .album {
   margin-top: 0.2rem;
