@@ -61,6 +61,7 @@
   font-size: 12px;
   opacity: 0.8;
 }
+
 /*-------------------------------------------ALBÜM DÜZENLEME MODAL'İ----------------------------------*/
 .album-edit-modal {
   position: fixed;
@@ -77,26 +78,28 @@
 }
 
 .album-edit-modal__inner {
-  background: #f0e6ef; /* senin form kutusunun rengine göre */
-    padding: 2rem;
-    border-radius: 16px;
-    width: 100%;
-    max-width: 420px;
-    margin: 0 auto;
-    box-shadow: 0 0 30px rgba(0,0,0,0.3);
+  background: #f0e6ef;
+  /* senin form kutusunun rengine göre */
+  padding: 2rem;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
 }
+
 .album-edit-info-top {
-    margin-bottom: 1.2rem;
+  margin-bottom: 1.2rem;
 }
 
 .album-edit-info-top .album {
-    font-size: 1.2rem;
-    font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .album-edit-info-top .artist {
-    font-size: .95rem;
-    opacity: .7;
+  font-size: .95rem;
+  opacity: .7;
 }
 
 .album-edit-modal__header {
@@ -281,26 +284,34 @@ body {
 
 .user-card-main {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  align-items: center;
+  gap: 1vw;
 }
+
 .user-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border-radius: 9px;
   object-fit: cover;
-  margin-right: 0.75rem;
+
   flex-shrink: 0;
 }
 
 .user-username {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: bold;
   color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 30vw;
+  /* ihtiyaca göre */
 }
 
 .user-albums {
-  font-size: 14px;
+  margin-left: 0.5vw;
+  opacity: 0.7;
+  font-size: max(12px, 1vw);
   color: #aaa;
 }
 
@@ -534,13 +545,13 @@ body {
 .box:hover .photo::after {
   opacity: 1;
 }
-@media (hover: none) {
-  .box:active {
-    transform: scale(1.05);
-  }
-  .box:active .photo::after {
-  opacity: 1;
+
+.box:active {
+  transform: scale(1.05);
 }
+
+.box:active .photo::after {
+  opacity: 1;
 }
 
 .album {
@@ -700,18 +711,7 @@ body {
 }
 
 /* Edit butonu wide modda hep görünsün ayarın kalsın */
-.box--wide .album-edit-btn {
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  transform: scale(1) !important;
 
-  width: 48px;
-  height: 48px;
-  font-size: 22px;
-
-  top: 8px;
-  right: 8px;
-}
 
 /* Mobilde genişliği tam ekrana yaklaştır */
 @media (max-width: 768px) {
@@ -928,8 +928,9 @@ body {
 
 #editProfileBtn {
   position: absolute;
-  top: 50px;        /* kutunun üstünden biraz içeri */
-  right: 30px; 
+  top: 50px;
+  /* kutunun üstünden biraz içeri */
+  right: 30px;
   transform: translateY(-10px);
   border: none;
   background: rgba(0, 0, 0, 0.4);
