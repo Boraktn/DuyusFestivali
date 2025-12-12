@@ -326,7 +326,7 @@ export async function loadUserAlbumsGrid(targetUsername) {
     artistDiv.classList.add("artist");
     artistDiv.textContent = album.artist;
 
-    /*if (editable) {
+    if (editable && viewMode=== "wide") {
       const editBtn = document.createElement("button");
       editBtn.className = "album-edit-btn";
       editBtn.type = "button";
@@ -346,7 +346,7 @@ export async function loadUserAlbumsGrid(targetUsername) {
       });
 
       box.appendChild(editBtn);
-    }*/
+    }
     const commentDiv = document.createElement("div");
     commentDiv.classList.add("comment");
     commentDiv.textContent = album.comment || "";
