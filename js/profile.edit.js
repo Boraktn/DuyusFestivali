@@ -3,12 +3,12 @@ import { auth, db } from "./firebase.js";
 import { doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
 const AVATARS = [
-  "img/avatars/default.webp",
   "img/avatars/1.png",
   "img/avatars/2.png",
   "img/avatars/3.png",
   "img/avatars/4.png",
   "img/avatars/5.png",
+  "img/avatars/6.png"
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
