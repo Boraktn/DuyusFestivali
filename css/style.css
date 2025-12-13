@@ -898,8 +898,8 @@ body {
 
 .profile-page {
   max-width: 90vw;
-  margin: 0 auto;
-  padding: 2rem 1.5rem 1rem;
+  margin: 0 1vw;
+  padding: 1vw 1vw 1vw 3vw;
   position: relative;
 }
 
@@ -907,11 +907,10 @@ body {
 .profile-header {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1vw;
   background: var(--polaroid-bg, #f3e7f3);
   border-radius: 2vw;
   padding: 0.5vw 0.5vw;
-  margin-bottom: 2rem;
 }
 
 .profile-avatar {
@@ -932,9 +931,9 @@ body {
 }
 
 .profile-info {
-  margin-top: -5vw;
+  margin-top: -6vw;
   width: 100%;
-  padding-right: 120px;
+  padding-right: 10vw;
 }
 
 .profile-username {
@@ -957,9 +956,9 @@ body {
 
 #editProfileBtn {
   position: absolute;
-  top: 50px;
+  top: 5vw;
   /* kutunun üstünden biraz içeri */
-  right: 30px;
+  right: 2vw;
   transform: translateY(-10px);
   border: none;
   background: rgba(0, 0, 0, 0.4);
