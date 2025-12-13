@@ -27,6 +27,31 @@ import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase
     }
   }
 }
+const toggleScoresBtn = document.getElementById("toggleScores");
+
+if (toggleScoresBtn) {
+  toggleScoresBtn.addEventListener("click", () => {
+    const isActive = document.body.classList.toggle("show-scores");
+    toggleScoresBtn.classList.toggle("active", isActive);
+  });
+}
+function disableToggleScores() {
+  if (!toggleScoresBtn) return;
+
+  // aktifse kapat
+  document.body.classList.remove("show-scores");
+  toggleScoresBtn.classList.remove("active");
+
+  // pasifleştir
+  toggleScoresBtn.classList.add("is-disabled");
+  toggleScoresBtn.disabled = true;
+}
+function enableToggleScores() {
+  if (!toggleScoresBtn) return;
+
+  toggleScoresBtn.classList.remove("is-disabled");
+  toggleScoresBtn.disabled = false;
+}
 
 let targetUsername;
 document.addEventListener("DOMContentLoaded", () => {
@@ -94,12 +119,14 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (mode === "wide") {
       viewWideBtn.classList.add("is-active");
       viewGridBtn.classList.remove("is-active");
+      
     }
   }
   if (viewGridBtn) {
     viewGridBtn.addEventListener("click", () => {
       setViewMode("grid", targetUsername);
       setActiveViewButton("grid");
+      enableToggleScores();
     });
   }
 
@@ -107,6 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
     viewWideBtn.addEventListener("click", () => {
       setViewMode("wide", targetUsername);
       setActiveViewButton("wide");
+      disableToggleScores();
     });
   }
 
