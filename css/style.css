@@ -804,8 +804,8 @@ body {
 }
 
 .view-btn {
-  width: 40px;
-  height: 40px;
+  width: max(3vw);
+  height: max(3vw);
   border-radius: 999px;
   border: none;
   cursor: pointer;
@@ -965,7 +965,7 @@ body {
   color: white;
   border-radius: 2vw;
   font-size: 3vw;
-  width: 4vw;
+  width: max(25px,4vw);
   aspect-ratio: 1/1;
   justify-content: center;
   align-items: center;
