@@ -166,6 +166,9 @@
 .n7 { margin-top: 8px; }
 /* Responsive */
 @media (max-width: 900px) {
+  .hero{
+    background-position: left center ;
+  }
   .hero__inner {
     grid-template-columns: 1fr;
     gap: 22px;
@@ -403,7 +406,8 @@
 html,
 body {
   margin: 0;
-  padding: 0;
+  padding: 0px;
+  gap: 0px;
   max-width: 100%;
   overflow-x: hidden;
   /* yatay scroll’u tamamen kapat */
