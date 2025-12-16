@@ -1,3 +1,192 @@
+/* HERO */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: clamp(420px, 70vh, 720px);
+
+  /* background PNG */
+  background-image: url("../img/herobanner.png");
+  background-size: cover;
+  background-position: right center;
+  background-repeat: no-repeat;
+
+  overflow: hidden;
+}
+
+.hero__inner {
+  height: 100%;
+  width: min(1200px, 92vw);
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(16px, 4vw, 48px);
+  align-items: center;
+
+  padding: clamp(22px, 5vw, 56px) 0;
+}
+
+.hero__left {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+}
+
+.hero__title {
+  margin: 0 0 14px;
+  line-height: 0.95;
+  letter-spacing: 0.5px;
+
+  display: grid;
+  gap: 6px;
+}
+
+.hero__num {
+  font-size: clamp(56px, 7vw, 96px);
+  font-weight: 900;
+  color: #fff6ff;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.hero__word {
+  font-size: clamp(20px, 2.4vw, 30px);
+  font-weight: 600;
+  color: #efe7ff;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.hero__word--bold {
+  letter-spacing: 0.18em;
+  font-weight: 800;
+}
+
+.hero__subtitle {
+  margin: 10px 0 20px;
+  font-size: clamp(14px, 1.5vw, 18px);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.86);
+  max-width: 42ch;
+}
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 18px;
+  border-radius: 14px;
+
+  background: rgba(255, 233, 120, 0.92);
+  color: #1b1026;
+  font-weight: 800;
+  text-decoration: none;
+
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.25);
+  transform: translateZ(0);
+  transition: transform 0.15s ease, filter 0.15s ease, opacity 0.15s ease;
+}
+
+.hero__cta:hover {
+  transform: translateY(-2px);
+  filter: brightness(0.95);
+}
+
+.hero__right {
+  position: relative;
+  z-index: 1;
+
+  height: clamp(360px, 62vh, 640px);
+  width: 110%;
+  justify-self: end;
+  /* Notlar sağdaki boşluktan "çıkıyor" hissi için */
+  overflow: visible;
+}
+
+/* NOTES */
+.note {
+  position: absolute;
+  width: 160px;
+  height: auto;
+
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.25));
+  opacity: 0.98;
+  transform-origin: 50% 50%;
+  z-index: 2;
+}
+
+/* Renk tonu (beyaz PNG üstüne) */
+.tone--pink {
+  filter:
+    drop-shadow(0 18px 28px rgba(0, 0, 0, 0.25))
+    sepia(1) saturate(6) hue-rotate(305deg) brightness(1.06);
+}
+
+.tone--yellow {
+  filter:
+    drop-shadow(0 18px 28px rgba(0, 0, 0, 0.25))
+    sepia(1) saturate(6) hue-rotate(10deg) brightness(1.25);
+}
+
+.tone--mint {
+  filter:
+    drop-shadow(0 18px 28px rgba(0, 0, 0, 0.25))
+    sepia(1) saturate(6) hue-rotate(155deg) brightness(1.12);
+}
+
+/* Konumlar: sağdan taşacak şekilde (x > 100%) */
+/* daha dağınık, bazıları bulut dışına taşıyor */
+.n1 { width: 210px; left: 46%; top: 6%;  transform: rotate(-12deg); }
+.n2 { width: 150px; left: 62%; top: 18%; transform: rotate(10deg);  opacity: 0.9; }
+.n3 { width: 120px; left: 78%; top: 8%;  transform: rotate(-6deg) scale(0.9); opacity: 0.75; }
+
+.n4 { width: 185px; left: 50%; top: 40%; transform: rotate(6deg); }
+.n5 { width: 145px; left: 68%; top: 52%; transform: rotate(-18deg); opacity: 0.85; }
+
+.n6 { width: 170px; left: 42%; top: 72%; transform: rotate(-10deg); }
+.n7 { width: 125px; left: 58%; top: 82%; transform: rotate(12deg) scale(0.95); opacity: 0.82; }
+
+/* hala biraz dışarı taşan, ama daha dengeli */
+.n8 { width: 115px; left: 20%; top: 10%; transform: rotate(-14deg) scale(0.9); opacity: 0.95; }
+/* SOLDAN BOŞ KALAN DAİRE ALANLARI (yeni notalar) */
+.n9  { width: 125px; left: 34%; top: 12%; transform: rotate(-18deg); opacity: 0.80; } /* üst-sol boşluk */
+.n10 { width: 105px; left: 28%; top: 44%; transform: rotate(14deg);  opacity: 0.76; } /* orta-sol küçük */
+.n11 { width: 115px; left: 40%; top: 52%; transform: rotate(-8deg);  opacity: 0.82; } /* orta */
+.n12 { width: 95px;  left: 36%; top: 72%; transform: rotate(10deg);  opacity: 0.72; } /* alt-sol küçük */
+
+.n1, .n4, .n6 { z-index: 3; }
+.n3, .n8 { z-index: 1; }
+
+.n2 { margin-top: -12px; }
+.n5 { margin-left: 10px; }
+.n7 { margin-top: 8px; }
+/* Responsive */
+@media (max-width: 900px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .hero__right {
+    height: 320px;
+    margin-top: 6px;
+  }
+
+  /* mobilde notaları biraz içeri al */
+  .n3 { left: 88%; }
+  .n8 { left: 92%; }
+}
+
+@media (max-width: 520px) {
+  .hero__subtitle { max-width: 34ch; }
+  .note { width: 130px; }
+  .n1 { width: 180px; }
+}
+
 .about-wrapper {
   width: 100%;
   display: flex;
@@ -23,12 +212,12 @@
 .about-card h1 {
   margin-top: 0;
   margin-bottom: 16px;
-  font-size: max(2vw,14px);
+  font-size: max(2vw, 14px);
   letter-spacing: 0.04em;
 }
 
-.about-card p{
-  font-size: max(10px,1vw);
+.about-card p {
+  font-size: max(10px, 1vw);
 }
 
 .site-footer {
@@ -43,7 +232,7 @@
 .footer-inner {
   display: flex;
   justify-content: center;
-  gap: max(10px,1vw);
+  gap: max(10px, 1vw);
   margin-bottom: 8px;
   flex-wrap: wrap;
 }
@@ -229,10 +418,20 @@ body {
 .navbar {
   width: 100%;
 }
+#title {
+  text-align: center;
+  font-size: clamp(1.8rem, 10vw, 7rem);
+  font-weight: bolder;
+  margin-top: 0.5vw;
+  margin-bottom: 0vw;
+  font-family: "Limelight", serif;
+  text-shadow: 5px 5px rgb(108, 79, 104);
+  color: rgb(246, 246, 228);
+}
 
 .navbar-links {
   align-items: left;
-  padding: 14px 20px;
+  padding: max(0.2vw) max(0.2vw);
   border-bottom: 1px solid #e7dde7;
   margin-bottom: 2vw;
   display: flex;
@@ -430,16 +629,7 @@ body {
   }
 }
 
-#title {
-  text-align: center;
-  font-size: clamp(1.8rem, 10vw, 7rem);
-  font-weight: bolder;
-  margin-top: 1vw;
-  margin-bottom: 1vw;
-  font-family: "Limelight", serif;
-  text-shadow: 5px 5px rgb(108, 79, 104);
-  color: rgb(246, 246, 228);
-}
+
 
 
 .grid {
@@ -813,8 +1003,8 @@ body {
 }
 
 .view-btn {
-  width: max(25px,3vw);
-  height: max(25px,3vw);
+  width: max(25px, 3vw);
+  height: max(25px, 3vw);
   border-radius: 999px;
   border: none;
   cursor: pointer;
@@ -839,8 +1029,8 @@ body {
 }
 
 .view-btn__icon {
-  width: max(15px,2vw);
-  height: max(15px,2vw);
+  width: max(15px, 2vw);
+  height: max(15px, 2vw);
   display: block;
 }
 
