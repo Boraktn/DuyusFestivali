@@ -30,6 +30,7 @@
   position: relative;
   z-index: 2;
   max-width: 560px;
+
 }
 
 .hero__title {
@@ -122,53 +123,150 @@
 /* Renk tonu (beyaz PNG üstüne) */
 .tone--pink {
   filter:
-    drop-shadow(0 18px 28px rgba(0, 0, 0, 0.25))
-    sepia(1) saturate(6) hue-rotate(305deg) brightness(1.06);
+    drop-shadow(0 18px 28px rgba(0, 0, 0, 0.25)) sepia(1) saturate(6) hue-rotate(305deg) brightness(1.06);
 }
 
 .tone--yellow {
   filter:
-    drop-shadow(0 18px 28px rgba(0, 0, 0, 0.25))
-    sepia(1) saturate(6) hue-rotate(10deg) brightness(1.25);
+    drop-shadow(0 18px 28px rgba(0, 0, 0, 0.25)) sepia(1) saturate(6) hue-rotate(10deg) brightness(1.25);
 }
 
 .tone--mint {
   filter:
-    drop-shadow(0 18px 28px rgba(0, 0, 0, 0.25))
-    sepia(1) saturate(6) hue-rotate(155deg) brightness(1.12);
+    drop-shadow(0 18px 28px rgba(0, 0, 0, 0.25)) sepia(1) saturate(6) hue-rotate(155deg) brightness(1.12);
 }
 
 /* Konumlar: sağdan taşacak şekilde (x > 100%) */
 /* daha dağınık, bazıları bulut dışına taşıyor */
-.n1 { width: 210px; left: 46%; top: 6%;  transform: rotate(-12deg); }
-.n2 { width: 150px; left: 62%; top: 18%; transform: rotate(10deg);  opacity: 0.9; }
-.n3 { width: 120px; left: 78%; top: 8%;  transform: rotate(-6deg) scale(0.9); opacity: 0.75; }
+.n1 {
+  width: 210px;
+  left: 46%;
+  top: 6%;
+  transform: rotate(-12deg);
+}
 
-.n4 { width: 185px; left: 50%; top: 40%; transform: rotate(6deg); }
-.n5 { width: 145px; left: 68%; top: 52%; transform: rotate(-18deg); opacity: 0.85; }
+.n2 {
+  width: 150px;
+  left: 62%;
+  top: 18%;
+  transform: rotate(10deg);
+  opacity: 0.9;
+}
 
-.n6 { width: 170px; left: 42%; top: 72%; transform: rotate(-10deg); }
-.n7 { width: 125px; left: 58%; top: 82%; transform: rotate(12deg) scale(0.95); opacity: 0.82; }
+.n3 {
+  width: 120px;
+  left: 78%;
+  top: 8%;
+  transform: rotate(-6deg) scale(0.9);
+  opacity: 0.75;
+}
+
+.n4 {
+  width: 185px;
+  left: 50%;
+  top: 40%;
+  transform: rotate(6deg);
+}
+
+.n5 {
+  width: 145px;
+  left: 68%;
+  top: 52%;
+  transform: rotate(-18deg);
+  opacity: 0.85;
+}
+
+.n6 {
+  width: 170px;
+  left: 42%;
+  top: 72%;
+  transform: rotate(-10deg);
+}
+
+.n7 {
+  width: 125px;
+  left: 58%;
+  top: 82%;
+  transform: rotate(12deg) scale(0.95);
+  opacity: 0.82;
+}
 
 /* hala biraz dışarı taşan, ama daha dengeli */
-.n8 { width: 115px; left: 20%; top: 10%; transform: rotate(-14deg) scale(0.9); opacity: 0.95; }
+.n8 {
+  width: 115px;
+  left: 20%;
+  top: 10%;
+  transform: rotate(-14deg) scale(0.9);
+  opacity: 0.95;
+}
+
 /* SOLDAN BOŞ KALAN DAİRE ALANLARI (yeni notalar) */
-.n9  { width: 125px; left: 34%; top: 12%; transform: rotate(-18deg); opacity: 0.80; } /* üst-sol boşluk */
-.n10 { width: 105px; left: 28%; top: 44%; transform: rotate(14deg);  opacity: 0.76; } /* orta-sol küçük */
-.n11 { width: 115px; left: 40%; top: 52%; transform: rotate(-8deg);  opacity: 0.82; } /* orta */
-.n12 { width: 95px;  left: 36%; top: 72%; transform: rotate(10deg);  opacity: 0.72; } /* alt-sol küçük */
+.n9 {
+  width: 125px;
+  left: 34%;
+  top: 12%;
+  transform: rotate(-18deg);
+  opacity: 0.80;
+}
 
-.n1, .n4, .n6 { z-index: 3; }
-.n3, .n8 { z-index: 1; }
+/* üst-sol boşluk */
+.n10 {
+  width: 105px;
+  left: 28%;
+  top: 44%;
+  transform: rotate(14deg);
+  opacity: 0.76;
+}
 
-.n2 { margin-top: -12px; }
-.n5 { margin-left: 10px; }
-.n7 { margin-top: 8px; }
+/* orta-sol küçük */
+.n11 {
+  width: 115px;
+  left: 40%;
+  top: 52%;
+  transform: rotate(-8deg);
+  opacity: 0.82;
+}
+
+/* orta */
+.n12 {
+  width: 95px;
+  left: 36%;
+  top: 72%;
+  transform: rotate(10deg);
+  opacity: 0.72;
+}
+
+/* alt-sol küçük */
+
+.n1,
+.n4,
+.n6 {
+  z-index: 3;
+}
+
+.n3,
+.n8 {
+  z-index: 1;
+}
+
+.n2 {
+  margin-top: -12px;
+}
+
+.n5 {
+  margin-left: 10px;
+}
+
+.n7 {
+  margin-top: 8px;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
-  .hero{
-    background-position: left center ;
+  .hero {
+    background-position: center;
   }
+
   .hero__inner {
     grid-template-columns: 1fr;
     gap: 22px;
@@ -180,14 +278,153 @@
   }
 
   /* mobilde notaları biraz içeri al */
-  .n3 { left: 88%; }
-  .n8 { left: 92%; }
+  .n3 {
+    left: 88%;
+  }
+
+  .n8 {
+    left: 92%;
+  }
 }
 
 @media (max-width: 520px) {
-  .hero__subtitle { max-width: 34ch; }
-  .note { width: 130px; }
-  .n1 { width: 180px; }
+  .hero__subtitle {
+    max-width: 34ch;
+  }
+
+  .note {
+    width: 130px;
+  }
+
+  .n1 {
+    width: 180px;
+  }
+}
+
+/* MOBILE HERO FIX */
+@media (max-width: 770px) {
+  .hero {
+    min-height: 400px;
+    /* çok uzamasın */
+    height: 400px;
+    /* sabitle -> banner taşmasın */
+  }
+
+  .hero__inner {
+    grid-template-columns: 1fr;
+    /* tek kolon */
+    gap: 12px;
+    padding: 18px 0 0;
+    /* alt padding'i azalt */
+  }
+
+  .hero__left {
+    max-width: 92vw;
+    margin-top: -200px;
+  }
+
+  /* sağ taraf (notalar) üstte dursun */
+  .hero__right {
+    order: -1;
+    /* yukarı al */
+    height: 170px;
+    /* nota alanını küçült */
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  /* notalar küçülsün */
+  .note {
+    width: 92px;
+  }
+
+  /* Mobilde notaları daha yukarı/kompakt konumla */
+  .n1 {
+    left: 48%;
+    top: 8%;
+    width: 120px;
+  }
+
+  .n2 {
+    left: 62%;
+    top: 16%;
+    width: 92px;
+  }
+
+  .n3 {
+    left: 76%;
+    top: 10%;
+    width: 82px;
+  }
+
+  .n4 {
+    left: 52%;
+    top: 44%;
+    width: 105px;
+  }
+
+  .n5 {
+    left: 68%;
+    top: 54%;
+    width: 90px;
+  }
+
+  .n6 {
+    left: 40%;
+    top: 64%;
+    width: 105px;
+  }
+
+  .n7 {
+    left: 58%;
+    top: 70%;
+    width: 86px;
+  }
+
+  .n8 {
+    left: 78%;
+    top: 60%;
+    width: 80px;
+  }
+
+  /* yeni eklediklerin varsa */
+  .n9 {
+    left: 30%;
+    top: 14%;
+    width: 78px;
+  }
+
+  .n10 {
+    left: 26%;
+    top: 46%;
+    width: 72px;
+  }
+
+  .n11 {
+    left: 38%;
+    top: 52%;
+    width: 74px;
+  }
+
+  .n12 {
+    left: 34%;
+    top: 74%;
+    width: 66px;
+  }
+
+  /* yazı biraz sıkılaşsın */
+  .hero__num {
+    font-size: 56px;
+  }
+
+  .hero__word {
+    font-size: 18px;
+    letter-spacing: 0.18em;
+  }
+
+  .hero__subtitle {
+    margin: 10px 0 14px;
+  }
 }
 
 .about-wrapper {
@@ -422,6 +659,7 @@ body {
 .navbar {
   width: 100%;
 }
+
 #title {
   text-align: center;
   font-size: clamp(1.8rem, 10vw, 7rem);
