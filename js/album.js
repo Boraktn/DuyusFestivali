@@ -4,11 +4,13 @@ import {
   addDoc,
   getDocs,
   updateDoc,
+  deleteDoc,
   increment,
   query,
   orderBy,
   doc
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+
 
 //ALBÜMÜ VERİTABANINA EKLEME
 export async function addAlbumForUser(album) {
@@ -119,6 +121,8 @@ const editArtist = document.getElementById("editModalArtist");
 const editScoreText = document.getElementById("editModalScoreText");
 const editScoreBox = document.getElementById("editModalScoreBox");
 const editCommentPreview = document.getElementById("editModalCommentPreview");
+const albumDeleteBtn = document.getElementById("albumDeleteBtn");
+
 
 //PUANA GÖRE VERİLEN RENK: 0->KIRMIZI, 100->YEŞİL
 function computeScoreColor(score) {
@@ -151,7 +155,6 @@ function openAlbumEditModal(albumData) {
   }
   if (editAlbumTitle) editAlbumTitle.textContent = albumData.album;
   if (editArtist) editArtist.textContent = albumData.artist;
-
   const scoreVal = albumData.score ?? "";
   const commentVal = albumData.comment ?? "";
 
@@ -229,6 +232,33 @@ if (albumEditForm) {
     }
   });
 }
+if (albumDeleteBtn) {
+  albumDeleteBtn.addEventListener("click", async () => {
+    if (!currentEditAlbumId) return;
+
+    const user = auth.currentUser;
+    if (!user || !user.displayName) return;
+
+
+    try {
+      // Albümü sil
+      const ref = doc(db, "users", user.displayName, "albums", currentEditAlbumId);
+      await deleteDoc(ref);
+
+      // albumCount azalt (isteğe bağlı ama tutarlılık için iyi)
+      await updateDoc(doc(db, "users", user.displayName), {
+        albumCount: increment(-1)
+      });
+
+      closeAlbumEditModal();
+      await loadUserAlbumsGrid();
+    } catch (err) {
+      console.error("Albüm silinirken hata:", err);
+      alert("Albüm silinirken bir hata oluştu.");
+    }
+  });
+}
+
 //ALBÜM KOLEKSİYONU YÜKLEME FONKSİYONU: BU FONKSİYON BAŞKA KULLANICILARIN SAYFALARINI DA
 //KULLANICININ KENDİ SAYFASINI DA YÜKLEYEBİLİR.
 export async function loadUserAlbumsGrid(targetUsername) {

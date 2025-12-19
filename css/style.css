@@ -612,7 +612,8 @@
 }
 
 .album-edit-form__primary,
-.album-edit-form__secondary {
+.album-edit-form__secondary,
+.album-edit-form__danger {
   border-radius: 999px;
   border: none;
   padding: 0.55rem 1.2rem;
@@ -639,6 +640,16 @@
 .album-edit-form__secondary:hover {
   background-color: rgba(108, 79, 104, 0.08);
 }
+.album-edit-form__danger{
+  border: 1px solid #ff4d4d;
+  background: transparent;
+  background-color: #ff4d4d;
+  color:white;
+}
+.album-edit-form__danger:hover{
+  filter: brightness(1.1);
+}
+
 
 html,
 body {
