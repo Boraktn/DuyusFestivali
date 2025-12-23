@@ -724,10 +724,13 @@ body {
 .users-list {
   list-style: none;
   padding: 0;
-  margin: 20px 0;
+  margin: 20px auto;
+  
   display: flex;
+  
   flex-direction: column;
-  gap: 12px;
+  width: clamp(320px, 40vw, 720px);
+  gap: 1vw;
 }
 
 .user-card {
