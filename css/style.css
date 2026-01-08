@@ -759,13 +759,13 @@ body {
 }
 
 .user-username {
-  font-size: 18px;
+  font-size: max(13px,1.1vw);
   font-weight: bold;
   color: #fff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 25vw;
+  max-width: 30vw;
   /* ihtiyaca göre */
 }
 
@@ -1313,6 +1313,11 @@ body {
   display: block;
   fill: currentColor;
 
+}
+.view-btn__icon2 svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 
