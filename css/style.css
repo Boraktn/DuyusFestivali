@@ -729,7 +729,7 @@ body {
   display: flex;
   
   flex-direction: column;
-  width: clamp(320px, 40vw, 720px);
+  width: clamp(350px, 60vw, 720px);
   gap: 1vw;
 }
 
@@ -765,7 +765,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 30vw;
+  max-width: 25vw;
   /* ihtiyaca göre */
 }
 
@@ -788,6 +788,23 @@ body {
 }
 
 .user-link:hover {
+  background: #666;
+}
+.load-more-btn{
+  
+  display: block;
+  margin: 24px auto 0;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #555;
+  background: #444;
+  color: #fff;
+  cursor: pointer;
+}
+
+.load-more-btn:hover{
   background: #666;
 }
 

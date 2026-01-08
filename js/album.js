@@ -58,15 +58,19 @@ export async function addAlbumForUser(album) {
 }
 //ALBÜM LİNKİNDEN SPOTIFY IP KISMINI ALMA
 export function extractAlbumId(spotifyUrl) {
-  try {
-    const url = new URL(spotifyUrl.trim());
-    const parts = url.pathname.split("/");
-    const albumIndex = parts.indexOf("album");
-    if (albumIndex === -1 || albumIndex + 1 >= parts.length) return null;
-    return parts[albumIndex + 1];
-  } catch {
-    return null;
-  }
+  if (!spotifyUrl) return null;
+
+  const cleaned = spotifyUrl.trim();
+
+  // spotify:album:ID formatı (özellikle mobilde çıkabiliyor)
+  const uriMatch = cleaned.match(/spotify:album:([a-zA-Z0-9]+)/);
+  if (uriMatch) return uriMatch[1];
+
+  // https://open.spotify.com/.../album/ID formatı
+  const urlMatch = cleaned.match(/\/album\/([a-zA-Z0-9]+)/);
+  if (urlMatch) return urlMatch[1];
+
+  return null;
 }
 
 export async function handleSpotifyAlbumSubmit(spotifyUrl) {
