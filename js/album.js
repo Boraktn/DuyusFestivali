@@ -30,14 +30,16 @@ export async function addAlbumForUser(album) {
     window.location.href = "login.html";
     return;
   }
-  console.log("username in LS:", username);
+  const normalizedArtist = Array.isArray(album.Artist)
+  ? album.Artist.join(", ")
+  : album.Artist;
   //KULLANICIN ALBUMS KOLEKSİYONUNA ALBÜMÜ TÜM BİLGİLERİYLE KAYDEDİYORUZ
   try {
     const albumsRef = collection(db, "users", username, "albums");
 
     await addDoc(albumsRef, {
       album: album.Album,
-      artist: album.Artist,
+      artist: normalizedArtist,
       image: album.Image,
       releaseYear: album.Release_Year,
       duration: album.Duration_Minutes,
