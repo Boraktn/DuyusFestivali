@@ -960,6 +960,7 @@ body {
   transition: opacity .15s ease, transform .15s ease;
 }
 
+
 .box:hover .album-edit-btn {
   opacity: 1;
   pointer-events: auto;
@@ -1057,7 +1058,7 @@ body {
 }
 
 .box--wide .album-edit-btn {
-  opacity: 1 !important;
+  opacity: 1;
   pointer-events: auto !important;
   transform: scale(1) !important;
 
@@ -1067,6 +1068,9 @@ body {
   border-radius: 1vw;
   top: 8px;
   right: 8px;
+}
+.album-edit-btn:hover{
+  opacity: 0.2;
 }
 
 .grid.grid--wide {
@@ -1427,6 +1431,13 @@ body {
   color: #3a233a;
   max-width: 40rem;
   white-space: pre-line;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  word-break: break-word; 
   /* bio'yu satır sonlarına göre kırabilmek için */
 }
 
@@ -1445,8 +1456,11 @@ body {
   aspect-ratio: 1/1;
   justify-content: center;
   align-items: center;
+  transition: transform 0.1s ease, background 0.15s ease;
 }
-
+#editProfileBtn:active{
+  transform: scale(1.1);
+}
 /* Dar ekran için */
 @media (max-width: 640px) {
 

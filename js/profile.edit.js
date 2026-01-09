@@ -12,7 +12,7 @@ const AVATARS = [
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
-  const editBtn = document.getElementById("editProfileBtn"); 
+  const editBtn = document.getElementById("editProfileBtn");
   const modal = document.getElementById("profileEditModal");
   const avatarGrid = document.getElementById("avatarGrid");
   const bioTextarea = document.getElementById("bioInput");
@@ -68,10 +68,16 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Kaydet
+  const MAX_BIO_LENGTH = 160;
   saveBtn.addEventListener("click", async () => {
     const user = auth.currentUser;
     if (!user || !user.displayName) return;
+    const bioText = bioTextarea.value.trim();
 
+    if (bioText.length > MAX_BIO_LENGTH) {
+      alert(`Biyografi en fazla ${MAX_BIO_LENGTH} karakter olabilir.`);
+      return;
+    }
     const userRef = doc(db, "users", user.displayName);
 
     await setDoc(
