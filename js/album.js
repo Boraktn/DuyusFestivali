@@ -30,9 +30,10 @@ export async function addAlbumForUser(album) {
     window.location.href = "login.html";
     return;
   }
-  const normalizedArtist = Array.isArray(album.Artist)
-  ? album.Artist.join(", ")
-  : album.Artist;
+  const normalizedArtist =
+  album.Artists?.length > 1
+    ? album.Artists.join(", ")
+    : album.Artists?.[0] || album.Artist || "";
   //KULLANICIN ALBUMS KOLEKSİYONUNA ALBÜMÜ TÜM BİLGİLERİYLE KAYDEDİYORUZ
   try {
     const albumsRef = collection(db, "users", username, "albums");
