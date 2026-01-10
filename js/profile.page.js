@@ -1,12 +1,12 @@
 import { setViewMode, loadUserAlbumsGrid, handleSpotifyAlbumSubmit } from "./album.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-import { auth,db } from "./firebase.js";
+import { auth, db } from "./firebase.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
 
-  const DEFAULT_AVATAR = "img/avatars/default.webp";
+const DEFAULT_AVATAR = "img/avatars/default.webp";
 
-  async function loadProfileHeader(usernameToLoad) {
+async function loadProfileHeader(usernameToLoad) {
   const usernameEl = document.getElementById("profileUsername");
   const avatarEl = document.getElementById("avatar");
   const bioTextEl = document.getElementById("profileBio");
@@ -20,9 +20,9 @@ import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase
     const data = snap.data();
 
     const avatarSrc = data.avatar || DEFAULT_AVATAR;
-  if (avatarEl) {
-    avatarEl.innerHTML = `<img src="${avatarSrc}" alt="Avatar" />`;
-  }
+    if (avatarEl) {
+      avatarEl.innerHTML = `<img src="${avatarSrc}" alt="Avatar" />`;
+    }
     if (bioTextEl) {
       bioTextEl.textContent = data.bio || "";
     }
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (mode === "wide") {
       viewWideBtn.classList.add("is-active");
       viewGridBtn.classList.remove("is-active");
-      
+
     }
   }
   if (viewGridBtn) {
@@ -151,7 +151,7 @@ onAuthStateChanged(auth, async (user) => {
   if (openAddAlbumBtn) {
     openAddAlbumBtn.style.display = isSelf ? "inline-flex" : "none";
   }
-    const editProfileBtn = document.getElementById("editProfileBtn");
+  const editProfileBtn = document.getElementById("editProfileBtn");
   if (editProfileBtn) {
     editProfileBtn.style.display = isSelf ? "inline-flex" : "none";
   }
@@ -183,7 +183,15 @@ downloadBtn?.addEventListener("click", async () => {
   const clone = gridEl.cloneNode(true);
   clone.id = "";                 // aynı id olmasın
   clone.classList.add("export-grid"); // 9 sütun zorlayacağın class
+  clone.style.gridTemplateColumns = "";
+  clone.style.width = "";
+  clone.style.maxWidth = "";
 
+  clone.style.setProperty("display", "grid", "important");
+  clone.style.setProperty("grid-template-columns", "repeat(9, 1fr)", "important");
+  clone.style.setProperty("gap", "12px", "important");
+  clone.style.setProperty("width", "1800px", "important");
+  clone.style.setProperty("max-width", "none", "important");
   const exportArea = document.createElement("div");
   exportArea.id = "exportArea";
   exportArea.appendChild(clone);
