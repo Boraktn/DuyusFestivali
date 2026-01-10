@@ -1617,3 +1617,26 @@ body {
   text-align: center;
   animation: fadeIn .3s ease;
 }
+/* Ekrandaki grid */
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+/* EXPORT için zorlanan grid */
+.export-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 12px;
+  width: 1800px; /* kritik: çıktı kalitesi */
+}
+
+/* Gizli export alanı */
+#exportArea {
+  position: fixed;
+  top: -99999px;
+  left: -99999px;
+  background: #1b1b1b; /* senin site bg */
+  padding: 16px;
+}
