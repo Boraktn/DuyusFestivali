@@ -26,11 +26,33 @@
         <input type="password" id="loginPassword" placeholder="Şifre" required />
         <button type="submit" class="auth-button">Giriş</button>
       </form>
-
+      <p class="auth-text">
+        <button type="button" class="auth-link" id="forgotPasswordBtn">Şifremi unuttum</button>
+      </p>
       <p class="auth-text">
         Hesabın yok mu?
         <a href="signup.html" class="auth-link">Kayıt ol</a>
       </p>
+      <div id="forgotModal" class="modal-backdrop" aria-hidden="true" style="display:none;">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="forgotTitle">
+    <h3 id="forgotTitle" class="modal-title">Şifre sıfırlama</h3>
+
+    <p class="modal-text">
+      E-postanı yaz, şifre sıfırlama bağlantısı gönderelim.
+    </p>
+
+    <form id="forgotForm" class="auth-form">
+      <input type="email" id="forgotEmail" placeholder="E-posta" autocomplete="email" required />
+      <button type="submit" class="auth-button">Sıfırlama maili gönder</button>
+    </form>
+
+    <div id="forgotMsg" class="auth-message-green" style="display:none; margin-top:10px;"></div>
+
+    <div class="modal-actions">
+      <button type="button" id="forgotCloseBtn" class="auth-link-btn">Kapat</button>
+    </div>
+  </div>
+</div>
     </div>
   </div>
     <div id="footer"></div>

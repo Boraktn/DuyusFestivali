@@ -3,6 +3,7 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/f
 import { auth,db } from "./firebase.js";
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
+
   const DEFAULT_AVATAR = "img/avatars/default.webp";
 
   async function loadProfileHeader(usernameToLoad) {
@@ -169,4 +170,35 @@ onAuthStateChanged(auth, async (user) => {
   } else {
     loadUserAlbumsGrid();
   }
+});
+const downloadBtn = document.getElementById("downloadGridBtn");
+
+downloadBtn?.addEventListener("click", async () => {
+  const gridEl = document.getElementById("grid"); // ✅ profil sayfasındaki gerçek grid
+  if (!gridEl || gridEl.children.length === 0) {
+    console.warn("Grid henüz yüklenmemiş.");
+    return;
+  }
+
+  const clone = gridEl.cloneNode(true);
+  clone.id = "";                 // aynı id olmasın
+  clone.classList.add("export-grid"); // 9 sütun zorlayacağın class
+
+  const exportArea = document.createElement("div");
+  exportArea.id = "exportArea";
+  exportArea.appendChild(clone);
+  document.body.appendChild(exportArea);
+
+  const canvas = await html2canvas(clone, {
+    scale: 2,
+    backgroundColor: "#1b1b1b",
+    useCORS: true,
+  });
+
+  const link = document.createElement("a");
+  link.download = "duyus-festivali-listem.png";
+  link.href = canvas.toDataURL("image/png");
+  link.click();
+
+  exportArea.remove();
 });

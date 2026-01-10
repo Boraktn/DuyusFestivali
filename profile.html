@@ -45,6 +45,7 @@
                     </svg>
                 </span>
             </button>
+
             <button id="toggleScores" class="view-btn" aria-label="Puanlar açık kapalı">
                 <span class="view-btn__icon2" aria-hidden="true">
                     <!-- Eye icon (show scores) -->
@@ -54,6 +55,18 @@
                         <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
                         <circle cx="12" cy="12" r="3" />
                     </svg>
+                </span>
+            </button>
+            <button id="downloadGridBtn" class="view-btn" aria-label="İndir">
+                <span class="view-btn__icon2" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+
                 </span>
             </button>
         </div>
@@ -119,7 +132,8 @@
                 </small>
 
                 <label for="editComment">Yorum</label>
-                <textarea id="editComment" rows="6" placeholder="Albüm hakkında düşüncelerin..."></textarea>
+                <textarea id="editComment" rows="6" maxlength="280"
+                    placeholder="Albüm hakkında düşüncelerin..."></textarea>
 
                 <div class="album-edit-form__buttons">
                     <button type="button" class="album-edit-form__secondary" id="albumEditCancel">
@@ -144,7 +158,7 @@
             <div id="avatarGrid" class="avatar-grid"></div>
 
             <label class="profile-edit-label" for="bioInput">Biyografi</label>
-            <textarea id="bioInput" rows="4" class="profile-edit-textarea"></textarea>
+            <textarea id="bioInput" rows="4" maxlength="130" class="profile-edit-textarea"></textarea>
 
             <div class="profile-edit-actions">
                 <button id="closeProfileModal" type="button" class="btn-secondary">İptal</button>
@@ -158,6 +172,7 @@
     <script type="module" src="js/navbar.js"></script>
     <script type="module" src="js/footer.js"></script>
     <script type="module" src="js/profile.edit.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </body>
 
 </html>
