@@ -29,6 +29,7 @@ async function loadProfileHeader(usernameToLoad) {
   }
 }
 const toggleScoresBtn = document.getElementById("toggleScores");
+const downloadBtn = document.getElementById("downloadGridBtn");
 
 if (toggleScoresBtn) {
   toggleScoresBtn.addEventListener("click", () => {
@@ -74,7 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const viewGridBtn = document.getElementById("viewGrid");
   const viewWideBtn = document.getElementById("viewWide");
-
   function openAddModal() {
     if (!albumAddModal) return;
     albumAddModal.classList.remove("album-edit-modal--hidden");
@@ -138,6 +138,35 @@ document.addEventListener("DOMContentLoaded", () => {
       disableToggleScores();
     });
   }
+  downloadBtn?.addEventListener("click", async () => {
+    const gridEl = document.getElementById("grid"); // ✅ profil sayfasındaki gerçek grid
+    if (!gridEl || gridEl.children.length === 0) {
+      console.warn("Grid henüz yüklenmemiş.");
+      return;
+    }
+
+    const clone = gridEl.cloneNode(true);
+    clone.id = "";                 // aynı id olmasın
+    clone.classList.add("export-grid"); // 9 sütun zorlayacağın class
+
+    const exportArea = document.createElement("div");
+    exportArea.id = "exportArea";
+    exportArea.appendChild(clone);
+    document.body.appendChild(exportArea);
+
+    const canvas = await html2canvas(clone, {
+      scale: 2,
+      backgroundColor: "#1b1b1b",
+      useCORS: true,
+    });
+
+    const link = document.createElement("a");
+    link.download = "duyus-festivali-listem.png";
+    link.href = canvas.toDataURL("image/png");
+    link.click();
+
+    exportArea.remove();
+  });
 
 
 
@@ -171,34 +200,5 @@ onAuthStateChanged(auth, async (user) => {
     loadUserAlbumsGrid();
   }
 });
-const downloadBtn = document.getElementById("downloadGridBtn");
 
-downloadBtn?.addEventListener("click", async () => {
-  const gridEl = document.getElementById("grid"); // ✅ profil sayfasındaki gerçek grid
-  if (!gridEl || gridEl.children.length === 0) {
-    console.warn("Grid henüz yüklenmemiş.");
-    return;
-  }
 
-  const clone = gridEl.cloneNode(true);
-  clone.id = "";                 // aynı id olmasın
-  clone.classList.add("export-grid"); // 9 sütun zorlayacağın class
-
-  const exportArea = document.createElement("div");
-  exportArea.id = "exportArea";
-  exportArea.appendChild(clone);
-  document.body.appendChild(exportArea);
-
-  const canvas = await html2canvas(clone, {
-    scale: 2,
-    backgroundColor: "#1b1b1b",
-    useCORS: true,
-  });
-
-  const link = document.createElement("a");
-  link.download = "duyus-festivali-listem.png";
-  link.href = canvas.toDataURL("image/png");
-  link.click();
-
-  exportArea.remove();
-});
