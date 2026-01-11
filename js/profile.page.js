@@ -183,15 +183,7 @@ downloadBtn?.addEventListener("click", async () => {
   const clone = gridEl.cloneNode(true);
   clone.id = "";                 // aynı id olmasın
   clone.classList.add("export-grid"); // 9 sütun zorlayacağın class
-  clone.style.gridTemplateColumns = "";
-  clone.style.width = "";
-  clone.style.maxWidth = "";
 
-  clone.style.setProperty("display", "grid", "important");
-  clone.style.setProperty("grid-template-columns", "repeat(9, 1fr)", "important");
-  clone.style.setProperty("gap", "12px", "important");
-  clone.style.setProperty("width", "1800px", "important");
-  clone.style.setProperty("max-width", "none", "important");
   const exportArea = document.createElement("div");
   exportArea.id = "exportArea";
   exportArea.appendChild(clone);

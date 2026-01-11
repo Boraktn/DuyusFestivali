@@ -11,7 +11,15 @@ import {
   doc
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
-
+function formatDate(date) {
+  if (!date) return "";
+  const d = date.toDate ? date.toDate() : new Date(date);
+  return d.toLocaleDateString("tr-TR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+  });
+}
 //ALBÜMÜ VERİTABANINA EKLEME
 export async function addAlbumForUser(album) {
 
@@ -31,9 +39,9 @@ export async function addAlbumForUser(album) {
     return;
   }
   const normalizedArtist =
-  album.Artists?.length > 1
-    ? album.Artists.join(", ")
-    : album.Artists?.[0] || album.Artist || "";
+    album.Artists?.length > 1
+      ? album.Artists.join(", ")
+      : album.Artists?.[0] || album.Artist || "";
   //KULLANICIN ALBUMS KOLEKSİYONUNA ALBÜMÜ TÜM BİLGİLERİYLE KAYDEDİYORUZ
   try {
     const albumsRef = collection(db, "users", username, "albums");
@@ -363,7 +371,7 @@ export async function loadUserAlbumsGrid(targetUsername) {
     artistDiv.classList.add("artist");
     artistDiv.textContent = album.artist;
 
-    if (editable && viewMode=== "wide") {
+    if (editable && viewMode === "wide") {
       const editBtn = document.createElement("button");
       editBtn.className = "album-edit-btn";
       editBtn.type = "button";
@@ -388,7 +396,23 @@ export async function loadUserAlbumsGrid(targetUsername) {
     commentDiv.classList.add("comment");
     commentDiv.textContent = album.comment || "";
 
-     if (viewMode === "wide") {
+    if (viewMode === "wide") {
+      if (album.spotifyUrl) {
+        const spotifyBtn = document.createElement("a");
+        spotifyBtn.className = "spotify-btn";
+        spotifyBtn.href = album.spotifyUrl;
+        spotifyBtn.target = "_blank";
+        spotifyBtn.rel = "noopener noreferrer";
+        spotifyBtn.setAttribute("aria-label", "Spotify’da aç");
+        const spotifyImg = document.createElement("img");
+        spotifyImg.src = "img/spotify-logo.png";
+        spotifyImg.alt = "Spotify";
+        spotifyImg.className = "spotify-icon";
+
+        spotifyBtn.appendChild(spotifyImg);
+
+        box.appendChild(spotifyBtn);
+      }
       // Sol: albüm kapağı
       const leftCol = document.createElement("div");
       leftCol.classList.add("left-col");
@@ -398,8 +422,13 @@ export async function loadUserAlbumsGrid(targetUsername) {
       // Orta: albüm adı, sanatçı ve hemen altında yorum
       const middleCol = document.createElement("div");
       middleCol.classList.add("middle-col");
+      const dateDiv = document.createElement("div");
+      dateDiv.classList.add("added-date");
+      dateDiv.textContent = formatDate(album.createdAt);
+
       middleCol.appendChild(albumDiv);
       middleCol.appendChild(artistDiv);
+      middleCol.appendChild(dateDiv);
       middleCol.appendChild(commentDiv);
 
       const emptyDiv = document.createElement("div");

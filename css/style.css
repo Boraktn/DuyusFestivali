@@ -640,13 +640,15 @@
 .album-edit-form__secondary:hover {
   background-color: rgba(108, 79, 104, 0.08);
 }
-.album-edit-form__danger{
+
+.album-edit-form__danger {
   border: 1px solid #ff4d4d;
   background: transparent;
   background-color: #ff4d4d;
-  color:white;
+  color: white;
 }
-.album-edit-form__danger:hover{
+
+.album-edit-form__danger:hover {
   filter: brightness(1.1);
 }
 
@@ -725,9 +727,9 @@ body {
   list-style: none;
   padding: 0;
   margin: 20px auto;
-  
+
   display: flex;
-  
+
   flex-direction: column;
   width: clamp(350px, 60vw, 720px);
   gap: 1vw;
@@ -759,7 +761,7 @@ body {
 }
 
 .user-username {
-  font-size: max(13px,1.1vw);
+  font-size: max(13px, 1.1vw);
   font-weight: bold;
   color: #fff;
   white-space: nowrap;
@@ -790,8 +792,9 @@ body {
 .user-link:hover {
   background: #666;
 }
-.load-more-btn{
-  
+
+.load-more-btn {
+
   display: block;
   margin: 24px auto 0;
   align-items: center;
@@ -804,7 +807,7 @@ body {
   cursor: pointer;
 }
 
-.load-more-btn:hover{
+.load-more-btn:hover {
   background: #666;
 }
 
@@ -1069,7 +1072,8 @@ body {
   top: 8px;
   right: 8px;
 }
-.album-edit-btn:hover{
+
+.album-edit-btn:hover {
   opacity: 0.2;
 }
 
@@ -1212,6 +1216,43 @@ body {
   }
 }
 
+.box--wide .spotify-btn {
+  position: absolute;
+  top: 62px;
+  /* edit butonunun altı */
+  right: 8px;
+  z-index: 2;
+
+  width: 48px;
+  height: 48px;
+  border-radius: 1vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.4);
+  text-decoration: none;
+
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+.box--wide .spotify-btn:hover {
+  opacity: 0.85;
+}
+
+.box--wide .spotify-btn:active {
+  transform: scale(0.97);
+}
+
+.box--wide .spotify-icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  pointer-events: none;
+  /* tıklama anchor’a gitsin */
+}
+
 .box--empty {
   pointer-events: none;
 }
@@ -1320,6 +1361,7 @@ body {
   fill: currentColor;
 
 }
+
 .view-btn__icon2 svg {
   width: 100%;
   height: 100%;
@@ -1438,7 +1480,7 @@ body {
   -webkit-box-orient: vertical;
   overflow: hidden;
   overflow-wrap: break-word;
-  word-break: break-word; 
+  word-break: break-word;
   /* bio'yu satır sonlarına göre kırabilmek için */
 }
 
@@ -1459,9 +1501,11 @@ body {
   align-items: center;
   transition: transform 0.1s ease, background 0.15s ease;
 }
-#editProfileBtn:active{
+
+#editProfileBtn:active {
   transform: scale(1.1);
 }
+
 /* Dar ekran için */
 @media (max-width: 640px) {
 
@@ -1487,8 +1531,8 @@ body {
 }
 
 .profile-edit-modal__content {
-  background: #111;
-  color: #fff;
+  background: rgb(231, 221, 231);
+  color: #111;
   padding: 1.5rem;
   border-radius: 16px;
   width: min(500px, 90vw);
@@ -1543,7 +1587,7 @@ body {
 }
 
 .avatar-option--selected {
-  outline-color: #ffd54f;
+  outline-color: #000000;
 }
 
 .profile-edit-textarea {
@@ -1557,6 +1601,7 @@ body {
   justify-content: flex-end;
   gap: 0.5rem;
 }
+
 .auth-actions {
   margin-top: 10px;
   display: flex;
@@ -1573,14 +1618,17 @@ body {
   color: inherit;
   opacity: 0.85;
 }
-.auth-link-btn:hover { opacity: 1; }
+
+.auth-link-btn:hover {
+  opacity: 1;
+}
 
 .modal-backdrop {
   position: fixed;
   inset: 0;
   display: grid;
   place-items: center;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0, 0, 0, 0.45);
   z-index: 9999;
   padding: 16px;
 }
@@ -1590,7 +1638,7 @@ body {
   background: #fff;
   border-radius: 16px;
   padding: 18px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
 }
 
 .modal-title {
@@ -1607,6 +1655,7 @@ body {
   display: flex;
   justify-content: flex-end;
 }
+
 .auth-message-green {
   background: #0fdf00;
   color: white;
@@ -1617,6 +1666,7 @@ body {
   text-align: center;
   animation: fadeIn .3s ease;
 }
+
 /* Ekrandaki grid */
 .album-grid {
   display: grid;
@@ -1629,7 +1679,8 @@ body {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   gap: 12px;
-  width: 1800px; /* kritik: çıktı kalitesi */
+  width: 1800px;
+  /* kritik: çıktı kalitesi */
 }
 
 /* Gizli export alanı */
@@ -1637,6 +1688,18 @@ body {
   position: fixed;
   top: -99999px;
   left: -99999px;
-  background: #1b1b1b; /* senin site bg */
+  background: #1b1b1b;
+  /* senin site bg */
   padding: 16px;
+}
+
+.box--wide .added-date {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin-top: 0.1rem;
+  font-style: italic;
+}
+
+.box--wide .middle-col {
+  gap: 0.35rem;
 }
