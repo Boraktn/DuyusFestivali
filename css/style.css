@@ -1094,6 +1094,7 @@ body {
   max-width: 100%;
   padding: 0.9rem 1rem;
   aspect-ratio: auto;
+  position: relative;
 }
 
 
@@ -1218,23 +1219,22 @@ body {
 
 .box--wide .spotify-btn {
   position: absolute;
-  top: 62px;
-  /* edit butonunun altı */
   right: 8px;
-  z-index: 2;
+  bottom: 8px;   /* ⬅️ KARTIN ALTINA GÖRE */
 
-  width: 48px;
-  height: 48px;
+    width: 48px;        /* ⬅️ EDIT İLE AYNI */
+  height: 48px;       /* ⬅️ EDIT İLE AYNI */
   border-radius: 1vw;
+  border-radius: 12px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   background: rgba(0, 0, 0, 0.4);
-  text-decoration: none;
+  z-index: 3;
 
-  transition: opacity .15s ease, transform .15s ease;
+  transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
 .box--wide .spotify-btn:hover {
@@ -1242,15 +1242,13 @@ body {
 }
 
 .box--wide .spotify-btn:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
 .box--wide .spotify-icon {
   width: 26px;
   height: 26px;
-  object-fit: contain;
   pointer-events: none;
-  /* tıklama anchor’a gitsin */
 }
 
 .box--empty {
