@@ -1698,9 +1698,24 @@ body {
   margin-top: 0.1rem;
   font-style: italic;
 }
-
+.section-wrapper{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.latest-section{
+  width: max(40vw);
+  padding: 1vw 2vw;
+  border-radius: 8px;
+  background: rgb(73, 62, 72);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  line-height: 1.6;
+}
 .box--wide .middle-col {
   gap: 0.35rem;
+}
+.latest-title{
+  color: white;
 }
 .latest-item {
   width: min(33vw, 540px);
