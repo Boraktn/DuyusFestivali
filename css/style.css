@@ -2,14 +2,13 @@
 .hero {
   position: relative;
   width: 100%;
-  min-height: clamp(420px, 70vh, 720px);
+  height: 440px;
 
   /* background PNG */
   background-image: url("../img/herobanner.png");
   background-size: cover;
   background-position: right center;
   background-repeat: no-repeat;
-
   overflow: hidden;
 }
 
@@ -23,7 +22,7 @@
   gap: clamp(16px, 4vw, 48px);
   align-items: center;
 
-  padding: clamp(22px, 5vw, 56px) 0;
+  padding: clamp(10px, 1vw, 25px) 0;
 }
 
 .hero__left {
@@ -178,15 +177,15 @@
 
 .n6 {
   width: 170px;
-  left: 42%;
-  top: 72%;
+  left: 12%;
+  top: 55%;
   transform: rotate(-10deg);
 }
 
 .n7 {
   width: 125px;
-  left: 58%;
-  top: 82%;
+  left: 78%;
+  top: 30%;
   transform: rotate(12deg) scale(0.95);
   opacity: 0.82;
 }
@@ -212,8 +211,8 @@
 /* üst-sol boşluk */
 .n10 {
   width: 105px;
-  left: 28%;
-  top: 44%;
+  left: 34%;
+  top: 42%;
   transform: rotate(14deg);
   opacity: 0.76;
 }
