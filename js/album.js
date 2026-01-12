@@ -230,6 +230,7 @@ function openAlbumPreviewModal(albumData, editable) {
     editBtn.innerHTML = "✎";
     editBtn.addEventListener("click", (e) => {
       e.stopPropagation();
+      closeAlbumPreviewModal();
       openAlbumEditModal({
         id: albumData.id,
         album: albumData.album,
@@ -354,7 +355,7 @@ if (albumEditForm) {
     const rawScore = (editScoreInput.value || "").trim();
     const scoreInt = parseInt(rawScore, 10);
 
-    if (isNaN(scoreInt) || scoreInt < 1 || scoreInt > 100) {
+    if (scoreInt < 1 || scoreInt > 100) {
       alert("Puan 1 ile 100 arasında olmalı.");
       return;
     }
@@ -588,22 +589,22 @@ export async function loadUserAlbumsGrid(targetUsername) {
       photoDiv.style.setProperty("--overlay-color", color);
     }
     if (viewMode !== "wide") {
-  box.addEventListener("click", () => {
-    openAlbumPreviewModal(
-      {
-        id: docSnap.id,
-        album: album.album,
-        artist: album.artist,
-        image: album.image,
-        score: album.score ?? "",
-        comment: album.comment || "",
-        createdAt: album.createdAt,
-        spotifyUrl: album.spotifyUrl || ""
-      },
-      editable
-    );
-  });
-}
+      box.addEventListener("click", () => {
+        openAlbumPreviewModal(
+          {
+            id: docSnap.id,
+            album: album.album,
+            artist: album.artist,
+            image: album.image,
+            score: album.score ?? "",
+            comment: album.comment || "",
+            createdAt: album.createdAt,
+            spotifyUrl: album.spotifyUrl || ""
+          },
+          editable
+        );
+      });
+    }
     grid.appendChild(box);
   });
   if (viewMode !== "wide") {
