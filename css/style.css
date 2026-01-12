@@ -1765,3 +1765,27 @@ body {
   opacity: 0.85;
 }
 *, *::before, *::after { box-sizing: border-box; }
+/*------------------ALBÜM ÖNİZLEME POPUP (GRID -> LİSTE KARTI)------------------*/
+.album-preview-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+}
+
+.album-preview-modal--hidden {
+  display: none;
+}
+
+.album-preview-modal__inner {
+  width: min(560px, 100%);
+}
+
+/* Popup içindeki kart tıklanabilir gibi görünmesin */
+.album-preview-modal .box {
+  cursor: default;
+}

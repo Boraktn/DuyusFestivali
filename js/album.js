@@ -137,7 +137,139 @@ const editScoreText = document.getElementById("editModalScoreText");
 const editScoreBox = document.getElementById("editModalScoreBox");
 const editCommentPreview = document.getElementById("editModalCommentPreview");
 const albumDeleteBtn = document.getElementById("albumDeleteBtn");
+//------------------GRID -> LİSTE KARTI POPUP------------------
+const albumPreviewModal = document.getElementById("albumPreviewModal");
+const albumPreviewInner = albumPreviewModal?.querySelector(".album-preview-modal__inner");
 
+function openAlbumPreviewModal(albumData, editable) {
+  if (!albumPreviewModal || !albumPreviewInner) return;
+
+  albumPreviewInner.innerHTML = "";
+
+  const card = document.createElement("div");
+  card.classList.add("box", "box--wide");
+
+  const photoDiv = document.createElement("div");
+  photoDiv.classList.add("photo");
+
+  const img = document.createElement("img");
+  img.src = albumData.image;
+  img.alt = albumData.album;
+  photoDiv.appendChild(img);
+
+  const scoreBox = document.createElement("div");
+  scoreBox.classList.add("score-box");
+
+  const scoreText = document.createElement("span");
+  scoreText.classList.add("score-text");
+
+  const scoreInt = parseInt(albumData.score);
+  const hasScore = !isNaN(scoreInt);
+
+  scoreText.textContent = hasScore ? scoreInt : "N/A";
+  scoreBox.appendChild(scoreText);
+  scoreBox.style.backgroundColor = computeScoreColor(hasScore ? scoreInt : NaN);
+
+  const leftCol = document.createElement("div");
+  leftCol.classList.add("left-col");
+  leftCol.appendChild(photoDiv);
+  leftCol.appendChild(scoreBox);
+
+  const middleCol = document.createElement("div");
+  middleCol.classList.add("middle-col");
+
+  const albumDiv = document.createElement("div");
+  albumDiv.classList.add("album");
+  albumDiv.textContent = albumData.album;
+
+  const artistDiv = document.createElement("div");
+  artistDiv.classList.add("artist");
+  artistDiv.textContent = albumData.artist || "";
+
+  const dateDiv = document.createElement("div");
+  dateDiv.classList.add("added-date");
+  dateDiv.textContent = formatDate(albumData.createdAt);
+
+  const commentDiv = document.createElement("div");
+  commentDiv.classList.add("comment");
+  commentDiv.textContent = albumData.comment || "";
+
+  middleCol.appendChild(albumDiv);
+  middleCol.appendChild(artistDiv);
+  middleCol.appendChild(dateDiv);
+  middleCol.appendChild(commentDiv);
+
+  const placeholder = document.createElement("div");
+  placeholder.classList.add("box--wide", "placeholder");
+
+  card.appendChild(leftCol);
+  card.appendChild(middleCol);
+  card.appendChild(placeholder);
+
+  if (albumData.spotifyUrl) {
+    const spotifyBtn = document.createElement("a");
+    spotifyBtn.className = "spotify-btn";
+    spotifyBtn.href = albumData.spotifyUrl;
+    spotifyBtn.target = "_blank";
+    spotifyBtn.rel = "noopener noreferrer";
+    spotifyBtn.setAttribute("aria-label", "Spotify’da aç");
+
+    const spotifyImg = document.createElement("img");
+    spotifyImg.src = "img/spotify-logo.png";
+    spotifyImg.alt = "Spotify";
+    spotifyImg.className = "spotify-icon";
+    spotifyBtn.appendChild(spotifyImg);
+
+    card.appendChild(spotifyBtn);
+  }
+
+  if (editable) {
+    const editBtn = document.createElement("button");
+    editBtn.className = "album-edit-btn";
+    editBtn.type = "button";
+    editBtn.innerHTML = "✎";
+    editBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openAlbumEditModal({
+        id: albumData.id,
+        album: albumData.album,
+        artist: albumData.artist,
+        image: albumData.image,
+        score: hasScore ? scoreInt : "",
+        comment: albumData.comment || ""
+      });
+    });
+    card.appendChild(editBtn);
+  }
+
+  albumPreviewInner.appendChild(card);
+
+  albumPreviewModal.classList.remove("album-preview-modal--hidden");
+  albumPreviewModal.setAttribute("aria-hidden", "false");
+}
+
+function closeAlbumPreviewModal() {
+  if (!albumPreviewModal || !albumPreviewInner) return;
+  albumPreviewModal.classList.add("album-preview-modal--hidden");
+  albumPreviewModal.setAttribute("aria-hidden", "true");
+  albumPreviewInner.innerHTML = "";
+}
+
+if (albumPreviewModal) {
+  albumPreviewModal.addEventListener("click", (e) => {
+    if (e.target === albumPreviewModal) closeAlbumPreviewModal();
+  });
+
+  // Opsiyonel: ESC ile kapansın
+  document.addEventListener("keydown", (e) => {
+    if (
+      e.key === "Escape" &&
+      !albumPreviewModal.classList.contains("album-preview-modal--hidden")
+    ) {
+      closeAlbumPreviewModal();
+    }
+  });
+}
 
 //PUANA GÖRE VERİLEN RENK: 0->KIRMIZI, 100->YEŞİL
 function computeScoreColor(score) {
@@ -455,7 +587,23 @@ export async function loadUserAlbumsGrid(targetUsername) {
     } else {
       photoDiv.style.setProperty("--overlay-color", color);
     }
-    console.log("thats one");
+    if (viewMode !== "wide") {
+  box.addEventListener("click", () => {
+    openAlbumPreviewModal(
+      {
+        id: docSnap.id,
+        album: album.album,
+        artist: album.artist,
+        image: album.image,
+        score: album.score ?? "",
+        comment: album.comment || "",
+        createdAt: album.createdAt,
+        spotifyUrl: album.spotifyUrl || ""
+      },
+      editable
+    );
+  });
+}
     grid.appendChild(box);
   });
   if (viewMode !== "wide") {
