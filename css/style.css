@@ -687,7 +687,6 @@ body {
   align-items: left;
   padding: max(0.2vw) max(0.2vw);
   border-bottom: 1px solid #e7dde7;
-  margin-bottom: 2vw;
   display: flex;
   gap: max(40px, 5vw);
   overflow: hidden;
