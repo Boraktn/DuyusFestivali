@@ -15,9 +15,9 @@
 </head>
 
 <body>
-    <div id="navbar"></div><!-- “Ana sayfa yakında…” yerine bunu koy -->
+    <div class="site-nav" id="navbar"></div><!-- “Ana sayfa yakında…” yerine bunu koy -->
     <!-- HERO BANNER -->
-    <section class="hero">
+    <section id="hero" class="hero">
         <div class="hero__inner">
             <!-- LEFT -->
             <div class="hero__left">
@@ -53,17 +53,19 @@
 
             </div>
         </div>
+        <div class="hero-sentinel" id="heroSentinel"></div>
+
     </section>
 
     <main class="section-wrapper">
-        <section class="latest-section">
-            <h2 class="latest-title">Festival Albümleri Akışı</h2>
+        <section class="main-section">
+            <h2 class="main-title">Festival Albümleri Akışı</h2>
 
             <!-- Wide görünümle birebir: grid + grid--wide -->
-            <div id="latestGrid" class="grid grid--wide"></div>
+            <div id="mainGrid" class="grid grid--wide"></div>
 
             <!-- (opsiyonel) load more -->
-            <button id="latestLoadMore" class="load-more-btn">Daha fazla göster</button>
+            <button id="mainLoadMore" class="load-more-btn">Daha fazla göster</button>
         </section>
     </main>
     <div id="footer"></div>

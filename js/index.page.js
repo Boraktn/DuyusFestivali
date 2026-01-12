@@ -64,24 +64,24 @@ function getOwnerUsernameFromAlbumDoc(docSnap) {
  * Wide kartı (profile wide ile aynı) üretir.
  * Dış katmana user badge ekler.
  */
-function buildLatestItem({ ownerUsername, ownerAvatar, albumDoc }) {
+function buildmainItem({ ownerUsername, ownerAvatar, albumDoc }) {
   const album = albumDoc;
 
   // Wrapper
   const wrapper = document.createElement("div");
-  wrapper.className = "latest-item";
+  wrapper.className = "main-item";
 
   // User badge
   const userRow = document.createElement("div");
-  userRow.className = "latest-user";
+  userRow.className = "main-user";
 
   const avatarImg = document.createElement("img");
-  avatarImg.className = "latest-user__avatar";
+  avatarImg.className = "main-user__avatar";
   avatarImg.src = ownerAvatar || DEFAULT_AVATAR;
   avatarImg.alt = `${ownerUsername} avatar`;
 
   const userLink = document.createElement("a");
-  userLink.className = "latest-user__name";
+  userLink.className = "main-user__name";
   userLink.href = `profile.html?u=${encodeURIComponent(ownerUsername)}`;
   userLink.textContent = ownerUsername;
 
@@ -183,11 +183,11 @@ function buildLatestItem({ ownerUsername, ownerAvatar, albumDoc }) {
   return wrapper;
 }
 
-let latestCursor = null;
-let latestLimit = 8;
+let mainCursor = null;
+let mainLimit = 8;
 
-async function loadLatestAlbums({ append = false } = {}) {
-  const grid = document.getElementById("latestGrid");
+async function loadmainAlbums({ append = false } = {}) {
+  const grid = document.getElementById("mainGrid");
   if (!grid) return;
 
   if (!append) grid.innerHTML = "";
@@ -196,22 +196,22 @@ async function loadLatestAlbums({ append = false } = {}) {
   const base = query(
     collectionGroup(db, "albums"),
     orderBy("createdAt", "desc"),
-    limit(latestLimit)
+    limit(mainLimit)
   );
 
-  const q = latestCursor
+  const q = mainCursor
     ? query(
         collectionGroup(db, "albums"),
         orderBy("createdAt", "desc"),
-        startAfter(latestCursor),
-        limit(latestLimit)
+        startAfter(mainCursor),
+        limit(mainLimit)
       )
     : base;
 
   const snap = await getDocs(q);
   if (snap.empty) return;
 
-  latestCursor = snap.docs[snap.docs.length - 1];
+  mainCursor = snap.docs[snap.docs.length - 1];
 
   // Render
   for (const docSnap of snap.docs) {
@@ -223,7 +223,7 @@ async function loadLatestAlbums({ append = false } = {}) {
 
     const meta = await getUserMeta(ownerUsername);
 
-    const node = buildLatestItem({
+    const node = buildmainItem({
       ownerUsername,
       ownerAvatar: meta.avatar,
       albumDoc,
@@ -234,11 +234,11 @@ async function loadLatestAlbums({ append = false } = {}) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  loadLatestAlbums({ append: false });
+  loadmainAlbums({ append: false });
 
-  const moreBtn = document.getElementById("latestLoadMore");
+  const moreBtn = document.getElementById("mainLoadMore");
   if (moreBtn) {
-    moreBtn.addEventListener("click", () => loadLatestAlbums({ append: true }));
+    moreBtn.addEventListener("click", () => loadmainAlbums({ append: true }));
   }
 });
 // (opsiyonel) Notlara hafif "float" animasyonu (çok sakin)
@@ -260,5 +260,3 @@ document.querySelectorAll(".note").forEach((el) => {
   // computed transform'dan açı okumak yerine: class'taki rotate değerini korumak daha kolay
   // pratik çözüm: elemente CSS custom prop ver
 });
-
-

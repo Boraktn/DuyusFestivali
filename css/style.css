@@ -1703,7 +1703,7 @@ body {
   display: flex;
   justify-content: center;
 }
-.latest-section{
+.main-section{
   width: max(40vw);
   padding: 1vw 2vw;
   border-radius: 8px;
@@ -1714,23 +1714,23 @@ body {
 .box--wide .middle-col {
   gap: 0.35rem;
 }
-.latest-title{
+.main-title{
   color: white;
 }
-.latest-item {
+.main-item {
   width: min(33vw, 540px);
   max-width: 100%;
 }
 
 /* kullanıcı badge */
-.latest-user {
+.main-user {
   display: flex;
   align-items: center;
   gap: 10px;
   margin: 0 0 8px 0;
 }
 
-.latest-user__avatar {
+.main-user__avatar {
   width: 36px;
   height: 36px;
   border-radius: 10px;
@@ -1739,13 +1739,13 @@ body {
   background: #444;
 }
 
-.latest-user__name {
+.main-user__name {
   color: #f6f2e9;
   font-weight: 800;
   font-size: 14px;
   text-decoration: none;
 }
 
-.latest-user__name:hover {
+.main-user__name:hover {
   opacity: 0.85;
 }
