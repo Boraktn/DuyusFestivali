@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
         li.innerHTML = `
           <div class="user-card-main">
             <img class="user-avatar" src="${avatarUrl}" alt="${username} profil fotoğrafı" />
-            <span class="user-username">@${username}</span>
+            <span class="user-username">${username}</span>
             <span class="user-albums">${data.albumCount ?? 0} albüm</span>
           </div>
           <a class="user-link" href="profile.html?u=${encodeURIComponent(username)}">
