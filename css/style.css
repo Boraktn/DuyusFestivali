@@ -1511,7 +1511,41 @@ body {
   }
 
 }
+.btn-primary {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: none;
+  background: rgb(108, 79, 104);;      /* sarı vurgu */
+  color: #e7dde7;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
 
+.btn-primary:hover {
+  background: rgb(60, 44, 58);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid rgb(60, 44, 58);
+  font-weight: bold;
+  background: #222;
+  color: #e7dde7;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-secondary:hover {
+  background: #333;
+  border-color: #777;
+}
 .profile-edit-modal {
   position: fixed;
   inset: 0;
