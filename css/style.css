@@ -1206,12 +1206,18 @@ body {
     width: 92vw;
     grid-template-columns: auto minmax(0, 1fr);
     grid-template-rows: auto auto;
+    padding-bottom: 60px;
   }
 
   .box--wide .score-box {
     grid-column: 1 / -1;
     justify-self: flex-end;
     margin-top: 0.5rem;
+  }
+}
+@media (max-width: 768px) {
+  .box.box--wide {
+    padding-bottom: calc(48px + 16px);
   }
 }
 
@@ -1737,7 +1743,7 @@ body {
   justify-content: center;
 }
 .main-section{
-  width: 40vw;
+  width: 45vw;
   padding: 1vw 2vw;
   border-radius: 8px;
   background: rgb(73, 62, 72);
