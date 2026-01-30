@@ -1179,28 +1179,21 @@ body {
   color: rgba(0, 0, 0, 0);
 }
 
-/* Skor yazısı */
 .box--wide .score-text {
   font-size: 1.4rem;
   font-weight: bold;
   color: #fff;
 }
 
-/* Wide modda eski hover skorunu gizle */
 .box--wide .score {
   display: none;
 }
 
-/* Wide kartta hover zoom istemiyoruz */
 .box--wide:hover {
   transform: none !important;
   box-shadow: none !important;
 }
 
-/* Edit butonu wide modda hep görünsün ayarın kalsın */
-
-
-/* Mobilde genişliği tam ekrana yaklaştır */
 @media (max-width: 768px) {
   .box.box--wide {
     width: 92vw;
