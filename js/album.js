@@ -113,30 +113,28 @@ export function extractAlbumId(spotifyUrl) {
 }*/
 export async function handleSpotifyAlbumSubmit(spotifyUrl) {
   const albumId = extractAlbumId(spotifyUrl);
-  if (!albumId) {
-    alert("Geçerli bir Spotify albüm linki gir.");
-    return;
-  }
+  if (!albumId) return alert("Geçerli bir Spotify albüm linki gir.");
 
   try {
     const url = `https://duyusfestivali-backend.vercel.app/api/route?albumId=${encodeURIComponent(albumId)}`;
     const res = await fetch(url);
 
-    const raw = await res.text(); // önce text al
+    const bodyText = await res.text(); // önce text
     if (!res.ok) {
-      console.error("Backend error:", res.status, raw);
+      console.error("BACKEND FAIL:", res.status, bodyText);
       alert(`Albüm verisi alınamadı. (HTTP ${res.status})`);
       return;
     }
 
-    const data = JSON.parse(raw);
+    const data = JSON.parse(bodyText);
     await addAlbumForUser(data);
     await loadUserAlbumsGrid();
   } catch (e) {
-    console.error("Fetch/parsing error:", e);
+    console.error("FETCH/PARSE FAIL:", e);
     alert("Albüm verisi alınırken hata oluştu.");
   }
 }
+
 
 //GÖRÜNÜM DEĞİŞKENİ
 let viewMode = "grid";
