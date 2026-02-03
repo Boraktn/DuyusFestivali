@@ -111,56 +111,55 @@ export function extractAlbumId(spotifyUrl) {
     alert("Albüm verisi alınırken hata oluştu.");
   }
 }*/
+
+function showError(title, err) {
+  const code = err?.code ? `\nCode: ${err.code}` : "";
+  const msg = err?.message ? `\nMsg: ${err.message}` : "";
+  const name = err?.name ? `\nName: ${err.name}` : "";
+  alert(`${title}${code}${name}${msg}`);
+}
+
 export async function handleSpotifyAlbumSubmit(spotifyUrl) {
   const albumId = extractAlbumId(spotifyUrl);
   if (!albumId) return alert("Geçerli bir Spotify albüm linki gir.");
 
-  console.log("[ADD] albumId:", albumId);
-
-  // 1) Backend fetch
+  // 1) Fetch
   let data;
   try {
     const url = `https://duyusfestivali-backend.vercel.app/api/route?albumId=${encodeURIComponent(albumId)}`;
-    console.log("[ADD] fetching:", url);
-
     const res = await fetch(url);
-    const bodyText = await res.text();
-
-    console.log("[ADD] fetch status:", res.status);
-    console.log("[ADD] raw body (first 200):", bodyText.slice(0, 200));
+    const text = await res.text();
 
     if (!res.ok) {
-      alert(`Backend hata (HTTP ${res.status}). Console’a bak.`);
+      alert(`Backend hata. HTTP ${res.status}\n${text.slice(0, 200)}`);
       return;
     }
 
-    data = JSON.parse(bodyText);
-    console.log("[ADD] parsed data:", data);
+    data = JSON.parse(text);
   } catch (e) {
-    console.error("[ADD] FETCH/PARSE FAIL:", e);
-    alert(`Fetch/Parse hata: ${e?.message || e}`);
+    showError("Fetch/Parse hatası", e);
     return;
   }
 
-  // 2) Firestore kaydetme
+  // 2) Auth kontrol (iPhone’da en sık burada patlıyor)
+  if (!auth.currentUser) {
+    alert("Giriş yapılmamış görünüyor. Lütfen tekrar giriş yapıp deneyin.");
+    return;
+  }
+
+  // 3) Firestore save
   try {
-    console.log("[ADD] saving to firestore...");
     await addAlbumForUser(data);
-    console.log("[ADD] firestore save OK");
   } catch (e) {
-    console.error("[ADD] FIRESTORE SAVE FAIL:", e);
-    alert(`Kaydetme hatası: ${e?.code || e?.message || e}`);
+    showError("Kaydetme (Firestore) hatası", e);
     return;
   }
 
-  // 3) Grid reload
+  // 4) Grid reload
   try {
-    console.log("[ADD] reloading grid...");
     await loadUserAlbumsGrid();
-    console.log("[ADD] grid reload OK");
   } catch (e) {
-    console.error("[ADD] GRID RELOAD FAIL:", e);
-    alert(`Grid yenileme hatası: ${e?.message || e}`);
+    showError("Grid yenileme hatası", e);
   }
 }
 
