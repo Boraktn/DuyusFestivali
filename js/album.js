@@ -115,25 +115,55 @@ export async function handleSpotifyAlbumSubmit(spotifyUrl) {
   const albumId = extractAlbumId(spotifyUrl);
   if (!albumId) return alert("Geçerli bir Spotify albüm linki gir.");
 
+  console.log("[ADD] albumId:", albumId);
+
+  // 1) Backend fetch
+  let data;
   try {
     const url = `https://duyusfestivali-backend.vercel.app/api/route?albumId=${encodeURIComponent(albumId)}`;
-    const res = await fetch(url);
+    console.log("[ADD] fetching:", url);
 
-    const bodyText = await res.text(); // önce text
+    const res = await fetch(url);
+    const bodyText = await res.text();
+
+    console.log("[ADD] fetch status:", res.status);
+    console.log("[ADD] raw body (first 200):", bodyText.slice(0, 200));
+
     if (!res.ok) {
-      console.error("BACKEND FAIL:", res.status, bodyText);
-      alert(`Albüm verisi alınamadı. (HTTP ${res.status})`);
+      alert(`Backend hata (HTTP ${res.status}). Console’a bak.`);
       return;
     }
 
-    const data = JSON.parse(bodyText);
-    await addAlbumForUser(data);
-    await loadUserAlbumsGrid();
+    data = JSON.parse(bodyText);
+    console.log("[ADD] parsed data:", data);
   } catch (e) {
-    console.error("FETCH/PARSE FAIL:", e);
-    alert("Albüm verisi alınırken hata oluştu.");
+    console.error("[ADD] FETCH/PARSE FAIL:", e);
+    alert(`Fetch/Parse hata: ${e?.message || e}`);
+    return;
+  }
+
+  // 2) Firestore kaydetme
+  try {
+    console.log("[ADD] saving to firestore...");
+    await addAlbumForUser(data);
+    console.log("[ADD] firestore save OK");
+  } catch (e) {
+    console.error("[ADD] FIRESTORE SAVE FAIL:", e);
+    alert(`Kaydetme hatası: ${e?.code || e?.message || e}`);
+    return;
+  }
+
+  // 3) Grid reload
+  try {
+    console.log("[ADD] reloading grid...");
+    await loadUserAlbumsGrid();
+    console.log("[ADD] grid reload OK");
+  } catch (e) {
+    console.error("[ADD] GRID RELOAD FAIL:", e);
+    alert(`Grid yenileme hatası: ${e?.message || e}`);
   }
 }
+
 
 
 //GÖRÜNÜM DEĞİŞKENİ
